@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Main';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/baloo-chettan-2-v2-latin-regular.eot');
+  src: local(''),
+    url('assets/fonts/baloo-chettan-2-v2-latin-regular.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/baloo-chettan-2-v2-latin-regular.woff2') format('woff2'),
+    url('assets/fonts/baloo-chettan-2-v2-latin-regular.woff') format('woff'),
+    url('assets/fonts/baloo-chettan-2-v2-latin-regular.ttf') format('truetype'),
+    url('assets/fonts/baloo-chettan-2-v2-latin-regular.svg#BalooChettan2') format('svg');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    overflow: hidden;
+}

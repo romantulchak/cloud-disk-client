@@ -1,0 +1,10 @@
+.left__nav_main{
+    display: grid;
+    grid-template-columns: 240px 1fr;
+}
+
+.content{
+    padding: 20px;
+    height: 90vh;
+    overflow-y: auto;
+}
