@@ -1,0 +1,44 @@
+<button (click)="isLogin = !isLogin">
+    <span *ngIf="isLogin">Registration</span>
+    <span *ngIf="!isLogin">Login</span>
+</button>
+<div *ngIf="isLogin">
+    <h3>Login</h3>
+    <form>
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" [(ngModel)]="loginRequest.username">
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" [(ngModel)]="loginRequest.password">
+        </div>
+        <button type="submit" (click)="login()">Login</button>
+    </form>
+</div>
+<div *ngIf="!isLogin">
+    <h3>Registration</h3>
+    <form>
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" [(ngModel)]="registrationRequest.username">
+        </div>
+        <div>
+            <label>First name</label>
+            <input type="text" name="firstName" [(ngModel)]="registrationRequest.firstName">
+        </div>
+        <div>
+            <label>Last name</label>
+            <input type="text" name="lastName" [(ngModel)]="registrationRequest.lastName">
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="text" name="email" [(ngModel)]="registrationRequest.email">
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" [(ngModel)]="registrationRequest.password">
+        </div>
+        <button type="submit" (click)="registration()">SignUp</button>
+    </form>
+</div>

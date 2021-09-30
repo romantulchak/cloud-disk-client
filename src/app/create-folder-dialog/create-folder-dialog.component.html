@@ -1,0 +1,15 @@
+<div class="create__folder" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <div class="folder__title_close">
+        <h3>Create new folder</h3>
+        <button class="close__btn" mat-dialog-close>
+            <svg class="a-qd-va undefined" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 10 10" focusable="false" fill="#000000"><polygon class="a-s-fa-Ha-pa" points="10,1.01 8.99,0 5,3.99 1.01,0 0,1.01 3.99,5 0,8.99 1.01,10 5,6.01 8.99,10 10,8.99 6.01,5 "></polygon></svg>
+        </button>
+    </div>
+    <div class="folder__name_input">
+        <input type="text" name="folderName" [(ngModel)]="folderName" (mousedown)="$event.stopPropagation()">
+    </div>
+    <div class="cancel__create_btn">
+        <button class="cancel__btn" mat-dialog-close>Cancel</button>
+        <button class="create__btn" (click)="createFolder()">Create</button>
+    </div>
+</div>

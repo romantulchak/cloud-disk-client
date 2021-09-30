@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { NavLeftSideComponent } from './nav-left-side/nav-left-side.component';
 import { NavTopComponent } from './nav-top/nav-top.component';
@@ -11,9 +14,14 @@ import { AvailableComponent } from './available/available.component';
 import { RecentComponent } from './recent/recent.component';
 import { NoticedComponent } from './noticed/noticed.component';
 import { TrashComponent } from './trash/trash.component';
-import { LoginComponent } from './login/login.component';
 import { DriveComponent } from './drive/drive.component';
-
+import { AuthComponent } from './auth/auth.component';
+import { authInterceptorProviders } from './helper/auth.interceptor';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatMenuModule} from '@angular/material/menu';
+import { CreateFolderDialogComponent } from './create-folder-dialog/create-folder-dialog.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +33,22 @@ import { DriveComponent } from './drive/drive.component';
     RecentComponent,
     NoticedComponent,
     TrashComponent,
-    LoginComponent,
-    DriveComponent
+    DriveComponent,
+    AuthComponent,
+    CreateFolderDialogComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatDialogModule,
+    MatMenuModule,
+    DragDropModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
