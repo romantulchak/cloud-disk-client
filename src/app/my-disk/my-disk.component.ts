@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FolderDTO } from '../dto/folder.dto';
+import { Context } from '../model/context.model';
+import { ContextEnum } from '../model/enum/context.enum';
+import { GridStyle } from '../model/enum/gridStyle.enum';
 import { Folder } from '../model/folder.model';
 import { DriveService } from '../service/drive.service';
 import { FolderService } from '../service/folder.service';
@@ -12,17 +16,37 @@ import { FolderService } from '../service/folder.service';
 export class MyDiskComponent implements OnInit {
 
   constructor(private driveService: DriveService,
-              private folderSerivce: FolderService) { }
+              private folderSerivce: FolderService,
+              private router: Router) { }
 
   private driveName: string;
-  
   public folders: FolderDTO[];
-  public displayedColumns: string[] = ['name', 'owner', 'lastChanged', 'size'];
-  public currentFolderId: number;
-  public isSelected: boolean = false;
 
+  public gridStyle = GridStyle;
+  public style: string;
+  
   ngOnInit(): void {
     this.getUserDrive();
+    this.updateFolders();
+    this.initContext();
+  }
+
+  private initContext(){
+    let context = new Context(ContextEnum.DRIVE);
+    this.driveService.contextSubject.next(context);
+  }
+
+  public updateFolders(){
+    this,this.folderSerivce.folderSubject.subscribe(
+      res=>{
+        if(res != null){
+          this.folders?.push(res);
+          if(this.folders != null){
+            this.folders = [...this.folders];
+          }
+        }
+      }
+    );
   }
 
   private getUserDrive(){
@@ -35,18 +59,9 @@ export class MyDiskComponent implements OnInit {
   private getFolders(){
     this.folderSerivce.findAllFoldersForDrive(this.driveName).subscribe(
       res=>{
-        console.log(res);
         this.folders = res;
       }
     );
   }
 
-  public open(){
-    console.log("Open");
-  }
-
-  public selectElement(element: FolderDTO){
-    this.currentFolderId = element.id;
-    this.isSelected = !this.isSelected;
-  }
 } 

@@ -5,7 +5,7 @@ header {
 
 nav {
   display: flex;
-  padding: 0px 3em 0px 3em;
+  padding: 0px 1em 0px 3em;
   align-items: center;
   font-family: 'Main';
 
@@ -62,4 +62,9 @@ nav {
 
 svg {
   fill: #5f6368;
+}
+
+.mat-progress-bar{
+  position: absolute;
+  height: 2px;
 }

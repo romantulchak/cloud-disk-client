@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateFolderDialogComponent } from '../create-folder-dialog/create-folder-dialog.component';
+import { FunctionService } from '../service/function.service';
 
 @Component({
   selector: 'app-nav-left-side',
@@ -9,14 +10,11 @@ import { CreateFolderDialogComponent } from '../create-folder-dialog/create-fold
 })
 export class NavLeftSideComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(public functionService: FunctionService) { }
 
   ngOnInit(): void {
+    
   }
 
-  public createFolder(){
-    this.dialog.open(CreateFolderDialogComponent, {
-      panelClass: 'create__folder_container'
-    });
-  }
+ 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from '../service/loader.service';
 
 @Component({
   selector: 'app-nav-top',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavTopComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loaderService: LoaderService) { }
+  public isLoading: boolean;
 
   ngOnInit(): void {
+    this.loading();
+  }
+
+  private loading(){
+    this,this.loaderService.isLoading.subscribe(
+      res=>{
+        this.isLoading = res;
+      }
+    );
   }
 
 }

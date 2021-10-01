@@ -22,6 +22,11 @@ import { MatMenuModule} from '@angular/material/menu';
 import { CreateFolderDialogComponent } from './create-folder-dialog/create-folder-dialog.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTableModule} from '@angular/material/table';
+import { FolderDetailsComponent } from './folder-details/folder-details.component';
+import { FolderToolbarComponent } from './folder-toolbar/folder-toolbar.component';
+import { FolderTableComponent } from './folder-table/folder-table.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { loaderInterceptorProviders } from './helper/loader.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +40,10 @@ import {MatTableModule} from '@angular/material/table';
     TrashComponent,
     DriveComponent,
     AuthComponent,
-    CreateFolderDialogComponent
+    CreateFolderDialogComponent,
+    FolderDetailsComponent,
+    FolderToolbarComponent,
+    FolderTableComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +54,10 @@ import {MatTableModule} from '@angular/material/table';
     MatDialogModule,
     MatMenuModule,
     DragDropModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressBarModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,loaderInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

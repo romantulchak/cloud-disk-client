@@ -1,8 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { DriveDTO } from "../dto/drive.dto";
+import { Context } from "../model/context.model";
+import { ContextEnum } from "../model/enum/context.enum";
 
 const API_URL = environment.api;
 
@@ -10,6 +12,8 @@ const API_URL = environment.api;
     providedIn: 'root'
 })
 export class DriveService{
+
+    public contextSubject: BehaviorSubject<Context> = new BehaviorSubject(null);
 
     constructor(private http: HttpClient){
 
