@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { FolderDTO } from "../dto/folder.dto";
+import { IStore } from "../model/interface/store.interface";
 
 const API_URL = environment.api;
 
@@ -11,7 +12,7 @@ const API_URL = environment.api;
 })
 export class FolderService{
     
-    public folderSubject: BehaviorSubject<FolderDTO> = new BehaviorSubject(null);
+    public folderSubject: BehaviorSubject<any> = new BehaviorSubject(null);
     public gridSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor(private http: HttpClient){}
@@ -20,8 +21,8 @@ export class FolderService{
         return this.http.post<FolderDTO>(`${API_URL}folders/create/${driveName}`, folderName);
     }
 
-    public findAllFoldersForDrive(driveName: string): Observable<FolderDTO[]>{
-        return this.http.get<FolderDTO[]>(`${API_URL}folders/${driveName}`);
+    public findAllElementsForDrive(driveName: string): Observable<IStore>{
+        return this.http.get<IStore>(`${API_URL}folders/${driveName}`);
     }
 
     public createSubFolder(folderName: string, folderLink: string): Observable<FolderDTO>{

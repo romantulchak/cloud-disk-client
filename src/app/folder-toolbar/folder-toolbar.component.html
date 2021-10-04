@@ -1,7 +1,5 @@
 <section class="folder__toolbar">
     <div class="toolbar__items">
-     
-
         <div>
             <button mat-button [matMenuTriggerFor]="menu">
                 <span>My drive</span>
@@ -10,9 +8,15 @@
                 <button mat-menu-item  (click)="functionService.createFolder()">
                   <span>Create folder</span>
                 </button>
+                <input type="file" hidden #uploader (change)="functionService.uploadFiles($event, context)" multiple>
+                <button mat-menu-item (click)="uploader.click()">
+                  <span>Upload file</span>
+                </button>
+                  <button mat-menu-item>
+                    <span>Upload folder</span>
+                  </button>
               </mat-menu>
         </div>
-
         <div class="items">
             <div class="item" (click)="changeGrid()">
                 <svg class="a-s-fa-Ha-pa" width="24px" height="24px" viewBox="0 0 24 24" fill="#767676"><path d="M2,5v14h20V5H2z M14,7v4h-4V7H14z M4,7h4v4H4V7z M16,11V7h4v4H16z M4,17v-4h4v4H4z M10,17v-4h4v4H10z M20,17 h-4v-4h4V17z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>

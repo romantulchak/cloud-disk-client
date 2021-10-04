@@ -8,6 +8,13 @@
       <button mat-menu-item  (click)="functionService.createFolder()">
         <span>Folder</span>
       </button>
+      <input type="file" hidden #uploader (change)="functionService.uploadFiles($event, context)" multiple>
+      <button mat-menu-item (click)="uploader.click()">
+        <span>Upload files</span>
+      </button>
+      <button mat-menu-item>
+        <span>Upload folder</span>
+      </button>
     </mat-menu>
   </div>
   <ul class="left__nav_list">

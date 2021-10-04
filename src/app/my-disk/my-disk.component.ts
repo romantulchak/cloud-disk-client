@@ -4,7 +4,6 @@ import { FolderDTO } from '../dto/folder.dto';
 import { Context } from '../model/context.model';
 import { ContextEnum } from '../model/enum/context.enum';
 import { GridStyle } from '../model/enum/gridStyle.enum';
-import { Folder } from '../model/folder.model';
 import { DriveService } from '../service/drive.service';
 import { FolderService } from '../service/folder.service';
 
@@ -28,11 +27,10 @@ export class MyDiskComponent implements OnInit {
   ngOnInit(): void {
     this.getUserDrive();
     this.updateFolders();
-    this.initContext();
   }
 
   private initContext(){
-    let context = new Context(ContextEnum.DRIVE);
+    let context = new Context(ContextEnum.DRIVE, this.driveName);
     this.driveService.contextSubject.next(context);
   }
 
@@ -53,13 +51,14 @@ export class MyDiskComponent implements OnInit {
     this.driveService.getDrive().then(res=>{
       this.driveName = res;
       this.getFolders();
+      this.initContext();
     });
   }
 
   private getFolders(){
-    this.folderSerivce.findAllFoldersForDrive(this.driveName).subscribe(
+    this.folderSerivce.findAllElementsForDrive(this.driveName).subscribe(
       res=>{
-        this.folders = res;
+        this.folders = res as FolderDTO[];
       }
     );
   }

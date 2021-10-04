@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 import { FolderDTO } from '../dto/folder.dto';
 import { Context } from '../model/context.model';
 import { ContextEnum } from '../model/enum/context.enum';
@@ -39,7 +39,6 @@ export class FolderDetailsComponent implements OnInit {
     this.folderService.folderSubject.subscribe(
       res=>{
         if(res != null){
-          
           this.folders?.push(res);
           if(this.folders != null){
             this.folders = [...this.folders];

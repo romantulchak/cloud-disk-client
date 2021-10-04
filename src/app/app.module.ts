@@ -27,6 +27,10 @@ import { FolderToolbarComponent } from './folder-toolbar/folder-toolbar.componen
 import { FolderTableComponent } from './folder-table/folder-table.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { loaderInterceptorProviders } from './helper/loader.interceptor';
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
+import { FileIconComponent } from './file-icon/file-icon.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +47,9 @@ import { loaderInterceptorProviders } from './helper/loader.interceptor';
     CreateFolderDialogComponent,
     FolderDetailsComponent,
     FolderToolbarComponent,
-    FolderTableComponent
+    FolderTableComponent,
+    UploadDialogComponent,
+    FileIconComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,8 @@ import { loaderInterceptorProviders } from './helper/loader.interceptor';
     MatMenuModule,
     DragDropModule,
     MatTableModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [authInterceptorProviders,loaderInterceptorProviders],
   bootstrap: [AppComponent]

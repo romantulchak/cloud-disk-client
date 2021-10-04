@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateFolderDialogComponent } from '../create-folder-dialog/create-folder-dialog.component';
+import { Context } from '../model/context.model';
+import { DriveService } from '../service/drive.service';
 import { FunctionService } from '../service/function.service';
 
 @Component({
@@ -10,10 +10,17 @@ import { FunctionService } from '../service/function.service';
 })
 export class NavLeftSideComponent implements OnInit {
 
-  constructor(public functionService: FunctionService) { }
+  public context: Context;
+
+  constructor(public functionService: FunctionService, 
+              private driveService: DriveService) { }
 
   ngOnInit(): void {
-    
+    this.driveService.contextSubject.subscribe(
+      res=>{
+        this.context = res;
+      }
+    );
   }
 
  

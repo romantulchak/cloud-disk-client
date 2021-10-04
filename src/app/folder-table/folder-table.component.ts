@@ -2,6 +2,9 @@ import { Component, HostListener, Input, OnChanges, OnInit, ViewChild } from '@a
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { FolderDTO } from '../dto/folder.dto';
+import { FileType } from '../model/enum/fileType.enum';
+import { SizeType } from '../model/enum/sizeType.enum';
+import { IStore } from '../model/interface/store.interface';
 import { FolderService } from '../service/folder.service';
 
 @Component({
@@ -27,13 +30,17 @@ export class FolderTableComponent implements OnInit {
   @Input("source") source: FolderDTO[];
 
   ngOnInit(): void {
-    
   }
 
-  public open(link: string){
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigateByUrl(`drive/folders/${link}`);
-   }
+  public open(element: any){
+    if(element.context == "FOLDER"){
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigateByUrl(`drive/folders/${element.link}`);
+    }else{
+      console.log('FILE');
+      
+    }
+  }
  
    public selectElement(element: FolderDTO){
      this.currentFolderId = element.id;
@@ -54,5 +61,22 @@ export class FolderTableComponent implements OnInit {
          this.source = this.source.filter(f => f.id !== folder.id);
        }
      );
+   }
+   
+   public getSize(size: number): string{
+     if(size > SizeType.B_MIN && size < SizeType.B_MAX){
+      return this.convertBytes(size, SizeType.B_MIN) + " B";
+     }else if(size > SizeType.KB_MIN && size < SizeType.KB_MAX){
+          return this.convertBytes(size, SizeType.KB_MIN) + " KB";
+      }else if(size > SizeType.MB_MIN && size < SizeType.MB_MAX){
+         return this.convertBytes(size, SizeType.MB_MIN) + " MB";
+      }else if(size > SizeType.GB_MIN && size < SizeType.GB_MAX){
+        return this.convertBytes(size, SizeType.GB_MIN) + " GB";
+      }
+      return "";
+   }
+
+   private convertBytes(size: number, divied: number): string{
+     return (size / divied).toPrecision(3);
    }
 }
