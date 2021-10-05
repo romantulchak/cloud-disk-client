@@ -15,4 +15,5 @@ export class FolderDTO implements IStore{
     public hasLinkAccess: boolean;
     public files: FileDTO[];
     public context: string;
+    public isSelected: boolean;
 }

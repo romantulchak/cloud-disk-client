@@ -11,7 +11,7 @@ const API_URL = environment.api;
     providedIn: 'root'
 })
 export class FolderService{
-    
+
     public folderSubject: BehaviorSubject<any> = new BehaviorSubject(null);
     public gridSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -21,7 +21,7 @@ export class FolderService{
         return this.http.post<FolderDTO>(`${API_URL}folders/create/${driveName}`, folderName);
     }
 
-    public findAllElementsForDrive(driveName: string): Observable<IStore>{
+    public findAllElementsForDrive(driveName: string): Observable<any>{
         return this.http.get<IStore>(`${API_URL}folders/${driveName}`);
     }
 

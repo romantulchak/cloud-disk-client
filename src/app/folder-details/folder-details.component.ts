@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute} from '@angular/router';
+import { FileDTO } from '../dto/file.dto';
 import { FolderDTO } from '../dto/folder.dto';
 import { Context } from '../model/context.model';
 import { ContextEnum } from '../model/enum/context.enum';
@@ -14,7 +16,7 @@ import { FolderService } from '../service/folder.service';
 export class FolderDetailsComponent implements OnInit {
 
   private folderLink: string;
-  public folders: FolderDTO[];
+  public folders: MatTableDataSource<FolderDTO | FileDTO> = new MatTableDataSource();
 
   constructor(private driveService: DriveService,
               private folderService: FolderService,
@@ -39,10 +41,8 @@ export class FolderDetailsComponent implements OnInit {
     this.folderService.folderSubject.subscribe(
       res=>{
         if(res != null){
-          this.folders?.push(res);
-          if(this.folders != null){
-            this.folders = [...this.folders];
-          }
+          this.folders.data.push(res);
+          this.folders.data = this.folders.data;
         }
       }
     );
@@ -56,7 +56,7 @@ export class FolderDetailsComponent implements OnInit {
   private getSubFoldersInFolder(){
     this.folderService.findSubFoldersInFolder(this.folderLink).subscribe(
       res=>{
-        this.folders = res;
+        this.folders.data = res;
       }
     );
   }

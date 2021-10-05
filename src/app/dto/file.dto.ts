@@ -13,4 +13,5 @@ export class FileDTO implements IStore{
     public drive: DriveDTO;
     public link: string;
     public context: string;
+    public isSelected: boolean;
 }

@@ -12,17 +12,28 @@ export class FileService{
 
     constructor(private http: HttpClient){}
 
-    public uploadFiles(file: File, folderLink: string): Observable<any>{
+    public uploadFileIntoFolder(file: File, folderLink: string): Observable<any>{
+        const req = this.sendRequest('upload-into-folder', folderLink, file);
+        return this.http.request(req);
+    }
+
+    public uploadFileIntoDrive(file: File, driveName: string):Observable<any>{
+        const req = this.sendRequest('upload-into-drive', driveName, file);
+        return this.http.request(req);
+    }
+
+    public deleteFile(fileLink: string): Observable<any>{
+        return this.http.delete(`${API_URL}files/delete-file/${fileLink}`);
+    }
+
+    private sendRequest(endPoint: string, name: string, file: File): HttpRequest<FormData>{
         const formData = new FormData();
         formData.append("file", file);
-        // for (let i = 0; i < files.length; i++) {
-        //     formData.append('file', files[i]);
-        // }
-        const req = new HttpRequest('POST', `${API_URL}files/upload-into-folder/${folderLink}`, formData, {
+        const req = new HttpRequest('POST', `${API_URL}files/${endPoint}/${name}`, formData, {
             reportProgress: true,
             responseType: 'json'
-        })
-        return this.http.request(req);
+        });
+        return req;
     }
 
 }

@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { FileDTO } from '../dto/file.dto';
 import { FolderDTO } from '../dto/folder.dto';
 import { Context } from '../model/context.model';
 import { ContextEnum } from '../model/enum/context.enum';
@@ -19,11 +21,11 @@ export class MyDiskComponent implements OnInit {
               private router: Router) { }
 
   private driveName: string;
-  public folders: FolderDTO[];
+  public folders: MatTableDataSource<FolderDTO | FileDTO> = new MatTableDataSource();
 
   public gridStyle = GridStyle;
   public style: string;
-  
+
   ngOnInit(): void {
     this.getUserDrive();
     this.updateFolders();
@@ -38,10 +40,8 @@ export class MyDiskComponent implements OnInit {
     this,this.folderSerivce.folderSubject.subscribe(
       res=>{
         if(res != null){
-          this.folders?.push(res);
-          if(this.folders != null){
-            this.folders = [...this.folders];
-          }
+          this.folders.data.push(res);
+          this.folders.data = this.folders.data;
         }
       }
     );
@@ -58,9 +58,9 @@ export class MyDiskComponent implements OnInit {
   private getFolders(){
     this.folderSerivce.findAllElementsForDrive(this.driveName).subscribe(
       res=>{
-        this.folders = res as FolderDTO[];
+        this.folders.data = res;
       }
     );
   }
 
-} 
+}

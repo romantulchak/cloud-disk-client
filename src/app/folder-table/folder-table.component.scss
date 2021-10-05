@@ -40,3 +40,17 @@
         font-size: 14px;
     }
 }
+.menu__btn{
+    display: flex;
+    align-items: center;
+    width: 250px;
+
+    .icon{
+        display: flex;
+        margin-right: 1em;
+        
+        svg{
+            fill:#5f6368;
+        }
+    }
+}

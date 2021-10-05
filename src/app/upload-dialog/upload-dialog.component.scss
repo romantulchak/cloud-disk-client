@@ -1,3 +1,33 @@
+@mixin iconStyle($heigh, $width) {
+  .icon {
+    height: 40px;
+    margin: 0 4px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    cursor: pointer;
+
+    svg {
+      fill: #a0a0a0;
+      height: $heigh;
+      width: $width;
+    }
+  }
+}
+
+%svgHover {
+  &:hover {
+    background-color: rgba(255, 255, 255, .12);
+
+    svg {
+      fill: #fff;
+    }
+  }
+}
+
 ::ng-deep .cdk-overlay-container {
   z-index: 0;
   width: 0;
@@ -34,6 +64,7 @@
   display: flex;
   flex-wrap: wrap;
   max-height: 356px;
+  overflow-y: auto;
 
   .uploader__header {
     display: flex;
@@ -44,10 +75,11 @@
     font-size: 14px;
     height: 52px;
     line-height: normal;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0px 15px 0px 15px;
     align-items: center;
     width: 100%;
-
+    z-index: 100;
     position: sticky;
     top: 1px;
 
@@ -56,28 +88,10 @@
       align-items: center;
       justify-content: center;
 
+      @include iconStyle(14px, 14px);
+
       .icon {
-        height: 40px;
-        margin: 0 4px;
-        width: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 50%;
-        cursor: pointer;
-
-        svg {
-          fill: #a0a0a0;
-        }
-
-        &:hover {
-          background-color: rgba(255, 255, 255, .12);
-
-          svg {
-            fill: #fff;
-          }
-        }
+        @extend %svgHover;
       }
     }
   }
@@ -85,6 +99,7 @@
 
 .uploader__body {
   width: 100%;
+  overflow-x: hidden;
 
   .file__list {
 
@@ -92,12 +107,26 @@
       border-bottom: solid 1px #eee;
       color: #757575;
       display: block;
-      padding-bottom: 6px;
       height: 51px;
+      padding-left: 2em;
       font-size: 12px;
       display: grid;
       align-items: center;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 3em 4fr 1fr;
+
+      .file__name {
+        overflow: hidden;
+      }
+
+      .progress {
+        @include iconStyle(24px, 24px);
+
+        .success {
+          svg {
+            fill: #0F9D58;
+          }
+        }
+      }
     }
   }
 }
