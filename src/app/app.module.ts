@@ -30,6 +30,7 @@ import { loaderInterceptorProviders } from './helper/loader.interceptor';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { FileIconComponent } from './file-icon/file-icon.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ContextMenuComponent } from './context-menu/context-menu.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FolderToolbarComponent,
     FolderTableComponent,
     UploadDialogComponent,
-    FileIconComponent
+    FileIconComponent,
+    ContextMenuComponent
   ],
   imports: [
     BrowserModule,

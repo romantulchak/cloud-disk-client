@@ -8,6 +8,10 @@ import {ContextType} from '../model/enum/contextType.enum';
 import {SizeType} from '../model/enum/sizeType.enum';
 import {FileService} from '../service/file.service';
 import {FolderService} from '../service/folder.service';
+import { saveAs } from 'file-saver';
+import { Uploader } from '../model/uploader.model';
+import { Download } from '../model/download.model';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-folder-table',
@@ -31,13 +35,14 @@ export class FolderTableComponent implements OnInit, OnChanges {
   public isSelected: boolean = false;
   public displayedColumns: string[] = ['name', 'owner', 'lastChanged', 'size'];
   public contextType = ContextType;
+  public eventType: number;
   private selectedElements: any[] = [];
 
 
   @Input("source") source: MatTableDataSource<FolderDTO | FileDTO>;
 
   ngOnInit(): void {
-
+    
   }
 
   ngOnChanges() {
@@ -130,5 +135,62 @@ export class FolderTableComponent implements OnInit, OnChanges {
 
   private convertBytes(size: number, divied: number): string {
     return (size / divied).toPrecision(3);
+  }
+
+  public download(){
+    
+
+    for (let index = 0; index < this.selectedElements.length; index++) {
+    this.selectedElements[index].download = new Download(0, true);
+
+    if(this.selectedElements[index].context === ContextType.FOLDER){
+      this.downloadFolder(this.selectedElements[index], index);
+    }else{
+        this.downloadFile(this.selectedElements[index], index);
+      }
+    }
+    
+    
+
+  }
+
+  private downloadFolder(element: FolderDTO, index: number){
+    this.folderService.downloadFolder(element.link).subscribe(
+      event=>{
+        this.selectedElements[index].download.eventType = event.type;
+
+
+        if (event.type === HttpEventType.DownloadProgress) {
+          this.selectedElements[index].download.value = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          
+          let blob = new Blob([event.body]);
+          saveAs(blob, element.name + ".zip");
+          setTimeout(() => {
+            this.selectedElements[index].download.downloaded = false;
+          }, 500);
+
+        }
+      }
+    );
+  }
+
+  private downloadFile(element: FileDTO, index: number){
+    this.fileService.downloadFile(element.link).subscribe(
+      event=>{
+        if (event.type === HttpEventType.DownloadProgress) {
+          this.selectedElements[index].download.value = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          let blob = new Blob([event.body]);
+          console.log(blob);
+          
+          saveAs(blob, element.name);
+          setTimeout(() => {
+            this.selectedElements[index].download.downloaded = false;
+          }, 500);
+
+        }
+      }
+    );
   }
 }

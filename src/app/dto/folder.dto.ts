@@ -1,3 +1,4 @@
+import { Download } from "../model/download.model";
 import { IStore } from "../model/interface/store.interface";
 import { DriveDTO } from "./drive.dto";
 import { FileDTO } from "./file.dto";
@@ -16,4 +17,5 @@ export class FolderDTO implements IStore{
     public files: FileDTO[];
     public context: string;
     public isSelected: boolean;
+    public download: Download;
 }

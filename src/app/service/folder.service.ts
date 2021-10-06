@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -35,6 +35,11 @@ export class FolderService{
 
     public removeFolder(folderLink: string): Observable<any>{
        return this.http.delete<any>(`${API_URL}folders/remove/${folderLink}`);
+    }
+
+    public downloadFolder(folderLink: string): Observable<any>{
+        const req = new HttpRequest('GET', `${API_URL}folders/download-folder/${folderLink}`, {responseType: 'arrayBuffer', reportProgress: true});
+        return this.http.request(req);
     }
 
     private saveGridStyle(style: string): string{

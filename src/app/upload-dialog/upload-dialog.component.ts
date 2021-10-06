@@ -1,5 +1,6 @@
 import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Folder } from '../model/folder.model';
 import { Uploader } from '../model/uploader.model';
 
 @Component({
@@ -25,7 +26,7 @@ export class UploadDialogComponent implements OnInit {
   }
 
 
-  public getExtension(file: File): string{
+  public getExtension(file: File | Folder): string{
     let index = file.name.lastIndexOf(".") + 1;
     return file.name.slice(index);
   }

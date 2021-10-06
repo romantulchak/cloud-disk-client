@@ -1,5 +1,7 @@
+import { Folder } from "./folder.model";
+
 export class Uploader {
-  public file: File;
+  public file: File | Folder;
   public value: number = 0;
   public uploaded: boolean;
   public error: {
@@ -7,7 +9,7 @@ export class Uploader {
       message: string
   };
 
-  constructor(file: File, value: number, uploaded: boolean){
+  constructor(file: File | Folder, value: number, uploaded: boolean){
       this.file = file;
       this.value = value;
       this.uploaded = uploaded;

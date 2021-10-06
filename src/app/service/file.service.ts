@@ -26,6 +26,11 @@ export class FileService{
         return this.http.delete(`${API_URL}files/delete-file/${fileLink}`);
     }
 
+    public downloadFile(fileLink: string): Observable<any>{
+        const req = new HttpRequest('GET', `${API_URL}files/download-file/${fileLink}`, {responseType: 'arrayBuffer', reportProgress: true});
+        return this.http.request(req);
+    }
+
     private sendRequest(endPoint: string, name: string, file: File): HttpRequest<FormData>{
         const formData = new FormData();
         formData.append("file", file);
@@ -35,5 +40,7 @@ export class FileService{
         });
         return req;
     }
+
+    
 
 }
