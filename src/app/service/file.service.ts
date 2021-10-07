@@ -26,6 +26,10 @@ export class FileService{
         return this.http.delete(`${API_URL}files/delete-file/${fileLink}`);
     }
 
+    public preDeleteFile(fileLink: string, driveName: string):Observable<any>{
+        return this.http.put(`${API_URL}files/pre-delete-file/${fileLink}`, driveName);
+    }
+
     public downloadFile(fileLink: string): Observable<any>{
         const req = new HttpRequest('GET', `${API_URL}files/download-file/${fileLink}`, {responseType: 'arrayBuffer', reportProgress: true});
         return this.http.request(req);

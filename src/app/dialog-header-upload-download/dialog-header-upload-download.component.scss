@@ -1,0 +1,59 @@
+ @mixin iconStyle($heigh, $width) {
+   .icon {
+     height: 40px;
+     margin: 0 4px;
+     width: 40px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
+     border-radius: 50%;
+     cursor: pointer;
+
+     svg {
+       fill: #a0a0a0;
+       height: $heigh;
+       width: $width;
+     }
+   }
+ }
+
+ %svgHover {
+   &:hover {
+     background-color: rgba(255, 255, 255, .12);
+
+     svg {
+       fill: #fff;
+     }
+   }
+ }
+
+
+ .uploader__header {
+   display: flex;
+   background-color: #323232;
+   border: 1px transparent solid;
+   bottom: 24px;
+   color: #fff;
+   font-size: 14px;
+   height: 52px;
+   line-height: normal;
+   justify-content: space-between;
+   padding: 0px 15px 0px 15px;
+   align-items: center;
+   z-index: 100;
+   position: sticky;
+   top: 1px;
+
+   .header__icons {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+
+     @include iconStyle(14px, 14px);
+
+     .icon {
+       @extend %svgHover;
+     }
+   }
+ }

@@ -1,4 +1,5 @@
 export enum ContextEnum {
   DRIVE = "DRIVE",
-  FOLDER = "FOLDER"
+  FOLDER = "FOLDER",
+  TRASH = "TRASH"
 }

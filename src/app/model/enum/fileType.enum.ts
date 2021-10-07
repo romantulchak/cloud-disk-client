@@ -11,4 +11,5 @@ export class FileType{
     public readonly SVG = ["svg"];
     public readonly TORRENT = ["torrent"];
     public readonly CODE = ["java", "py", "cs", "gradle", "ts", "js"]
+    public readonly MP4 = ["mp4", "mp3", "webm", "avi"]
 }

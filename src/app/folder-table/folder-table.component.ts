@@ -4,14 +4,13 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 import {FileDTO} from '../dto/file.dto';
 import {FolderDTO} from '../dto/folder.dto';
+import { Download } from '../model/download.model';
 import {ContextType} from '../model/enum/contextType.enum';
 import {SizeType} from '../model/enum/sizeType.enum';
+import { DriveService } from '../service/drive.service';
 import {FileService} from '../service/file.service';
 import {FolderService} from '../service/folder.service';
-import { saveAs } from 'file-saver';
-import { Uploader } from '../model/uploader.model';
-import { Download } from '../model/download.model';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { FunctionService } from '../service/function.service';
 
 @Component({
   selector: 'app-folder-table',
@@ -20,6 +19,8 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 })
 export class FolderTableComponent implements OnInit, OnChanges {
   constructor(private router: Router,
+              private driveService: DriveService,
+              private functionService: FunctionService,
               private folderService: FolderService,
               private fileService: FileService) {
   }
@@ -36,13 +37,13 @@ export class FolderTableComponent implements OnInit, OnChanges {
   public displayedColumns: string[] = ['name', 'owner', 'lastChanged', 'size'];
   public contextType = ContextType;
   public eventType: number;
-  private selectedElements: any[] = [];
-
+  public selectedElements: any[] = [];
+  private driveName: string;
 
   @Input("source") source: MatTableDataSource<FolderDTO | FileDTO>;
 
   ngOnInit(): void {
-    
+    this.getDriveName();
   }
 
   ngOnChanges() {
@@ -51,6 +52,16 @@ export class FolderTableComponent implements OnInit, OnChanges {
         element.isSelected = false;
       });
     }
+  }
+
+  private getDriveName(){
+    this.driveService.contextSubject.subscribe(
+      res=>{
+        if(res != null){
+          this.driveName = res.data;
+        }
+      }
+    );
   }
 
   public open(element: any) {
@@ -94,8 +105,10 @@ export class FolderTableComponent implements OnInit, OnChanges {
   }
 
   public removeFile(element: FileDTO) {
-    this.fileService.deleteFile(element.link).subscribe(
-      res => {
+
+
+    this.fileService.preDeleteFile(element.link, this.driveName).subscribe(
+      res=>{
         this.source.data = this.source.data.filter(f => f.id !== element.id);
       }
     );
@@ -120,77 +133,13 @@ export class FolderTableComponent implements OnInit, OnChanges {
     this.selectedElements = [];
   }
 
-  public getSize(size: number): string {
-    if (size > SizeType.B_MIN && size < SizeType.B_MAX) {
-      return this.convertBytes(size, SizeType.B_MIN) + " B";
-    } else if (size > SizeType.KB_MIN && size < SizeType.KB_MAX) {
-      return this.convertBytes(size, SizeType.KB_MIN) + " KB";
-    } else if (size > SizeType.MB_MIN && size < SizeType.MB_MAX) {
-      return this.convertBytes(size, SizeType.MB_MIN) + " MB";
-    } else if (size > SizeType.GB_MIN && size < SizeType.GB_MAX) {
-      return this.convertBytes(size, SizeType.GB_MIN) + " GB";
-    }
-    return "";
-  }
-
-  private convertBytes(size: number, divied: number): string {
-    return (size / divied).toPrecision(3);
-  }
-
   public download(){
-    
-
-    for (let index = 0; index < this.selectedElements.length; index++) {
-    this.selectedElements[index].download = new Download(0, true);
-
-    if(this.selectedElements[index].context === ContextType.FOLDER){
-      this.downloadFolder(this.selectedElements[index], index);
-    }else{
-        this.downloadFile(this.selectedElements[index], index);
-      }
-    }
-    
-    
-
+    let downloadProgress: Download[] = [];
+    this.selectedElements.forEach(element => {
+      let download = new Download(0, false, element);
+      downloadProgress.push(download);
+    });
+    this.functionService.download(downloadProgress);
   }
 
-  private downloadFolder(element: FolderDTO, index: number){
-    this.folderService.downloadFolder(element.link).subscribe(
-      event=>{
-        this.selectedElements[index].download.eventType = event.type;
-
-
-        if (event.type === HttpEventType.DownloadProgress) {
-          this.selectedElements[index].download.value = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          
-          let blob = new Blob([event.body]);
-          saveAs(blob, element.name + ".zip");
-          setTimeout(() => {
-            this.selectedElements[index].download.downloaded = false;
-          }, 500);
-
-        }
-      }
-    );
-  }
-
-  private downloadFile(element: FileDTO, index: number){
-    this.fileService.downloadFile(element.link).subscribe(
-      event=>{
-        if (event.type === HttpEventType.DownloadProgress) {
-          this.selectedElements[index].download.value = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          let blob = new Blob([event.body]);
-          console.log(blob);
-          
-          saveAs(blob, element.name);
-          setTimeout(() => {
-            this.selectedElements[index].download.downloaded = false;
-          }, 500);
-
-        }
-      }
-    );
-  }
 }

@@ -31,6 +31,10 @@ import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { FileIconComponent } from './file-icon/file-icon.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
+import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
+import { FileExtensionPipe } from './pipe/file-extension.pipe';
+import { DialogHeaderUploadDownloadComponent } from './dialog-header-upload-download/dialog-header-upload-download.component';
+import { FileSizePipe } from './pipe/file-size.pipe';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     FolderTableComponent,
     UploadDialogComponent,
     FileIconComponent,
-    ContextMenuComponent
+    ContextMenuComponent,
+    DownloadDialogComponent,
+    FileExtensionPipe,
+    DialogHeaderUploadDownloadComponent,
+    FileSizePipe,
   ],
   imports: [
     BrowserModule,

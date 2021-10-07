@@ -12,8 +12,7 @@ export class UploadDialogComponent implements OnInit {
 
   public totalElements: number = 0;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public progressInfos: Uploader[],
-            private dialogRef: MatDialogRef<any>) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public progressInfos: Uploader[]) { 
   }
 
   ngOnInit(): void {
@@ -24,11 +23,4 @@ export class UploadDialogComponent implements OnInit {
       }
     })
   }
-
-
-  public getExtension(file: File | Folder): string{
-    let index = file.name.lastIndexOf(".") + 1;
-    return file.name.slice(index);
-  }
-
 }

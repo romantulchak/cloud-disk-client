@@ -42,6 +42,10 @@ export class FolderService{
         return this.http.request(req);
     }
 
+    public getRemovedElements(driveName: string): Observable<any>{
+        return this.http.get(`${API_URL}folders/removed-elements/${driveName}`)
+    }
+
     private saveGridStyle(style: string): string{
         localStorage.setItem('gridStyle', style);
         return style;

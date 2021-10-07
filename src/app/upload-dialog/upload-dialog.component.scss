@@ -61,41 +61,6 @@
 
 
 .uploader__dialog {
-  display: flex;
-  flex-wrap: wrap;
-  max-height: 356px;
-  overflow-y: auto;
-
-  .uploader__header {
-    display: flex;
-    background-color: #323232;
-    border: 1px transparent solid;
-    bottom: 24px;
-    color: #fff;
-    font-size: 14px;
-    height: 52px;
-    line-height: normal;
-    justify-content: space-between;
-    padding: 0px 15px 0px 15px;
-    align-items: center;
-    width: 100%;
-    z-index: 100;
-    position: sticky;
-    top: 1px;
-
-    .header__icons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      @include iconStyle(14px, 14px);
-
-      .icon {
-        @extend %svgHover;
-      }
-    }
-  }
-}
 
 .uploader__body {
   width: 100%;
@@ -129,4 +94,5 @@
       }
     }
   }
+} 
 }
