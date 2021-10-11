@@ -9,6 +9,8 @@ import { FileType } from '../model/enum/fileType.enum';
 export class FileIconComponent implements OnInit {
 
   @Input("extension") extension: string;
+  @Input("path") path: string;
+
   public fileType: FileType = new FileType();
 
   constructor() { }

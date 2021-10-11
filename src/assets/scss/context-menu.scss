@@ -1,0 +1,38 @@
+.menu__btn {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  height: 30px;
+
+  .icon {
+    display: flex;
+    margin-right: 1em;
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: #5f6368;
+    }
+  }
+
+  .icon__right{
+    margin-left: 5em;
+  }
+
+  .text__btn {
+    font-family: "Main";
+    font-size: 14px;
+  }
+}
+
+.separator {
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #e5e4e4;
+    margin: 5px 0 5px 0;
+  }
+}

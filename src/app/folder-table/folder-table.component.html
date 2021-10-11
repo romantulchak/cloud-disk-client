@@ -5,23 +5,17 @@
       <td class="element__name" mat-cell *matCellDef="let element">
         <div class="name__icon">
           <div class="icon">
-            <svg *ngIf="element.context == 'FOLDER'" x="0px" y="0px" focusable="false" viewBox="0 0 24 24" height="24px"
-              width="24px" fill="#5f6368">
+            <svg [attr.fill]="element.color | svgStyle" *ngIf="element.context === 'FOLDER'" fill="element.color" x="0px" y="0px" focusable="false"
+              viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">
               <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z">
               </path>
               <path d="M0 0h24v24H0z" fill="none"></path>
             </svg>
-            <app-file-icon [extension]="element.extension"></app-file-icon>
+            <app-file-icon *ngIf="element.context === 'FILE'" [extension]="element.extension"
+              [path]="element?.path?.fullPath"></app-file-icon>
           </div>
           <span>{{element?.name}}</span>
         </div>
-
-        <!-- <div *ngIf="element?.download?.eventType === 0" class="create__zip_block">
-          <span>Creating zip</span>
-        </div>
-        <div *ngIf="element?.download?.downloaded" class="download__progress">
-          <mat-progress-bar mode="determinate" [value]="element.download.value"></mat-progress-bar>
-        </div> -->
       </td>
     </ng-container>
 
@@ -54,40 +48,13 @@
 
 
 
-
 <div style="visibility: hidden; position: fixed;" [style.left]="menuTopLeftPosition.x"
   [style.top]="menuTopLeftPosition.y" [matMenuTriggerFor]="rightMenu"></div>
 
 <mat-menu #rightMenu="matMenu" class="context__menu">
+
   <ng-template matMenuContent let-element="element">
-
-    <button mat-menu-item (click)="download()" class="menu__btn">
-      <i class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-          <title>
-            download
-          </title>
-          <path d="M17 12v5H3v-5H1v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5z" />
-          <path d="M10 15l5-6h-4V1H9v8H5l5 6z" />
-        </svg>
-      </i>
-      <span class="text__btn">Dowload</span>
-    </button>
-
-    <div class="separator">
-      <hr>
-    </div>
-
-    <button mat-menu-item (click)="remove()" class="menu__btn">
-      <i class="icon">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="#000000" focusable="false">
-          <path _ngcontent-lnu-c102="" d="M0 0h24v24H0z" fill="none"></path>
-          <path _ngcontent-lnu-c102=""
-            d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
-          <path _ngcontent-lnu-c102="" d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
-        </svg>
-      </i>
-      <span class="text__btn">Remove</span>
-    </button>
+    <app-context-menu [selectedElements]="selectedElements" (changeColor)="changeColor($event)" [element]="element" [driveName]="driveName" [source]="source">
+    </app-context-menu>
   </ng-template>
 </mat-menu>

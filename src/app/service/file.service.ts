@@ -22,7 +22,7 @@ export class FileService{
         return this.http.request(req);
     }
 
-    public deleteFile(fileLink: string): Observable<any>{
+    public fullDeleteFile(fileLink: string): Observable<any>{
         return this.http.delete(`${API_URL}files/delete-file/${fileLink}`);
     }
 
@@ -33,6 +33,10 @@ export class FileService{
     public downloadFile(fileLink: string): Observable<any>{
         const req = new HttpRequest('GET', `${API_URL}files/download-file/${fileLink}`, {responseType: 'arrayBuffer', reportProgress: true});
         return this.http.request(req);
+    }
+
+    public restoreFile(fileLink: string): Observable<any>{
+        return this.http.put(`${API_URL}files/restore-file/${fileLink}`, null);
     }
 
     private sendRequest(endPoint: string, name: string, file: File): HttpRequest<FormData>{

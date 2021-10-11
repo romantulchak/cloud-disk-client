@@ -1,4 +1,5 @@
 export enum ContextType{
     FILE = "FILE",
-    FOLDER = "FOLDER"
+    FOLDER = "FOLDER",
+    ANY = "ANY",
 }

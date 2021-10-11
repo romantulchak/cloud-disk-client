@@ -13,7 +13,7 @@ import { FolderService } from '../service/folder.service';
 })
 export class CreateFolderDialogComponent implements OnInit {
 
-  public folderName: string = "Untitled";
+  public folderName: string = "Untitled folder";
   private driveName: string;
   private context: Context;
 

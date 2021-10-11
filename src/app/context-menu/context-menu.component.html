@@ -1,1 +1,84 @@
-<p>context-menu works!</p>
+    <ng-container *ngIf="context === contextType.FOLDER">
+      <button mat-menu-item (click)="getColors()" [matMenuTriggerFor]="colorPalette" class="menu__btn">
+        <i class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512"
+            xml:space="preserve">
+            <path
+              d="M512 319c-2-42-20-81-52-108-18-16-35-27-51-37s-30-19-41-30-20-25-30-41-21-33-37-51a149 149 0 0 0-219-9l-2 2a272 272 0 0 0 0 387c52 51 121 80 193 80h1a272 272 0 0 0 195-82c29-30 45-70 43-111zm-67 88-2 2c-45 45-106 70-169 70h-1c-64 0-124-26-169-71a239 239 0 0 1 1-341 116 116 0 0 1 170 7c15 16 25 32 35 47 10 17 21 33 35 46 13 14 29 25 46 35 15 10 31 20 47 34a116 116 0 0 1 7 171z" />
+            <path
+              d="M207 305a53 53 0 0 0-76 0 53 53 0 1 0 76 0zm-24 52a20 20 0 1 1-28-28 20 20 0 0 1 28 28zM343 379a53 53 0 1 0-106 12 53 53 0 0 0 106-12zm-51 26a20 20 0 0 1-22-17 20 20 0 0 1 20-23 20 20 0 0 1 2 40zM427 272a53 53 0 0 0-73 17 53 53 0 1 0 73-17zm-11 56a20 20 0 1 1-34-22 20 20 0 0 1 34 22zM240 85a53 53 0 1 0-90 57 53 53 0 0 0 90-57zm-34 45a20 20 0 0 1-28-6 20 20 0 0 1 6-28c4-2 7-3 11-3a20 20 0 0 1 11 37zM133 169a53 53 0 1 0-12 106 53 53 0 0 0 12-106zm13 55a20 20 0 0 1-22 18 20 20 0 1 1 22-18z" />
+          </svg>
+        </i>
+        <span class="text__btn">Change color</span>
+      </button>
+    </ng-container>
+    <mat-menu #colorPalette>
+      <div class="colors" *ngIf="colors.length !== 0">
+        <div *ngFor="let color of colors" [style]="'background-color: ' + color.value" [title]="color.name" [class.active]="color.isSelected" class="color" (click)="changeColor(color)">
+          <svg stroke="#fff" fill="#000" *ngIf="color.isSelected" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" viewBox="0 0 24 24">
+            <path
+              d="M20.303 4.846l.882.882-12.22 12.452-6.115-5.93.902-.902 5.303 5.028 11.248-11.53zm-.018-2.846l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285-3.715-3.715z" />
+          </svg>
+        </div>
+      </div>
+    </mat-menu>
+
+    <ng-container *ngIf="pageContext !== pageContextType.TRASH">
+
+      <button mat-menu-item (click)="download()" class="menu__btn">
+        <i class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+            <title>
+              download
+            </title>
+            <path d="M17 12v5H3v-5H1v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5z" />
+            <path d="M10 15l5-6h-4V1H9v8H5l5 6z" />
+          </svg>
+        </i>
+        <span class="text__btn">Dowload</span>
+      </button>
+
+      <div class="separator">
+        <hr>
+      </div>
+      <button mat-menu-item (click)="preRemove()" class="menu__btn">
+        <i class="icon">
+          <svg width="24px" height="24px" viewBox="0 0 24 24" fill="#000000" focusable="false">
+            <path _ngcontent-lnu-c102="" d="M0 0h24v24H0z" fill="none"></path>
+            <path _ngcontent-lnu-c102=""
+              d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z">
+            </path>
+            <path _ngcontent-lnu-c102="" d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+          </svg>
+        </i>
+        <span class="text__btn">Remove</span>
+      </button>
+    </ng-container>
+
+
+
+
+    <ng-container *ngIf="pageContext === pageContextType.TRASH">
+      <button mat-menu-item (click)="fullRemove()" class="menu__btn">
+        <i class="icon">
+          <svg width="24px" height="24px" viewBox="0 0 24 24" fill="#000000" focusable="false">
+            <path _ngcontent-lnu-c102="" d="M0 0h24v24H0z" fill="none"></path>
+            <path _ngcontent-lnu-c102=""
+              d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z">
+            </path>
+            <path _ngcontent-lnu-c102="" d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+          </svg>
+        </i>
+        <span class="text__btn">Full remove</span>
+      </button>
+      <button mat-menu-item (click)="restore()" class="menu__btn">
+        <i class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 20">
+            <path
+              d="M4 4v2.01C5.83 3.58 8.73 2 12.01 2 17.53 2 22 6.48 22 12s-4.47 10-9.99 10C6.48 22 2 17.52 2 12h2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8C9.04 4 6.47 5.61 5.09 8H8v2H2V4h2z" />
+          </svg>
+        </i>
+        <span>Restore</span>
+      </button>
+    </ng-container>

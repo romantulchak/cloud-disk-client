@@ -6,7 +6,6 @@ import {FileDTO} from '../dto/file.dto';
 import {FolderDTO} from '../dto/folder.dto';
 import { Download } from '../model/download.model';
 import {ContextType} from '../model/enum/contextType.enum';
-import {SizeType} from '../model/enum/sizeType.enum';
 import { DriveService } from '../service/drive.service';
 import {FileService} from '../service/file.service';
 import {FolderService} from '../service/folder.service';
@@ -38,7 +37,7 @@ export class FolderTableComponent implements OnInit, OnChanges {
   public contextType = ContextType;
   public eventType: number;
   public selectedElements: any[] = [];
-  private driveName: string;
+  public driveName: string;
 
   @Input("source") source: MatTableDataSource<FolderDTO | FileDTO>;
 
@@ -54,12 +53,12 @@ export class FolderTableComponent implements OnInit, OnChanges {
     }
   }
 
+
+
   private getDriveName(){
-    this.driveService.contextSubject.subscribe(
+    this.driveService.getDrive().then(
       res=>{
-        if(res != null){
-          this.driveName = res.data;
-        }
+        this.driveName = res;
       }
     );
   }
@@ -104,42 +103,8 @@ export class FolderTableComponent implements OnInit, OnChanges {
     this.matMenuTrigger.openMenu();
   }
 
-  public removeFile(element: FileDTO) {
-
-
-    this.fileService.preDeleteFile(element.link, this.driveName).subscribe(
-      res=>{
-        this.source.data = this.source.data.filter(f => f.id !== element.id);
-      }
-    );
+  public changeColor(folder: FolderDTO){
+    let element = this.source.data.find(element => element.id === folder.id) as FolderDTO;
+    element.color = folder.color;
   }
-
-  private removeFolder(element: FolderDTO) {
-    this.folderService.removeFolder(element.link).subscribe(
-      res => {
-        this.source.data = this.source.data.filter(f => f.id !== element.id);
-      }
-    );
-  }
-
-  public remove() {
-    this.selectedElements.forEach(element => {
-      if (element.context == this.contextType.FOLDER) {
-        this.removeFolder(element);
-      } else {
-        this.removeFile(element);
-      }
-    });
-    this.selectedElements = [];
-  }
-
-  public download(){
-    let downloadProgress: Download[] = [];
-    this.selectedElements.forEach(element => {
-      let download = new Download(0, false, element);
-      downloadProgress.push(download);
-    });
-    this.functionService.download(downloadProgress);
-  }
-
 }

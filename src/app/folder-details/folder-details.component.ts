@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute} from '@angular/router';
 import { FileDTO } from '../dto/file.dto';
@@ -13,7 +13,7 @@ import { FolderService } from '../service/folder.service';
   templateUrl: './folder-details.component.html',
   styleUrls: ['./folder-details.component.scss'],
 })
-export class FolderDetailsComponent implements OnInit {
+export class FolderDetailsComponent implements OnInit, OnDestroy {
 
   private folderLink: string;
   public folders: MatTableDataSource<FolderDTO | FileDTO> = new MatTableDataSource();
@@ -59,5 +59,9 @@ export class FolderDetailsComponent implements OnInit {
         this.folders.data = res;
       }
     );
+  }
+
+  ngOnDestroy(): void{
+    this.folders.data = [];
   }
 } 

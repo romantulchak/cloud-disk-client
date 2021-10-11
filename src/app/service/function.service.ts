@@ -13,6 +13,8 @@ import { FileService } from "./file.service";
 import { FolderService } from "./folder.service";
 import { saveAs } from 'file-saver';
 import { DownloadDialogComponent } from "../download-dialog/download-dialog.component";
+import { MatTableDataSource } from "@angular/material/table";
+import { FolderDTO } from "../dto/folder.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -77,7 +79,75 @@ export class FunctionService {
     }
   }
 
+  public preRemove(selectedElements: any[], driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>) {
+    selectedElements.forEach(element => {
+      if (element.context === ContextEnum.FOLDER) {
+        this.removeFolder(element, driveName, source);
+      } else {
+        this.removeFile(element, driveName, source);
+      }
+    });
+  }
 
+  private removeFolder(element: FileDTO, driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>) {
+    this.folderService.preDeleteFolder(element.link, driveName).subscribe(
+      res=>{
+        source.data = source.data.filter(f => f.id !== element.id);
+      }
+    );
+  }
+  private removeFile(element: FileDTO, driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>) {
+    this.fileService.preDeleteFile(element.link, driveName).subscribe(
+      res=>{
+        source.data = source.data.filter(f => f.id !== element.id);
+      }
+    );
+  }
+
+  
+
+  public fullRemove(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
+    selectedElements.forEach(element =>{
+      if(element.context === ContextType.FILE){
+        this.fullFileRemove(element.link, source);
+      }else{
+        this.fullFolderRemove(element.link, source);
+      }
+    });
+
+  }
+
+  private fullFileRemove(fileLink: string, source: MatTableDataSource<FolderDTO | FileDTO>){
+    this.fileService.fullDeleteFile(fileLink).subscribe(
+      res=>{
+        source.data = source.data.filter(element => element.link !== fileLink);
+      }
+    );
+  }
+
+  private fullFolderRemove(folderLink, source: MatTableDataSource<FolderDTO | FileDTO>) {
+    this.folderService.removeFolder(folderLink).subscribe(
+      res => {
+        source.data = source.data.filter(f => f.link !== folderLink);
+      }
+    );
+  }
+
+  public restore(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
+    selectedElements.forEach(element =>{
+      if(element.context === ContextType.FILE){
+        this.restoreFile(element, source);
+      }
+    });
+  }
+
+  private restoreFile(file: FileDTO, source: MatTableDataSource<FolderDTO | FileDTO>){
+    this.fileService.restoreFile(file.link).subscribe(
+      res=>{
+        source.data = source.data.filter(element => element.id != file.id);
+      }
+    );
+  }
 
   //TODO: optimize this
   public uploadFiles(event: any, context: Context) {

@@ -42,6 +42,14 @@ export class FolderService{
         return this.http.request(req);
     }
 
+    public preDeleteFolder(folderLink: string, driveName: string){
+        return this.http.put(`${API_URL}folders/pre-remove/${folderLink}`, driveName);
+    }
+
+    public changeFolderColor(folderLink: string, color: string): Observable<FolderDTO>{
+        return this.http.put<FolderDTO>(`${API_URL}folders/change-color/${folderLink}`, color);
+    }
+
     public getRemovedElements(driveName: string): Observable<any>{
         return this.http.get(`${API_URL}folders/removed-elements/${driveName}`)
     }

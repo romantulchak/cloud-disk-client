@@ -1,5 +1,6 @@
 import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ContextType } from '../model/enum/contextType.enum';
 import { Folder } from '../model/folder.model';
 import { Uploader } from '../model/uploader.model';
 

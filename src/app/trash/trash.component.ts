@@ -26,7 +26,12 @@ export class TrashComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDriveName();
+    this.initContext();
+  }
 
+  private initContext(){
+    let context = new Context(ContextEnum.TRASH);
+    this.driveService.contextSubject.next(context);
   }
 
   private getDriveName(){
@@ -47,7 +52,7 @@ export class TrashComponent implements OnInit {
   }
 
   public removeFile(element: FolderDTO | FileDTO){
-        this.fileService.deleteFile(element.link).subscribe(
+        this.fileService.fullDeleteFile(element.link).subscribe(
       res => {
         // this.source.data = this.source.data.filter(f => f.id !== element.id);
         console.log(res);
