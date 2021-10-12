@@ -65,7 +65,6 @@ export class FolderTableComponent implements OnInit, OnChanges {
 
   public open(element: any) {
     if (element.context == "FOLDER") {
-      this.router.onSameUrlNavigation = 'reload';
       this.router.navigateByUrl(`drive/folders/${element.link}`);
     } else {
       console.log('FILE');

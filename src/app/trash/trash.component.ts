@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileDTO } from '../dto/file.dto';
 import { FolderDTO } from '../dto/folder.dto';
@@ -14,7 +14,7 @@ import { TrashService } from '../service/trash.service';
   templateUrl: './trash.component.html',
   styleUrls: ['./trash.component.scss']
 })
-export class TrashComponent implements OnInit {
+export class TrashComponent implements OnInit, OnDestroy {
 
   public elements: MatTableDataSource<FolderDTO | FileDTO> = new MatTableDataSource();
   private driveName: string;
@@ -51,13 +51,8 @@ export class TrashComponent implements OnInit {
     );
   }
 
-  public removeFile(element: FolderDTO | FileDTO){
-        this.fileService.fullDeleteFile(element.link).subscribe(
-      res => {
-        // this.source.data = this.source.data.filter(f => f.id !== element.id);
-        console.log(res);
-      }
-    );
+  ngOnDestroy(){
+    this.folderService.folderSubject.next(null);
+    this.elements.data = [];
   }
-
 }

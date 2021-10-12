@@ -4,7 +4,7 @@
     <div class="file__list">
       <div class="file" *ngFor="let file of progressInfos">
         <div class="icon">
-          <app-file-icon [extension]="file.file | fileExtension"></app-file-icon>
+          <app-file-icon [extension]="file.file.name | fileExtension"></app-file-icon>
         </div>
         <div class="file__name" [title]="file.file.name">
           {{file.file.name | slice: 0: 45}}

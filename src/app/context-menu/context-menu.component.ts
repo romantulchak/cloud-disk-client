@@ -102,13 +102,15 @@ export class ContextMenuComponent implements OnInit {
   }
 
   public changeColor(color: FolderColor){
-    this.folderService.changeFolderColor(this.element.link, color.value).subscribe(
-      res=>{
-        color.isSelected = true;
-        this.selectedColor = color;
-        this.element = res;
-        this.changeColorEvent.emit(res);
-      }
-    );
+    this.selectedElements.forEach(element => {
+      this.folderService.changeFolderColor(element.link, color.value).subscribe(
+        res=>{
+          color.isSelected = true;
+          this.selectedColor = color;
+          this.element = res;
+          this.changeColorEvent.emit(res);
+        }
+      );
+    });
   }
 }

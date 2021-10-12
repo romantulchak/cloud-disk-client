@@ -35,7 +35,7 @@ import { DownloadDialogComponent } from './download-dialog/download-dialog.compo
 import { FileExtensionPipe } from './pipe/file-extension.pipe';
 import { DialogHeaderUploadDownloadComponent } from './dialog-header-upload-download/dialog-header-upload-download.component';
 import { FileSizePipe } from './pipe/file-size.pipe';
-import { SvgStylePipe } from './svg-style.pipe';
+import { SvgStylePipe } from './pipe/svg-style.pipe';
 
 @NgModule({
   declarations: [

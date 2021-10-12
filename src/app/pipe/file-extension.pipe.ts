@@ -7,9 +7,9 @@ import { FolderDTO } from '../dto/folder.dto';
 })
 export class FileExtensionPipe implements PipeTransform {
 
-  transform(value: FolderDTO | FileDTO | File, ...args: unknown[]): string {
-    let index = value.name.lastIndexOf(".") + 1;
-    return value.name.slice(index);
+  transform(value: string, ...args: unknown[]): string {
+    let index = value.lastIndexOf(".") + 1;
+    return value.slice(index);
   }
 
 }

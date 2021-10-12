@@ -20,6 +20,61 @@ nav {
       max-width: 720px;
       width: 100%;
       margin-right: 25em;
+      position: relative;
+
+      .search__result{
+        z-index: 9999999;
+        position: absolute;
+        max-height: 360px;
+        background: #fff;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 10px 10px;
+        box-shadow: 1px 5px 7px 0px rgb(0 0 0 / 20%);
+        
+        .not__found{
+          padding: 3em;
+          text-align: center;
+        }
+
+        .result{
+          display: flex;
+          justify-content: space-between;
+          padding: 0 1em 0 1em;
+          height: 40px;
+          align-items: center;
+          border-left: 2px solid transparent;
+          transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+          &:hover{
+            cursor: pointer;
+            background: #f1f3f4;
+            border-left: 2px solid #03a9f4;
+          }
+
+          .icon__name{
+            display: flex;
+
+            h5{
+              font-size: 15px;
+              margin-left: 1em;
+            }
+          }
+        }
+      }
+
+      .resalt__block_focus{
+        z-index: 9999999;
+        position: absolute;
+        max-height: 360px;
+        background: #fff;
+        top: 45px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 0 0 10px 10px;
+        border: 1px solid #c7c7c7;
+        padding-bottom: 7px;
+      }
 
       input {
         width: 100%;
@@ -29,6 +84,19 @@ nav {
         border-radius: 8px;
         padding-left: 3em;
         box-sizing: border-box;
+        outline: none;
+      }
+      .input_focus{
+        width: 100%;
+        height: 45px;
+        border: none;
+        background-color: #fff;
+        padding-left: 3em;
+        border-radius: 10px 10px 0 0;
+        box-sizing: border-box;
+        border-top: 1px solid #c7c7c7;
+        border-left: 1px solid #c7c7c7;
+        border-right: 1px solid #c7c7c7;
         outline: none;
       }
 
@@ -68,3 +136,5 @@ svg {
   position: absolute;
   height: 2px;
 }
+
+
