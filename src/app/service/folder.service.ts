@@ -2,6 +2,7 @@ import { HttpClient, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { FileDTO } from "../dto/file.dto";
 import { FolderDTO } from "../dto/folder.dto";
 import { IStore } from "../model/interface/store.interface";
 
@@ -50,8 +51,8 @@ export class FolderService{
         return this.http.put<FolderDTO>(`${API_URL}folders/change-color/${folderLink}`, color);
     }
 
-    public getRemovedElements(driveName: string): Observable<any>{
-        return this.http.get(`${API_URL}folders/removed-elements/${driveName}`)
+    public getRemovedElements(driveName: string): Observable<FolderDTO[] | FileDTO[]>{
+        return this.http.get<FolderDTO[] | FileDTO[]>(`${API_URL}folders/removed-elements/${driveName}`)
     }
 
     private saveGridStyle(style: string): string{

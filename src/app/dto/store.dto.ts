@@ -16,4 +16,5 @@ export class StoreDTO{
     public isSelected: boolean;
     public download: Download;
     public path: LocalPath;
+    public noticed: boolean;
 }

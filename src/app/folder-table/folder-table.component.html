@@ -11,10 +11,14 @@
               </path>
               <path d="M0 0h24v24H0z" fill="none"></path>
             </svg>
-            <app-file-icon *ngIf="element.context === 'FILE'" [extension]="element.extension"
+            <app-file-icon *ngIf="element.context === 'FILE'" [extension]="element.name | fileExtension"
               [path]="element?.path?.fullPath"></app-file-icon>
           </div>
           <span>{{element?.name}}</span>
+
+          <ng-container *ngIf="element.noticed">
+            <svg class="noticed" [attr.fill]="element.isSelected ? '#1967d2' :'#b2b2b2' "  width="16px" height="16px" viewBox="0 0 16 16" focusable="false" fill=""><path d="M8,11.5133333 L12.12,14 L11.0266667,9.31333333 L14.6666667,6.16 L9.87333333,5.75333333 L8,1.33333333 L6.12666667,5.75333333 L1.33333333,6.16 L4.97333333,9.31333333 L3.88,14 L8,11.5133333 Z"></path></svg>
+          </ng-container>
         </div>
       </td>
     </ng-container>

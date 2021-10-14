@@ -12,6 +12,7 @@ import { FolderColor } from '../model/folderColor.model';
 import { DriveService } from '../service/drive.service';
 import { FolderService } from '../service/folder.service';
 import { FunctionService } from '../service/function.service';
+import { NoticedService } from '../service/noticed.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -37,7 +38,8 @@ export class ContextMenuComponent implements OnInit {
 
   constructor(private functionService: FunctionService,
               private driveService: DriveService,
-              private folderService: FolderService) { }
+              private folderService: FolderService,
+              private noticeService: NoticedService) { }
 
   ngOnInit(): void {
     this.getFilesContext();
@@ -112,5 +114,37 @@ export class ContextMenuComponent implements OnInit {
         }
       );
     });
+  }
+
+  public addToStarred(){
+    this.selectedElements = this.selectedElements.filter(element => !element.noticed);
+    this.selectedElements.forEach(element =>{
+      this.noticeService.addElementToNoticed(element.link).subscribe(
+        res=>{
+          element.noticed = true;
+        }
+      );
+    })
+  }
+
+  public removeFromStarred(){
+    this.selectedElements.forEach(element =>{
+      this.noticeService.removeFromStarred(element.link).subscribe(
+        res=>{
+          element.noticed = false;
+          if(this.pageContext === ContextEnum.NOTICED){
+            this.source.data = this.source.data.filter(element => element.id !== element.id);
+          }
+        }
+      );
+    });
+  }
+
+  public checkNoticedElements(): boolean{
+    let noticed = this.selectedElements.filter(element => element.noticed);
+    if(this.selectedElements.length === noticed.length){
+      return true;
+    }
+    return false;
   }
 }

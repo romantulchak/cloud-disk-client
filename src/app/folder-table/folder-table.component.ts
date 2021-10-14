@@ -4,12 +4,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 import {FileDTO} from '../dto/file.dto';
 import {FolderDTO} from '../dto/folder.dto';
-import { Download } from '../model/download.model';
 import {ContextType} from '../model/enum/contextType.enum';
 import { DriveService } from '../service/drive.service';
-import {FileService} from '../service/file.service';
-import {FolderService} from '../service/folder.service';
-import { FunctionService } from '../service/function.service';
 
 @Component({
   selector: 'app-folder-table',
@@ -18,10 +14,7 @@ import { FunctionService } from '../service/function.service';
 })
 export class FolderTableComponent implements OnInit, OnChanges {
   constructor(private router: Router,
-              private driveService: DriveService,
-              private functionService: FunctionService,
-              private folderService: FolderService,
-              private fileService: FileService) {
+              private driveService: DriveService) {
   }
 
   @HostListener('contextmenu', ['$event'])
@@ -50,10 +43,9 @@ export class FolderTableComponent implements OnInit, OnChanges {
       this.source.data.forEach(element => {
         element.isSelected = false;
       });
+      
     }
   }
-
-
 
   private getDriveName(){
     this.driveService.getDrive().then(
@@ -105,5 +97,11 @@ export class FolderTableComponent implements OnInit, OnChanges {
   public changeColor(folder: FolderDTO){
     let element = this.source.data.find(element => element.id === folder.id) as FolderDTO;
     element.color = folder.color;
+  }
+
+  public changeNoticed(element: FileDTO | FolderDTO){
+    console.log(element);
+    
+    this.source.data.find(element => element.id === element.id).noticed = element.noticed;
   }
 }

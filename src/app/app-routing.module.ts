@@ -14,6 +14,7 @@ import { TrashComponent } from './trash/trash.component';
 const routes: Routes = [
   {path:'auth', component: AuthComponent, canActivate: [AuthGuard]},
   {path: 'drive', component: DriveComponent, children: [
+    {path: '', redirectTo:'my-drive', pathMatch:'full'},
     {path: 'my-drive', component: MyDiskComponent},
     {path: 'folders/:link', component: FolderDetailsComponent},
     {path: 'computer', component: ComputerComponent},
