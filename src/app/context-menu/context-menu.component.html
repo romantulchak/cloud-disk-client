@@ -1,21 +1,29 @@
     <ng-container *ngIf="pageContext !== pageContextType.TRASH">
-      <button *ngIf="!checkNoticedElements()" mat-menu-item (click)="addToStarred()"  class="menu__btn">
+      <button *ngIf="selectedElements.length === 1" mat-menu-item (click)="openAccessDialog()" class="menu__btn">
+        <i class="icon"></i>
+        <span class="text__btn">Get link</span>
+      </button>
+      <button *ngIf="!checkNoticedElements()" mat-menu-item (click)="addToStarred()" class="menu__btn">
         <i class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path
+              d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
+          </svg>
         </i>
         <span class="text__btn">Add to Starred</span>
       </button>
-      <button *ngIf="checkNoticedElements()" mat-menu-item (click)="removeFromStarred()"  class="menu__btn">
+      <button *ngIf="checkNoticedElements()" mat-menu-item (click)="removeFromStarred()" class="menu__btn">
         <i class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path
+              d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
+          </svg>
         </i>
         <span class="text__btn">Remove from starred</span>
       </button>
-
-
     </ng-container>
     <ng-container *ngIf="context === contextType.FOLDER && pageContext !== pageContextType.TRASH">
-      <button mat-menu-item (click)="getColors()" [matMenuTriggerFor]="colorPalette" class="menu__btn">
+      <button [disabled]="element?.access?.accessType !== accessType.EDITOR && !element.isOwner" mat-menu-item (click)="getColors()" [matMenuTriggerFor]="colorPalette" class="menu__btn">
         <i class="icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512"
             xml:space="preserve">
@@ -30,7 +38,8 @@
     </ng-container>
     <mat-menu #colorPalette>
       <div class="colors" *ngIf="colors.length !== 0">
-        <div *ngFor="let color of colors" [style]="'background-color: ' + color.value" [title]="color.name" [class.active]="color.isSelected" class="color" (click)="changeColor(color)">
+        <div *ngFor="let color of colors" [style]="'background-color: ' + color.value" [title]="color.name"
+          [class.active]="color.isSelected" class="color" (click)="changeColor(color)">
           <svg stroke="#fff" fill="#000" *ngIf="color.isSelected" xmlns="http://www.w3.org/2000/svg" width="24"
             height="24" viewBox="0 0 24 24">
             <path
@@ -39,8 +48,10 @@
         </div>
       </div>
     </mat-menu>
-
     <ng-container *ngIf="pageContext !== pageContextType.TRASH">
+      <div class="separator">
+        <hr>
+      </div>
       <button mat-menu-item (click)="download()" class="menu__btn">
         <i class="icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -53,11 +64,10 @@
         </i>
         <span class="text__btn">Dowload</span>
       </button>
-
       <div class="separator">
         <hr>
       </div>
-      <button mat-menu-item (click)="preRemove()" class="menu__btn">
+      <button mat-menu-item (click)="preRemove()" [disabled]="element?.access?.accessType !== accessType.EDITOR && !element.isOwner" class="menu__btn">
         <i class="icon">
           <svg width="24px" height="24px" viewBox="0 0 24 24" fill="#000000" focusable="false">
             <path _ngcontent-lnu-c102="" d="M0 0h24v24H0z" fill="none"></path>
@@ -70,10 +80,6 @@
         <span class="text__btn">Remove</span>
       </button>
     </ng-container>
-
-
-
-
     <ng-container *ngIf="pageContext === pageContextType.TRASH">
       <button mat-menu-item (click)="fullRemove()" class="menu__btn">
         <i class="icon">

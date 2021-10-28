@@ -1,6 +1,6 @@
 <section class="folder__toolbar">
     <div class="toolbar__items">
-        <div>
+        <div *ngIf="context?.context !== contextType.TRASH">
             <button mat-button [matMenuTriggerFor]="menu">
                 <span>My drive</span>
               </button>
@@ -16,6 +16,9 @@
                     <span>Upload folder</span>
                   </button>
               </mat-menu>
+        </div>
+        <div *ngIf="context?.context === contextType.TRASH">
+          <h3>My trash</h3>
         </div>
         <div class="items">
             <div class="item" (click)="changeGrid()">

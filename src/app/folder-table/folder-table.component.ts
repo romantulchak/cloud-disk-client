@@ -100,8 +100,6 @@ export class FolderTableComponent implements OnInit, OnChanges {
   }
 
   public changeNoticed(element: FileDTO | FolderDTO){
-    console.log(element);
-    
     this.source.data.find(element => element.id === element.id).noticed = element.noticed;
   }
 }

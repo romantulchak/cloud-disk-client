@@ -1,4 +1,5 @@
 import { Download } from "../model/download.model";
+import { Access } from "./access.dto";
 import { DriveDTO } from "./drive.dto";
 import { LocalPath } from "./localPath.dto";
 import { UserDTO } from "./user.dto";
@@ -17,4 +18,6 @@ export class StoreDTO{
     public download: Download;
     public path: LocalPath;
     public noticed: boolean;
+    public access: Access;
+    public isOwner: boolean;
 }

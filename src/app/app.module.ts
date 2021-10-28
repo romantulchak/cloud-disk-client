@@ -36,6 +36,7 @@ import { FileExtensionPipe } from './pipe/file-extension.pipe';
 import { DialogHeaderUploadDownloadComponent } from './dialog-header-upload-download/dialog-header-upload-download.component';
 import { FileSizePipe } from './pipe/file-size.pipe';
 import { SvgStylePipe } from './pipe/svg-style.pipe';
+import { AccessDialogComponent } from './access-dialog/access-dialog.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { SvgStylePipe } from './pipe/svg-style.pipe';
     DialogHeaderUploadDownloadComponent,
     FileSizePipe,
     SvgStylePipe,
+    AccessDialogComponent,
   ],
   imports: [
     BrowserModule,

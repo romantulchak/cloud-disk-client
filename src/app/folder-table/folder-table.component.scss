@@ -141,3 +141,13 @@
   left: 0;
   position: absolute;
 }
+
+.additional__icons{
+  margin-right: 7px;
+  display: flex;
+  align-items: center;
+
+  svg{
+    margin: 3px;
+  }
+}

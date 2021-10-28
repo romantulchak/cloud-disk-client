@@ -56,6 +56,8 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
   private getSubFoldersInFolder(){
     this.folderService.findSubFoldersInFolder(this.folderLink).subscribe(
       res=>{
+        console.log(res);
+        
         this.folders.data = res;
       }
     );

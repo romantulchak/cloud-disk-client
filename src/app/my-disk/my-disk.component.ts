@@ -58,6 +58,8 @@ export class MyDiskComponent implements OnInit {
   private getFolders(){
     this.folderSerivce.findAllElementsForDrive(this.driveName).subscribe(
       res=>{
+        console.log(res);
+        
         this.folders.data = res;
       }
     );

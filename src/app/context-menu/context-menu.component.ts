@@ -13,6 +13,10 @@ import { DriveService } from '../service/drive.service';
 import { FolderService } from '../service/folder.service';
 import { FunctionService } from '../service/function.service';
 import { NoticedService } from '../service/noticed.service';
+import { ElementAccessService } from '../service/element-access.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AccessDialogComponent } from '../access-dialog/access-dialog.component';
+import { AccessType } from '../model/enum/accessType.enum';
 
 @Component({
   selector: 'app-context-menu',
@@ -33,17 +37,21 @@ export class ContextMenuComponent implements OnInit {
   public pageContextType = ContextEnum;
   public selectedColor: FolderColor;
   public colors: FolderColor[] = [];
+  public accessType = AccessType;
   private filesCount: number = 0;
   private folderCount: number = 0;
 
   constructor(private functionService: FunctionService,
               private driveService: DriveService,
               private folderService: FolderService,
-              private noticeService: NoticedService) { }
+              private noticeService: NoticedService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getFilesContext();
     this.getPageContext();
+    console.log(this.element);
+    
   }
 
   public getColors(){
@@ -133,7 +141,7 @@ export class ContextMenuComponent implements OnInit {
         res=>{
           element.noticed = false;
           if(this.pageContext === ContextEnum.NOTICED){
-            this.source.data = this.source.data.filter(element => element.id !== element.id);
+            this.source.data = this.source.data.filter(e => e.id !== element.id);
           }
         }
       );
@@ -146,5 +154,11 @@ export class ContextMenuComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  public openAccessDialog(){
+    this.dialog.open(AccessDialogComponent, {
+      data: this.element
+    });
   }
 }

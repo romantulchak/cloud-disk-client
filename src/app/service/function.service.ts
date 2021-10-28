@@ -104,8 +104,6 @@ export class FunctionService {
     );
   }
 
-  
-
   public fullRemove(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
     selectedElements.forEach(element =>{
       if(element.context === ContextType.FILE){

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FileDTO } from '../dto/file.dto';
 import { FolderDTO } from '../dto/folder.dto';
@@ -9,7 +9,7 @@ import { SearchService } from '../service/search.service';
 @Component({
   selector: 'app-nav-top',
   templateUrl: './nav-top.component.html',
-  styleUrls: ['./nav-top.component.scss']
+  styleUrls: ['./nav-top.component.scss'],
 })
 export class NavTopComponent implements OnInit {
 
@@ -27,9 +27,11 @@ export class NavTopComponent implements OnInit {
   }
 
   private loading(){
-    this,this.loaderService.isLoading.subscribe(
+    this.loaderService.isLoading.subscribe(
       res=>{
-        this.isLoading = res;
+        setTimeout(() => {
+          this.isLoading = res;
+        }, 1);
       }
     );
   }
