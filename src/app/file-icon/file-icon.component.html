@@ -1,3 +1,4 @@
+<ng-container *ngIf="isFileImageExists()">
   <img *ngIf="fileType.RAR.includes(extension)" src="../../assets/images/zip.png" alt="rar">
   <img *ngIf="fileType.PDF.includes(extension)" src="../../assets/images/7z.png" alt="pdf">
   <img *ngIf="fileType.WORD.includes(extension)" src="../../assets/images/word.png" alt="word">
@@ -11,7 +12,14 @@
   <img *ngIf="fileType.SVG.includes(extension)" src="../../assets/images/svg.png" alt="svg">
   <img *ngIf="fileType.EXE.includes(extension)" src="../../assets/images/exe.png" alt="exe">
   <img *ngIf="fileType.TORRENT.includes(extension)" src="../../assets/images/exe.png" alt="torrent">
+  <img *ngIf="fileType.EXCEL.includes(extension)" src="../../assets/images/excel.png" alt="excel">
   <img *ngIf="fileType.CODE.includes(extension)" src="../../assets/images/code.png" alt="code">
   <img *ngIf="fileType.MP4.includes(extension)" src="../../assets/images/video.png" alt="video">
-  <img *ngIf="fileType.MP4.includes(extension)" src="../../assets/images/json.png" alt="json">
+  <img *ngIf="fileType.JSON.includes(extension)" src="../../assets/images/json.png" alt="json">
   <img *ngIf="fileType.PPT.includes(extension)" src="../../assets/images/ppt.png" alt="json">
+
+</ng-container>
+
+<ng-container *ngIf="!isFileImageExists()">
+  <img src="../../assets/images/undefined.png" alt="json">
+</ng-container>

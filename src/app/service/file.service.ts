@@ -35,10 +35,6 @@ export class FileService{
         return this.http.request(req);
     }
 
-    public restoreFile(fileLink: string): Observable<any>{
-        return this.http.put(`${API_URL}files/restore-file/${fileLink}`, null);
-    }
-
     private sendRequest(endPoint: string, name: string, file: File): HttpRequest<FormData>{
         const formData = new FormData();
         formData.append("file", file);
@@ -48,7 +44,5 @@ export class FileService{
         });
         return req;
     }
-
-    
 
 }

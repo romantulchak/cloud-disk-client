@@ -15,6 +15,7 @@ import { saveAs } from 'file-saver';
 import { DownloadDialogComponent } from "../download-dialog/download-dialog.component";
 import { MatTableDataSource } from "@angular/material/table";
 import { FolderDTO } from "../dto/folder.dto";
+import { ElementService } from "./element.service";
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +25,12 @@ export class FunctionService {
   private files: FileList;
   private uploaderDialog: MatDialogRef <any, any>;
   private downloadDialog: MatDialogRef <any, any>;
+  private readonly ZIP_NAME_EXT = ".zip";
 
   constructor(private dialog: MatDialog,
     private folderService: FolderService,
-    private fileService: FileService) {}
+    private fileService: FileService,
+    private elementService: ElementService) {}
 
   public createFolder() {
     this.dialog.open(CreateFolderDialogComponent, {
@@ -81,27 +84,12 @@ export class FunctionService {
 
   public preRemove(selectedElements: any[], driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>) {
     selectedElements.forEach(element => {
-      if (element.context === ContextEnum.FOLDER) {
-        this.removeFolder(element, driveName, source);
-      } else {
-        this.removeFile(element, driveName, source);
-      }
+      this.elementService.preRemoveElement(element.link, driveName).subscribe(
+        res=>{
+          source.data = source.data.filter(f => f.id !== element.id);
+        }
+      );
     });
-  }
-
-  private removeFolder(element: FileDTO, driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>) {
-    this.folderService.preDeleteFolder(element.link, driveName).subscribe(
-      res=>{
-        source.data = source.data.filter(f => f.id !== element.id);
-      }
-    );
-  }
-  private removeFile(element: FileDTO, driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>) {
-    this.fileService.preDeleteFile(element.link, driveName).subscribe(
-      res=>{
-        source.data = source.data.filter(f => f.id !== element.id);
-      }
-    );
   }
 
   public fullRemove(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
@@ -133,14 +121,12 @@ export class FunctionService {
 
   public restore(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
     selectedElements.forEach(element =>{
-      if(element.context === ContextType.FILE){
-        this.restoreFile(element, source);
-      }
+        this.retstoreElement(element, source);
     });
   }
 
-  private restoreFile(file: FileDTO, source: MatTableDataSource<FolderDTO | FileDTO>){
-    this.fileService.restoreFile(file.link).subscribe(
+  private retstoreElement(file: FileDTO, source: MatTableDataSource<FolderDTO | FileDTO>){
+    this.elementService.restoreElement(file.link).subscribe(
       res=>{
         source.data = source.data.filter(element => element.id != file.id);
       }
@@ -200,6 +186,7 @@ export class FunctionService {
       this.uploaderDialog.componentInstance.progressInfos[index].value = Math.round(100 * event.loaded / event.total);
     } else if (event instanceof HttpResponse) {
       this.uploaderDialog.componentInstance.progressInfos[index].uploaded = true;
+      event.body.isOwner = true;
       this.folderService.folderSubject.next(event.body);
     }
   }
@@ -207,7 +194,7 @@ export class FunctionService {
 
   private saveFileDependsOnContext(blob: Blob, filename: string, context: ContextType){
     if(context === ContextType.FOLDER){
-      saveAs(blob, filename + ".zip");
+      saveAs(blob, filename + this.ZIP_NAME_EXT);
     }else{
       saveAs(blob, filename);
     }

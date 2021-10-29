@@ -17,6 +17,7 @@ import { ElementAccessService } from '../service/element-access.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AccessDialogComponent } from '../access-dialog/access-dialog.component';
 import { AccessType } from '../model/enum/accessType.enum';
+import { ElementService } from '../service/element.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -45,6 +46,7 @@ export class ContextMenuComponent implements OnInit {
               private driveService: DriveService,
               private folderService: FolderService,
               private noticeService: NoticedService,
+              private elementService: ElementService,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {

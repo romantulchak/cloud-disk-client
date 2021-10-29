@@ -18,4 +18,9 @@ export class FileIconComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  public isFileImageExists(): boolean{
+    return this.fileType.FILE_TYPES.find(element => element.type.includes(this.extension)) != null;
+  }
+
 }
