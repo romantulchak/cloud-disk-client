@@ -41,7 +41,7 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
     this.folderService.folderSubject.subscribe(
       res=>{
         if(res != null){
-          this.folders.data.push(res);
+          this.folders.data.unshift(res);
           this.folders.data = this.folders.data;
         }
       }

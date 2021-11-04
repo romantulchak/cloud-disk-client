@@ -7,6 +7,7 @@ import { Context } from '../model/context.model';
 import { ContextEnum } from '../model/enum/context.enum';
 import { GridStyle } from '../model/enum/gridStyle.enum';
 import { DriveService } from '../service/drive.service';
+import { ElementService } from '../service/element.service';
 import { FolderService } from '../service/folder.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class MyDiskComponent implements OnInit {
 
   constructor(private driveService: DriveService,
               private folderSerivce: FolderService,
+              private elementService: ElementService,
               private router: Router) { }
 
   private driveName: string;
@@ -40,7 +42,7 @@ export class MyDiskComponent implements OnInit {
     this,this.folderSerivce.folderSubject.subscribe(
       res=>{
         if(res != null){
-          this.folders.data.push(res);
+          this.folders.data.unshift(res);
           this.folders.data = this.folders.data;
         }
       }
@@ -56,10 +58,8 @@ export class MyDiskComponent implements OnInit {
   }
 
   private getFolders(){
-    this.folderSerivce.findAllElementsForDrive(this.driveName).subscribe(
+    this.elementService.findElementsForDrive(this.driveName).subscribe(
       res=>{
-        console.log(res);
-        
         this.folders.data = res;
       }
     );

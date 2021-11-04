@@ -78,9 +78,11 @@
   background-color: #e8f0fe;
   font-weight: 900;
   font-size: 16px;
+  border: none;
 
   td {
     color: #1967d2;
+    border-bottom-width: 0;
   }
 }
 
@@ -90,9 +92,10 @@
 
   td {
     font-family: "Main";
-    font-weight: 900;
+    font-weight: 600;
+    letter-spacing: .5px;
     color: #767676;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 

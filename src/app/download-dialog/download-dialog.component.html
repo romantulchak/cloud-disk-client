@@ -6,7 +6,7 @@
           <div class="icon">
             <app-file-icon *ngIf="file.file.context === contextType.FILE;else folder"  [extension]="file.file.name | fileExtension" [path]="file.file.path.fullPath"></app-file-icon>
             <ng-template #folder>
-              <svg _ngcontent-hnm-c148="" x="0px" y="0px" focusable="false" viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368" class="ng-star-inserted"><path _ngcontent-hnm-c148="" d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path><path _ngcontent-hnm-c148="" d="M0 0h24v24H0z" fill="none"></path></svg>
+              <svg x="0px" y="0px" focusable="false" viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368" class="ng-star-inserted"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path><path _ngcontent-hnm-c148="" d="M0 0h24v24H0z" fill="none"></path></svg>
             </ng-template>
           </div>
           <div class="file__name" [title]="file.file.name">

@@ -1,4 +1,4 @@
-import { HttpClient, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -19,40 +19,42 @@ export class FolderService{
     constructor(private http: HttpClient){}
 
     public createFolder(driveName: string, folderName: string): Observable<FolderDTO>{
-        return this.http.post<FolderDTO>(`${API_URL}folders/create/${driveName}`, folderName);
-    }
-
-    public findAllElementsForDrive(driveName: string): Observable<any>{
-        return this.http.get<IStore>(`${API_URL}folders/${driveName}`);
+        return this.http.post<FolderDTO>(`${API_URL}folder/create/${driveName}`, folderName);
     }
 
     public createSubFolder(folderName: string, folderLink: string): Observable<FolderDTO>{
-        return this.http.post<FolderDTO>(`${API_URL}folders/create-subfolder/${folderLink}`, folderName)
+        return this.http.post<FolderDTO>(`${API_URL}folder/create-subfolder/${folderLink}`, folderName)
     }
 
     public findSubFoldersInFolder(folderLink: string):Observable<FolderDTO[]>{
-        return this.http.get<FolderDTO[]>(`${API_URL}folders/sub-folders/${folderLink}`);
+        return this.http.get<FolderDTO[]>(`${API_URL}folder/sub-folders/${folderLink}`);
     }
 
     public removeFolder(folderLink: string): Observable<any>{
-       return this.http.delete<any>(`${API_URL}folders/remove/${folderLink}`);
+       return this.http.delete<any>(`${API_URL}folder/remove/${folderLink}`);
     }
 
     public downloadFolder(folderLink: string): Observable<any>{
-        const req = new HttpRequest('GET', `${API_URL}folders/download-folder/${folderLink}`, {responseType: 'arrayBuffer', reportProgress: true});
+        const req = new HttpRequest('GET', `${API_URL}folder/download-folder/${folderLink}`, {responseType: 'arrayBuffer', reportProgress: true});
         return this.http.request(req);
     }
 
     public preDeleteFolder(folderLink: string, driveName: string){
-        return this.http.put(`${API_URL}folders/pre-remove/${folderLink}`, driveName);
+        return this.http.put(`${API_URL}folder/pre-remove/${folderLink}`, driveName);
     }
 
     public changeFolderColor(folderLink: string, color: string): Observable<FolderDTO>{
-        return this.http.put<FolderDTO>(`${API_URL}folders/change-color/${folderLink}`, color);
+        return this.http.put<FolderDTO>(`${API_URL}folder/change-color/${folderLink}`, color);
     }
 
-    public getRemovedElements(driveName: string): Observable<FolderDTO[] | FileDTO[]>{
-        return this.http.get<FolderDTO[] | FileDTO[]>(`${API_URL}folders/removed-elements/${driveName}`)
+    public uploadInFolder(formData: FormData){
+        const req = this.uploadFolderRequest(formData, 'upload');
+        return this.http.request(req); 
+    }
+
+    public uploadInDrive(formData: FormData){
+        const req = this.uploadFolderRequest(formData, 'upload-in-drive');
+        return this.http.request(req);
     }
 
     private saveGridStyle(style: string): string{
@@ -67,5 +69,13 @@ export class FolderService{
         }
         this.gridSubject.next(true);
         return gridStyle;
+    }
+
+
+    private uploadFolderRequest(formData: FormData, endPoint: string): HttpRequest<FormData>{
+        return new HttpRequest('POST', `${API_URL}folder/${endPoint}`, formData, {
+            reportProgress: true,
+            responseType: 'json',
+        });
     }
 }

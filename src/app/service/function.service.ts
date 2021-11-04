@@ -94,27 +94,15 @@ export class FunctionService {
 
   public fullRemove(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
     selectedElements.forEach(element =>{
-      if(element.context === ContextType.FILE){
-        this.fullFileRemove(element.link, source);
-      }else{
-        this.fullFolderRemove(element.link, source);
-      }
+      this.removeElement(element.link, source);
     });
 
   }
 
-  private fullFileRemove(fileLink: string, source: MatTableDataSource<FolderDTO | FileDTO>){
-    this.fileService.fullDeleteFile(fileLink).subscribe(
+  private removeElement(fileLink: string, source: MatTableDataSource<FolderDTO | FileDTO>){
+    this.elementService.removeElement(fileLink).subscribe(
       res=>{
         source.data = source.data.filter(element => element.link !== fileLink);
-      }
-    );
-  }
-
-  private fullFolderRemove(folderLink, source: MatTableDataSource<FolderDTO | FileDTO>) {
-    this.folderService.removeFolder(folderLink).subscribe(
-      res => {
-        source.data = source.data.filter(f => f.link !== folderLink);
       }
     );
   }
@@ -146,6 +134,52 @@ export class FunctionService {
         this.uploadIntoFolder(context, this.files[index], index);
       }
     }
+  }
+
+  public uploadFolder(files: FileList, context: Context){ 
+    this.openUploadDialog();
+    let obj = new Uploader(null, 0, false, files.length);
+    this.uploaderDialog.componentInstance.progressInfos.unshift(obj);
+    let formData = new FormData();
+    Array.from(files).forEach((file: File) => {
+      formData.append("files", file)
+    });
+    if(context.context === ContextEnum.DRIVE){
+      formData.append("driveName", context.data);
+      this.uploadFolderInDrive(formData);
+    }else{
+      formData.append("folderLink", context.data);
+      this.uploadFolderInFolder(formData);
+    }
+  } 
+
+  private uploadFolderInDrive(formData: FormData){
+    this.folderService.uploadInDrive(formData).subscribe(
+      event => {
+      this.getUploadingProgess(event, 0);
+    },
+    error => {
+      this.uploaderDialog.componentInstance.progressInfos[0].error = {
+        isError: true,
+        message: error.error.message
+      };
+    }
+    );
+  }
+
+  
+  private uploadFolderInFolder(formData: FormData){
+    this.folderService.uploadInFolder(formData).subscribe(
+      event => {
+      this.getUploadingProgess(event, 0);
+    },
+    error => {
+      this.uploaderDialog.componentInstance.progressInfos[0].error = {
+        isError: true,
+        message: error.error.message
+      };
+    }
+    );
   }
 
   private uploadIntoDrive(context: Context, file: File, index: number) {

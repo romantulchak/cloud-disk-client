@@ -16,17 +16,83 @@ $cloud-disk-client-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($cloud-disk-client-theme);
 
+/* commissioner-regular - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
   font-style: normal;
   font-weight: 400;
-  src: url('assets/fonts/baloo-chettan-2-v2-latin-regular.eot');
+  src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.eot'); /* IE9 Compat Modes */
   src: local(''),
-    url('assets/fonts/baloo-chettan-2-v2-latin-regular.eot?#iefix') format('embedded-opentype'),
-    url('assets/fonts/baloo-chettan-2-v2-latin-regular.woff2') format('woff2'),
-    url('assets/fonts/baloo-chettan-2-v2-latin-regular.woff') format('woff'),
-    url('assets/fonts/baloo-chettan-2-v2-latin-regular.ttf') format('truetype'),
-    url('assets/fonts/baloo-chettan-2-v2-latin-regular.svg#BalooChettan2') format('svg');
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff') format('woff'), /* Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.svg#Commissioner') format('svg'); /* Legacy iOS */
+}
+/* commissioner-500 - latin-ext_latin_cyrillic-ext_cyrillic */
+@font-face {
+  font-family: 'Main';
+  font-style: normal;
+  font-weight: 500;
+  src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.woff') format('woff'), /* Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.svg#Commissioner') format('svg'); /* Legacy iOS */
+}
+/* commissioner-600 - latin-ext_latin_cyrillic-ext_cyrillic */
+@font-face {
+  font-family: 'Main';
+  font-style: normal;
+  font-weight: 600;
+  src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.woff') format('woff'), /* Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.svg#Commissioner') format('svg'); /* Legacy iOS */
+}
+/* commissioner-700 - latin-ext_latin_cyrillic-ext_cyrillic */
+@font-face {
+  font-family: 'Main';
+  font-style: normal;
+  font-weight: 700;
+  src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.woff') format('woff'), /* Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.svg#Commissioner') format('svg'); /* Legacy iOS */
+}
+/* commissioner-800 - latin-ext_latin_cyrillic-ext_cyrillic */
+@font-face {
+  font-family: 'Main';
+  font-style: normal;
+  font-weight: 800;
+  src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.woff') format('woff'), /* Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.svg#Commissioner') format('svg'); /* Legacy iOS */
+}
+/* commissioner-900 - latin-ext_latin_cyrillic-ext_cyrillic */
+@font-face {
+  font-family: 'Main';
+  font-style: normal;
+  font-weight: 900;
+  src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.woff') format('woff'), /* Modern Browsers */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
 
 * {

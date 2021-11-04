@@ -12,7 +12,8 @@
                 <button mat-menu-item (click)="uploader.click()">
                   <span>Upload file</span>
                 </button>
-                  <button mat-menu-item>
+                <input type="file" hidden #uploaderFolder (change)="functionService.uploadFolder(uploaderFolder.files, context)" webkitDirectory multiple>
+                  <button mat-menu-item (click)="uploaderFolder.click()">
                     <span>Upload folder</span>
                   </button>
               </mat-menu>

@@ -5,6 +5,7 @@ import { FolderDTO } from '../dto/folder.dto';
 import { Context } from '../model/context.model';
 import { ContextEnum } from '../model/enum/context.enum';
 import { DriveService } from '../service/drive.service';
+import { ElementService } from '../service/element.service';
 import { FileService } from '../service/file.service';
 import { FolderService } from '../service/folder.service';
 import { TrashService } from '../service/trash.service';
@@ -20,9 +21,8 @@ export class TrashComponent implements OnInit, OnDestroy {
   private driveName: string;
 
   constructor(private driveService: DriveService,
-              private fileService: FileService,
               private folderService: FolderService,
-              private trashService: TrashService) { }
+              private elementService: ElementService) { }
 
   ngOnInit(): void {
     this.getDriveName();
@@ -44,7 +44,7 @@ export class TrashComponent implements OnInit, OnDestroy {
   }
 
   private getRemovedElements(){
-    this.folderService.getRemovedElements(this.driveName).subscribe(
+    this.elementService.getRemovedElements(this.driveName).subscribe(
       res=>{
         this.elements.data = res;
       }
