@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { FileDTO } from '../dto/file.dto';
-import { FolderDTO } from '../dto/folder.dto';
-import { Context } from '../model/context.model';
-import { ContextEnum } from '../model/enum/context.enum';
-import { GridStyle } from '../model/enum/gridStyle.enum';
-import { DriveService } from '../service/drive.service';
-import { ElementService } from '../service/element.service';
-import { FolderService } from '../service/folder.service';
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {Router} from '@angular/router';
+import {FileDTO} from '../dto/file.dto';
+import {FolderDTO} from '../dto/folder.dto';
+import {Context} from '../model/context.model';
+import {ContextEnum} from '../model/enum/context.enum';
+import {GridStyle} from '../model/enum/gridStyle.enum';
+import {DriveService} from '../service/drive.service';
+import {ElementService} from '../service/element.service';
+import {FolderService} from '../service/folder.service';
 
 @Component({
   selector: 'app-my-disk',
@@ -18,13 +18,12 @@ import { FolderService } from '../service/folder.service';
 export class MyDiskComponent implements OnInit {
 
   constructor(private driveService: DriveService,
-              private folderSerivce: FolderService,
-              private elementService: ElementService,
-              private router: Router) { }
+              private folderService: FolderService,
+              private elementService: ElementService) {
+  }
 
   private driveName: string;
   public folders: MatTableDataSource<FolderDTO | FileDTO> = new MatTableDataSource();
-
   public gridStyle = GridStyle;
   public style: string;
 
@@ -33,15 +32,15 @@ export class MyDiskComponent implements OnInit {
     this.updateFolders();
   }
 
-  private initContext(){
+  private initContext(): void {
     let context = new Context(ContextEnum.DRIVE, this.driveName);
     this.driveService.contextSubject.next(context);
   }
 
-  public updateFolders(){
-    this,this.folderSerivce.folderSubject.subscribe(
-      res=>{
-        if(res != null){
+  public updateFolders(): void {
+    this.folderService.folderSubject.subscribe(
+      res => {
+        if (res != null) {
           this.folders.data.unshift(res);
           this.folders.data = this.folders.data;
         }
@@ -49,17 +48,17 @@ export class MyDiskComponent implements OnInit {
     );
   }
 
-  private getUserDrive(){
-    this.driveService.getDrive().then(res=>{
+  private getUserDrive(): void {
+    this.driveService.getDrive().then(res => {
       this.driveName = res;
       this.getFolders();
       this.initContext();
     });
   }
 
-  private getFolders(){
+  private getFolders(): void {
     this.elementService.findElementsForDrive(this.driveName).subscribe(
-      res=>{
+      res => {
         this.folders.data = res;
       }
     );

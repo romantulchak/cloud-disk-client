@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { environment } from 'src/environments/environment';
-import { ElementAccessDTO } from '../dto/element-access.dto';
-import { StoreDTO } from '../dto/store.dto';
-import { ContextType } from '../model/enum/contextType.enum';
-import { Link } from '../model/link.model';
-import { ElementAccessService } from '../service/element-access.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {environment} from 'src/environments/environment';
+import {ElementAccessDTO} from '../dto/element-access.dto';
+import {StoreDTO} from '../dto/store.dto';
+import {ContextType} from '../model/enum/contextType.enum';
+import {Link} from '../model/link.model';
+import {ElementAccessService} from '../service/element-access.service';
 
 const HOST_LINK = environment.hostLink;
 
@@ -21,48 +21,48 @@ export class AccessDialogComponent implements OnInit {
   public isAccessOpen: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) private element: StoreDTO,
-    private elementAccessService: ElementAccessService) {}
+              private elementAccessService: ElementAccessService) {
+  }
 
   ngOnInit(): void {
     this.getAccess();
     this.getAccessTypes();
   }
 
-  private getAccess() {
+  private getAccess(): void {
     this.elementAccessService.findElementAccess(this.element.link).subscribe(
       res => {
         if (res) {
           this.getLink(res);
           this.isAccessOpen = true;
-        }else{
+        } else {
           this.isAccessOpen = false;
         }
       }
     );
   }
 
-  private getLink(access: ElementAccessDTO){
+  private getLink(access: ElementAccessDTO): void {
+    let name, url: string;
     if (this.element.context === ContextType.FILE) {
-      let name = `${HOST_LINK}file/view/${this.element.link}`
-      let url = `file/view/${this.element.link}`
-      this.link = new Link(name, url, access.accessType);
+      name = `${HOST_LINK}file/view/${this.element.link}`
+      url = `file/view/${this.element.link}`
     } else {
-      let name = `${HOST_LINK}drive/folders/${this.element.link}`;
-      let url = `drive/folders/${this.element.link}`;
-      this.link = new Link(name, url, access.accessType);
+      name = `${HOST_LINK}drive/folders/${this.element.link}`;
+      url = `drive/folders/${this.element.link}`;
     }
+    this.link = new Link(name, url, access.accessType);
   }
 
-  private getAccessTypes() {
+  private getAccessTypes(): void {
     this.elementAccessService.findAccessTypes().subscribe(
       res => {
-        console.log(res);
         this.accessTypes = res;
       }
     )
   }
 
-  public changeAccess(type: string) {
+  public changeAccess(type: string): void {
     this.elementAccessService.changeAccessType(this.element.link, type).subscribe(
       res => {
         this.element.access = res;
@@ -70,22 +70,22 @@ export class AccessDialogComponent implements OnInit {
     );
   }
 
-  public access(openAccess: string){
-    if(JSON.parse(openAccess)){
-     this.openAccess();
-    }else{
+  public access(openAccess: string): void {
+    if (JSON.parse(openAccess)) {
+      this.openAccess();
+    } else {
       this.elementAccessService.closeAccess(this.element.link).subscribe(
-        res=>{
+        () => {
           this.element.access = null;
           this.isAccessOpen = false;
         }
-      ); 
+      );
     }
   }
 
-  private openAccess(){
+  private openAccess(): void {
     this.elementAccessService.openAccess(this.element.link, this.accessTypes[0].name).subscribe(
-      res=>{
+      res => {
         this.element.access = res;
         this.isAccessOpen = true;
         this.getLink(res);

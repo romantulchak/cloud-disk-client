@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FileDTO } from '../dto/file.dto';
-import { FolderDTO } from '../dto/folder.dto';
-import { ContextType } from '../model/enum/contextType.enum';
-import { LoaderService } from '../service/loader.service';
-import { SearchService } from '../service/search.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FileDTO} from '../dto/file.dto';
+import {FolderDTO} from '../dto/folder.dto';
+import {ContextType} from '../model/enum/contextType.enum';
+import {LoaderService} from '../service/loader.service';
+import {SearchService} from '../service/search.service';
 
 @Component({
   selector: 'app-nav-top',
@@ -13,22 +13,25 @@ import { SearchService } from '../service/search.service';
 })
 export class NavTopComponent implements OnInit {
 
-  constructor(private loaderService: LoaderService,
-              private searchService: SearchService,
-              private rotuer: Router) { }
+
   public isLoading: boolean;
   public value: string = "";
   public searchResult: FolderDTO[] | FileDTO[];
   public isSearchBlockShow: boolean = false;
   public context = ContextType;
 
+  constructor(private loaderService: LoaderService,
+              private searchService: SearchService,
+              private router: Router) {
+  }
+
   ngOnInit(): void {
     this.loading();
   }
 
-  private loading(){
+  private loading(): void {
     this.loaderService.isLoading.subscribe(
-      res=>{
+      res => {
         setTimeout(() => {
           this.isLoading = res;
         }, 1);
@@ -36,28 +39,28 @@ export class NavTopComponent implements OnInit {
     );
   }
 
-  public search(){
-    if(this.value.length > 0){
+  public search(): void {
+    if (this.value.length > 0) {
       this.searchService.search(this.value).subscribe(
-        res=>{
+        res => {
           this.searchResult = res;
         }
       );
     }
   }
 
-  public showSearchBlock(){
-      this.isSearchBlockShow = true;
+  public showSearchBlock(): void {
+    this.isSearchBlockShow = true;
   }
 
-  public hideSearchBlock(){
+  public hideSearchBlock(): void {
     setTimeout(() => {
       this.isSearchBlockShow = false;
     }, 300);
   }
 
-  public openFolder(link: string){
-    this.rotuer.navigateByUrl(`drive/folders/${link}`);
+  public openFolder(link: string): void {
+    this.router.navigateByUrl(`drive/folders/${link}`);
   }
 
 }

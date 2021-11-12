@@ -1,27 +1,29 @@
-.folder__toolbar{
-    height: 45px;
-    border-bottom: 1px solid #dadce0;
+.folder__toolbar {
+  height: 45px;
+  border-bottom: 1px solid #dadce0;
 
-    .toolbar__items{
-        display: flex;
-        padding: 0 15px 0px 15px;
-        justify-content: space-between;
-        height: 100%;
-        align-items: center;
+  .toolbar__items {
+    display: flex;
+    padding: 0 15px 0px 15px;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
 
-        .items{
-            display: flex;
+    .items {
+      display: flex;
 
-            .item{
-                cursor: pointer;
-                margin-right: 1em;
-                svg{
-                    transition: 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
-                    &:hover{
-                        fill: #000;
-                    }
-                }
-            }
+      .item {
+        cursor: pointer;
+        margin-right: 1em;
+
+        svg {
+          transition: 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+          &:hover {
+            fill: #000;
+          }
         }
+      }
     }
+  }
 }

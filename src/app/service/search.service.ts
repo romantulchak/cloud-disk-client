@@ -14,7 +14,6 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-
   public search(name: string): Observable<FolderDTO[] | FileDTO[]>{
     return this.http.get<FolderDTO[] | FileDTO[]>(`${API_URL}search/${name}`);
   }

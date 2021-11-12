@@ -1,6 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { FileDTO } from '../dto/file.dto';
-import { FolderDTO } from '../dto/folder.dto';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'fileExtension'

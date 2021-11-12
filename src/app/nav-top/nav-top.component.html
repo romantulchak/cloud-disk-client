@@ -8,8 +8,9 @@
     </div>
     <div class="search__section">
       <div class="search">
-        <input type="text" autocomplete="off" (focus)="showSearchBlock()"  [class.input_focus]="isSearchBlockShow" (focusout)="hideSearchBlock()"
-          placeholder="Search on Cloud Disk" name="search" [(ngModel)]="value" (input)="search()">
+        <input type="text" autocomplete="off" (focus)="showSearchBlock()" [class.input_focus]="isSearchBlockShow"
+               (focusout)="hideSearchBlock()"
+               placeholder="Search on Cloud Disk" name="search" [(ngModel)]="value" (input)="search()">
 
         <div class="search__result" *ngIf="isSearchBlockShow" [class.resalt__block_focus]="isSearchBlockShow">
           <div class="not__found" *ngIf="searchResult === undefined || searchResult.length === 0">
@@ -17,18 +18,18 @@
           </div>
           <div class="result" (click)="openFolder(result.link)" *ngFor="let result of searchResult">
             <div class="icon__name">
-                <svg *ngIf="result.context === context.FOLDER" fill="element.color" x="0px" y="0px" focusable="false"
-              viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">
-              <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z">
-              </path>
-              <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-            <app-file-icon *ngIf="result.context === context.FILE" [extension]="result.name | fileExtension"
-              [path]="result?.path?.fullPath"></app-file-icon>
+              <svg *ngIf="result.context === context.FOLDER" fill="element.color" x="0px" y="0px" focusable="false"
+                   viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">
+                <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z">
+                </path>
+                <path d="M0 0h24v24H0z" fill="none"></path>
+              </svg>
+              <app-file-icon *ngIf="result.context === context.FILE" [extension]="result.name | fileExtension"
+                             [path]="result?.path?.fullPath"></app-file-icon>
               <h5>{{result.name}}</h5>
-            </div>     
+            </div>
             <div class="created__at">
-                <h5>{{result.createAt | date: 'dd LLL'}}</h5>
+              <h5>{{result.createAt | date: 'dd LLL'}}</h5>
             </div>
           </div>
         </div>
@@ -37,7 +38,7 @@
     <div class="profile__section">
       <div>
         <svg class="wo35tf" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
-          fill="#000000" focusable="false">
+             fill="#000000" focusable="false">
           <path fill="none" d="M0 0h24v24H0z"></path>
           <path
             d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z">

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FileType } from '../model/enum/fileType.enum';
+import {Component, Input, OnInit} from '@angular/core';
+import {FileType} from '../model/enum/fileType.enum';
 
 @Component({
   selector: 'app-file-icon',
@@ -13,13 +13,14 @@ export class FileIconComponent implements OnInit {
 
   public fileType: FileType = new FileType();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
 
-  public isFileImageExists(): boolean{
+  public isFileImageExists(): boolean {
     return this.fileType.FILE_TYPES.find(element => element.type.includes(this.extension)) != null;
   }
 

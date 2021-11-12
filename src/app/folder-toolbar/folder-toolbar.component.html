@@ -1,34 +1,43 @@
 <section class="folder__toolbar">
-    <div class="toolbar__items">
-        <div *ngIf="context?.context !== contextType.TRASH">
-            <button mat-button [matMenuTriggerFor]="menu">
-                <span>My drive</span>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item  (click)="functionService.createFolder()">
-                  <span>Create folder</span>
-                </button>
-                <input type="file" hidden #uploader (change)="functionService.uploadFiles($event, context)" multiple>
-                <button mat-menu-item (click)="uploader.click()">
-                  <span>Upload file</span>
-                </button>
-                <input type="file" hidden #uploaderFolder (change)="functionService.uploadFolder(uploaderFolder.files, context)" webkitDirectory multiple>
-                  <button mat-menu-item (click)="uploaderFolder.click()">
-                    <span>Upload folder</span>
-                  </button>
-              </mat-menu>
-        </div>
-        <div *ngIf="context?.context === contextType.TRASH">
-          <h3>My trash</h3>
-        </div>
-        <div class="items">
-            <div class="item" (click)="changeGrid()">
-                <svg class="a-s-fa-Ha-pa" width="24px" height="24px" viewBox="0 0 24 24" fill="#767676"><path d="M2,5v14h20V5H2z M14,7v4h-4V7H14z M4,7h4v4H4V7z M16,11V7h4v4H16z M4,17v-4h4v4H4z M10,17v-4h4v4H10z M20,17 h-4v-4h4V17z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
-            </div>
-            <div class="item">
-                <svg class="a-s-fa-Ha-pa" width="24px" height="24px" viewBox="0 0 24 24" fill="#767676"><path d="M0 0h24v24H0z" fill="none"></path><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"></path></svg>
-            </div>
-        </div>
+  <div class="toolbar__items">
+    <div *ngIf="context?.context !== contextType.TRASH">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span>My drive</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="functionService.createFolder()">
+          <span>Create folder</span>
+        </button>
+        <input type="file" hidden #uploader (change)="functionService.uploadFiles($event, context)" multiple>
+        <button mat-menu-item (click)="uploader.click()">
+          <span>Upload file</span>
+        </button>
+        <input type="file" hidden #uploaderFolder (change)="functionService.uploadFolder(uploaderFolder.files, context)"
+               webkitDirectory multiple>
+        <button mat-menu-item (click)="uploaderFolder.click()">
+          <span>Upload folder</span>
+        </button>
+      </mat-menu>
     </div>
+    <div *ngIf="context?.context === contextType.TRASH">
+      <h3>My trash</h3>
+    </div>
+    <div class="items">
+      <div class="item" (click)="changeGrid()">
+        <svg class="a-s-fa-Ha-pa" width="24px" height="24px" viewBox="0 0 24 24" fill="#767676">
+          <path
+            d="M2,5v14h20V5H2z M14,7v4h-4V7H14z M4,7h4v4H4V7z M16,11V7h4v4H16z M4,17v-4h4v4H4z M10,17v-4h4v4H10z M20,17 h-4v-4h4V17z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
+      <div class="item">
+        <svg class="a-s-fa-Ha-pa" width="24px" height="24px" viewBox="0 0 24 24" fill="#767676">
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
 
 </section>

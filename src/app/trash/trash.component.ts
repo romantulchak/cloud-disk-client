@@ -1,14 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { FileDTO } from '../dto/file.dto';
-import { FolderDTO } from '../dto/folder.dto';
-import { Context } from '../model/context.model';
-import { ContextEnum } from '../model/enum/context.enum';
-import { DriveService } from '../service/drive.service';
-import { ElementService } from '../service/element.service';
-import { FileService } from '../service/file.service';
-import { FolderService } from '../service/folder.service';
-import { TrashService } from '../service/trash.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {FileDTO} from '../dto/file.dto';
+import {FolderDTO} from '../dto/folder.dto';
+import {Context} from '../model/context.model';
+import {ContextEnum} from '../model/enum/context.enum';
+import {DriveService} from '../service/drive.service';
+import {ElementService} from '../service/element.service';
+import {FolderService} from '../service/folder.service';
 
 @Component({
   selector: 'app-trash',
@@ -22,36 +20,37 @@ export class TrashComponent implements OnInit, OnDestroy {
 
   constructor(private driveService: DriveService,
               private folderService: FolderService,
-              private elementService: ElementService) { }
+              private elementService: ElementService) {
+  }
 
   ngOnInit(): void {
     this.getDriveName();
     this.initContext();
   }
 
-  private initContext(){
+  private initContext(): void {
     let context = new Context(ContextEnum.TRASH);
     this.driveService.contextSubject.next(context);
   }
 
-  private getDriveName(){
+  private getDriveName(): void {
     this.driveService.getDrive().then(
-      res=>{
+      res => {
         this.driveName = res;
         this.getRemovedElements();
       }
     );
   }
 
-  private getRemovedElements(){
+  private getRemovedElements(): void {
     this.elementService.getRemovedElements(this.driveName).subscribe(
-      res=>{
+      res => {
         this.elements.data = res;
       }
     );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy(): void {
     this.folderService.folderSubject.next(null);
     this.elements.data = [];
   }

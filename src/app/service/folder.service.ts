@@ -1,10 +1,8 @@
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { FileDTO } from "../dto/file.dto";
 import { FolderDTO } from "../dto/folder.dto";
-import { IStore } from "../model/interface/store.interface";
 
 const API_URL = environment.api;
 
@@ -30,17 +28,13 @@ export class FolderService{
         return this.http.get<FolderDTO[]>(`${API_URL}folder/sub-folders/${folderLink}`);
     }
 
-    public removeFolder(folderLink: string): Observable<any>{
-       return this.http.delete<any>(`${API_URL}folder/remove/${folderLink}`);
+    public removeFolder(folderLink: string): Observable<void>{
+       return this.http.delete<void>(`${API_URL}folder/remove/${folderLink}`);
     }
 
     public downloadFolder(folderLink: string): Observable<any>{
         const req = new HttpRequest('GET', `${API_URL}folder/download-folder/${folderLink}`, {responseType: 'arrayBuffer', reportProgress: true});
         return this.http.request(req);
-    }
-
-    public preDeleteFolder(folderLink: string, driveName: string){
-        return this.http.put(`${API_URL}folder/pre-remove/${folderLink}`, driveName);
     }
 
     public changeFolderColor(folderLink: string, color: string): Observable<FolderDTO>{
@@ -49,7 +43,7 @@ export class FolderService{
 
     public uploadInFolder(formData: FormData){
         const req = this.uploadFolderRequest(formData, 'upload');
-        return this.http.request(req); 
+        return this.http.request(req);
     }
 
     public uploadInDrive(formData: FormData){

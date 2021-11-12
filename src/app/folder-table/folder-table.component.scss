@@ -34,9 +34,7 @@
           background: #E4E8EB;
 
         }
-
         .mat-progress-bar-fill {
-
           &::after {
             background-color: #364ef466;
           }
@@ -44,10 +42,9 @@
       }
     }
   }
-
 }
 
-.tablel__content {
+.table__content {
   width: 100%;
 
   .element__name {
@@ -69,7 +66,7 @@
         margin-left: 1em;
         padding-right: 8px;
       }
-     
+
     }
   }
 }

@@ -1,42 +1,44 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from "@angular/common/http";
-import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from "@angular/common/http";
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
-import { NavLeftSideComponent } from './nav-left-side/nav-left-side.component';
-import { NavTopComponent } from './nav-top/nav-top.component';
-import { MyDiskComponent } from './my-disk/my-disk.component';
-import { ComputerComponent } from './computer/computer.component';
-import { AvailableComponent } from './available/available.component';
-import { RecentComponent } from './recent/recent.component';
-import { NoticedComponent } from './noticed/noticed.component';
-import { TrashComponent } from './trash/trash.component';
-import { DriveComponent } from './drive/drive.component';
-import { AuthComponent } from './auth/auth.component';
-import { authInterceptorProviders } from './helper/auth.interceptor';
+import {AppComponent} from './app.component';
+import {NavLeftSideComponent} from './nav-left-side/nav-left-side.component';
+import {NavTopComponent} from './nav-top/nav-top.component';
+import {MyDiskComponent} from './my-disk/my-disk.component';
+import {ComputerComponent} from './computer/computer.component';
+import {AvailableComponent} from './available/available.component';
+import {RecentComponent} from './recent/recent.component';
+import {NoticedComponent} from './noticed/noticed.component';
+import {TrashComponent} from './trash/trash.component';
+import {DriveComponent} from './drive/drive.component';
+import {AuthComponent} from './auth/auth.component';
+import {authInterceptorProviders} from './helper/auth.interceptor';
 import {MatDialogModule} from '@angular/material/dialog';
-import { MatMenuModule} from '@angular/material/menu';
-import { CreateFolderDialogComponent } from './create-folder-dialog/create-folder-dialog.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {CreateFolderDialogComponent} from './create-folder-dialog/create-folder-dialog.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTableModule} from '@angular/material/table';
-import { FolderDetailsComponent } from './folder-details/folder-details.component';
-import { FolderToolbarComponent } from './folder-toolbar/folder-toolbar.component';
-import { FolderTableComponent } from './folder-table/folder-table.component';
+import {FolderDetailsComponent} from './folder-details/folder-details.component';
+import {FolderToolbarComponent} from './folder-toolbar/folder-toolbar.component';
+import {FolderTableComponent} from './folder-table/folder-table.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { loaderInterceptorProviders } from './helper/loader.interceptor';
-import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
-import { FileIconComponent } from './file-icon/file-icon.component';
+import {loaderInterceptorProviders} from './helper/loader.interceptor';
+import {UploadDialogComponent} from './upload-dialog/upload-dialog.component';
+import {FileIconComponent} from './file-icon/file-icon.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { ContextMenuComponent } from './context-menu/context-menu.component';
-import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
-import { FileExtensionPipe } from './pipe/file-extension.pipe';
-import { DialogHeaderUploadDownloadComponent } from './dialog-header-upload-download/dialog-header-upload-download.component';
-import { FileSizePipe } from './pipe/file-size.pipe';
-import { SvgStylePipe } from './pipe/svg-style.pipe';
-import { AccessDialogComponent } from './access-dialog/access-dialog.component';
+import {ContextMenuComponent} from './context-menu/context-menu.component';
+import {DownloadDialogComponent} from './download-dialog/download-dialog.component';
+import {FileExtensionPipe} from './pipe/file-extension.pipe';
+import {DialogHeaderUploadDownloadComponent} from './dialog-header-upload-download/dialog-header-upload-download.component';
+import {FileSizePipe} from './pipe/file-size.pipe';
+import {SvgStylePipe} from './pipe/svg-style.pipe';
+import {AccessDialogComponent} from './access-dialog/access-dialog.component';
+import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { AccessDialogComponent } from './access-dialog/access-dialog.component';
     FileSizePipe,
     SvgStylePipe,
     AccessDialogComponent,
+    RenameDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,9 +79,11 @@ import { AccessDialogComponent } from './access-dialog/access-dialog.component';
     DragDropModule,
     MatTableModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonModule
   ],
-  providers: [authInterceptorProviders,loaderInterceptorProviders],
+  providers: [authInterceptorProviders, loaderInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

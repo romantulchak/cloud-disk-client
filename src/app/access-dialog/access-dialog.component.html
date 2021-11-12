@@ -1,16 +1,17 @@
 <div *ngIf="isAccessOpen">
-    <div>
-        <div class="access">
-            <select *ngIf="accessTypes != null" name="accessType" #type (change)="changeAccess(type.value)">
-                <option *ngFor="let type of accessTypes" [value]="type?.name" [selected]="type.name === link?.accessType" >{{type.value}}</option>
-            </select>
-        </div>
+  <div>
+    <div class="access">
+      <select *ngIf="accessTypes != null" name="accessType" #type (change)="changeAccess(type.value)">
+        <option *ngFor="let type of accessTypes" [value]="type?.name"
+                [selected]="type.name === link?.accessType">{{type.value}}</option>
+      </select>
     </div>
-    <a routerLink="../../../{{link?.url}}">{{link?.name}}</a>
+  </div>
+  <a routerLink="../../../{{link?.url}}">{{link?.name}}</a>
 </div>
 <div>
-    <select name="openAccess" id="" #accessType (change)="access(accessType.value)">
-        <option [value]="false" [selected]="!isAccessOpen">Close access</option>
-        <option [value]="true" [selected]="isAccessOpen">Open access</option>
-    </select>
+  <select name="openAccess" id="" #accessType (change)="access(accessType.value)">
+    <option [value]="false" [selected]="!isAccessOpen">Close access</option>
+    <option [value]="true" [selected]="isAccessOpen">Open access</option>
+  </select>
 </div>

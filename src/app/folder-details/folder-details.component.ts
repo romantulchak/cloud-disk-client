@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute} from '@angular/router';
-import { FileDTO } from '../dto/file.dto';
-import { FolderDTO } from '../dto/folder.dto';
-import { Context } from '../model/context.model';
-import { ContextEnum } from '../model/enum/context.enum';
-import { DriveService } from '../service/drive.service';
-import { FolderService } from '../service/folder.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {ActivatedRoute} from '@angular/router';
+import {FileDTO} from '../dto/file.dto';
+import {FolderDTO} from '../dto/folder.dto';
+import {Context} from '../model/context.model';
+import {ContextEnum} from '../model/enum/context.enum';
+import {DriveService} from '../service/drive.service';
+import {FolderService} from '../service/folder.service';
 
 @Component({
   selector: 'app-folder-details',
@@ -20,16 +20,17 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private driveService: DriveService,
               private folderService: FolderService,
-              private activatedRouter: ActivatedRoute) { }
+              private activatedRouter: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.getSubFolders();
     this.updateFolders();
   }
 
-  private getSubFolders(){
+  private getSubFolders(): void {
     this.activatedRouter.params.subscribe(
-      res=>{
+      res => {
         this.folderLink = res.link;
         this.initContext();
         this.getSubFoldersInFolder();
@@ -37,10 +38,10 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  private updateFolders(){
+  private updateFolders(): void {
     this.folderService.folderSubject.subscribe(
-      res=>{
-        if(res != null){
+      res => {
+        if (res != null) {
           this.folders.data.unshift(res);
           this.folders.data = this.folders.data;
         }
@@ -48,22 +49,20 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  private initContext(){
+  private initContext(): void {
     let context = new Context(ContextEnum.FOLDER, this.folderLink);
     this.driveService.contextSubject.next(context);
   }
 
-  private getSubFoldersInFolder(){
+  private getSubFoldersInFolder(): void {
     this.folderService.findSubFoldersInFolder(this.folderLink).subscribe(
-      res=>{
-        console.log(res);
-        
+      res => {
         this.folders.data = res;
       }
     );
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.folders.data = [];
   }
-} 
+}

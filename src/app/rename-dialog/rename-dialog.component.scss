@@ -1,0 +1,9 @@
+@import "../../assets/scss/file-folder-dialog.scss";
+
+::ng-deep{
+    .folder__file_container {
+        mat-dialog-container {
+            padding: 0;
+          }
+    }
+  }

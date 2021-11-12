@@ -1,23 +1,23 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { EventEmitter } from '@angular/core';
-import { FileDTO } from '../dto/file.dto';
-import { FolderDTO } from '../dto/folder.dto';
-import { StoreDTO } from '../dto/store.dto';
-import { Download } from '../model/download.model';
-import { ContextEnum } from '../model/enum/context.enum';
-import { ContextType } from '../model/enum/contextType.enum';
-import { FolderColorType } from '../model/enum/folderColorType.enum';
-import { FolderColor } from '../model/folderColor.model';
-import { DriveService } from '../service/drive.service';
-import { FolderService } from '../service/folder.service';
-import { FunctionService } from '../service/function.service';
-import { NoticedService } from '../service/noticed.service';
-import { ElementAccessService } from '../service/element-access.service';
-import { MatDialog } from '@angular/material/dialog';
-import { AccessDialogComponent } from '../access-dialog/access-dialog.component';
-import { AccessType } from '../model/enum/accessType.enum';
-import { ElementService } from '../service/element.service';
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {EventEmitter} from '@angular/core';
+import {FileDTO} from '../dto/file.dto';
+import {FolderDTO} from '../dto/folder.dto';
+import {StoreDTO} from '../dto/store.dto';
+import {Download} from '../model/download.model';
+import {ContextEnum} from '../model/enum/context.enum';
+import {ContextType} from '../model/enum/contextType.enum';
+import {FolderColorType} from '../model/enum/folderColorType.enum';
+import {FolderColor} from '../model/folderColor.model';
+import {DriveService} from '../service/drive.service';
+import {FolderService} from '../service/folder.service';
+import {FunctionService} from '../service/function.service';
+import {NoticedService} from '../service/noticed.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AccessDialogComponent} from '../access-dialog/access-dialog.component';
+import {AccessType} from '../model/enum/accessType.enum';
+import {ElementService} from '../service/element.service';
+import {RenameDialogComponent} from '../rename-dialog/rename-dialog.component';
 
 @Component({
   selector: 'app-context-menu',
@@ -30,7 +30,7 @@ export class ContextMenuComponent implements OnInit {
   @Input('driveName') driveName: string;
   @Input('source') source: MatTableDataSource<FolderDTO | FileDTO>;
   @Input('element') element: FolderDTO;
-  @Output('changeColor') changeColorEvent:EventEmitter<FolderDTO>= new EventEmitter();
+  @Output('changeColor') changeColorEvent: EventEmitter<FolderDTO> = new EventEmitter();
 
   public context: string;
   public pageContext: string;
@@ -47,22 +47,21 @@ export class ContextMenuComponent implements OnInit {
               private folderService: FolderService,
               private noticeService: NoticedService,
               private elementService: ElementService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.getFilesContext();
     this.getPageContext();
-    console.log(this.element);
-    
   }
 
-  public getColors(){
-    if(this.colors.length === 0){
-      Object.entries(FolderColorType).forEach(element =>{
+  public getColors(): void {
+    if (this.colors.length === 0) {
+      Object.entries(FolderColorType).forEach(element => {
         let name = element[0].replace(/_/g, ' ').toLocaleLowerCase();
         let isSelected = this.element.color === element[1];
         let folderColor = new FolderColor(name, element[1], isSelected);
-        if(isSelected){
+        if (isSelected) {
           this.selectedColor = folderColor;
         }
         this.colors.push(folderColor);
@@ -70,30 +69,30 @@ export class ContextMenuComponent implements OnInit {
     }
   }
 
-  private getPageContext(){
+  private getPageContext(): void {
     this.driveService.contextSubject.subscribe(
-      res=>{
+      res => {
         this.pageContext = res.context;
       }
     );
   }
 
-  private getFilesContext(){
+  private getFilesContext(): void {
     this.selectedElements.forEach(element => {
-      if(element.context === this.contextType.FILE){
+      if (element.context === this.contextType.FILE) {
         this.filesCount++;
-      }else{
+      } else {
         this.folderCount++;
       }
     });
-    if(this.selectedElements.length === this.filesCount && this.folderCount === 0 || this.selectedElements.length === this.folderCount && this.filesCount === 0){
+    if (this.selectedElements.length === this.filesCount && this.folderCount === 0 || this.selectedElements.length === this.folderCount && this.filesCount === 0) {
       this.context = this.selectedElements[0].context;
-    }else{
+    } else {
       this.context = this.contextType.ANY;
     }
   }
 
-  public download(){
+  public download(): void {
     let downloadProgress: Download[] = [];
     this.selectedElements.forEach(element => {
       let download = new Download(0, false, element);
@@ -102,21 +101,22 @@ export class ContextMenuComponent implements OnInit {
     this.functionService.download(downloadProgress);
   }
 
-  public preRemove() {
+  public preRemove(): void {
     this.functionService.preRemove(this.selectedElements, this.driveName, this.source);
   }
-  public fullRemove(){
-    this.functionService.fullRemove(this.selectedElements, this.source);
-  } 
 
-  public restore(){
+  public fullRemove(): void {
+    this.functionService.fullRemove(this.selectedElements, this.source);
+  }
+
+  public restore(): void {
     this.functionService.restore(this.selectedElements, this.source);
   }
 
-  public changeColor(color: FolderColor){
+  public changeColor(color: FolderColor): void {
     this.selectedElements.forEach(element => {
       this.folderService.changeFolderColor(element.link, color.value).subscribe(
-        res=>{
+        res => {
           color.isSelected = true;
           this.selectedColor = color;
           this.element = res;
@@ -126,23 +126,23 @@ export class ContextMenuComponent implements OnInit {
     });
   }
 
-  public addToStarred(){
+  public addToNoticed(): void {
     this.selectedElements = this.selectedElements.filter(element => !element.noticed);
-    this.selectedElements.forEach(element =>{
+    this.selectedElements.forEach(element => {
       this.noticeService.addElementToNoticed(element.link).subscribe(
-        res=>{
+        () => {
           element.noticed = true;
         }
       );
     })
   }
 
-  public removeFromStarred(){
-    this.selectedElements.forEach(element =>{
+  public removeFromStarred(): void {
+    this.selectedElements.forEach(element => {
       this.noticeService.removeFromStarred(element.link).subscribe(
-        res=>{
+        () => {
           element.noticed = false;
-          if(this.pageContext === ContextEnum.NOTICED){
+          if (this.pageContext === ContextEnum.NOTICED) {
             this.source.data = this.source.data.filter(e => e.id !== element.id);
           }
         }
@@ -150,17 +150,21 @@ export class ContextMenuComponent implements OnInit {
     });
   }
 
-  public checkNoticedElements(): boolean{
+  public checkNoticedElements(): boolean {
     let noticed = this.selectedElements.filter(element => element.noticed);
-    if(this.selectedElements.length === noticed.length){
-      return true;
-    }
-    return false;
+    return this.selectedElements.length === noticed.length;
   }
 
-  public openAccessDialog(){
+  public openAccessDialog() {
     this.dialog.open(AccessDialogComponent, {
       data: this.element
     });
+  }
+
+  public openRenameDialog() {
+    this.dialog.open(RenameDialogComponent, {
+      data: this.element,
+      panelClass: 'folder__file_container'
+    })
   }
 }

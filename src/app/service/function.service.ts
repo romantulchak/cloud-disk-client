@@ -1,21 +1,21 @@
-import { HttpEventType, HttpResponse } from "@angular/common/http";
+import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CreateFolderDialogComponent} from "../create-folder-dialog/create-folder-dialog.component";
-import { FileDTO } from "../dto/file.dto";
-import { Context } from "../model/context.model";
-import { Download } from "../model/download.model";
-import { ContextEnum } from "../model/enum/context.enum";
-import { ContextType } from "../model/enum/contextType.enum";
-import { Uploader } from "../model/uploader.model";
-import { UploadDialogComponent } from "../upload-dialog/upload-dialog.component";
-import { FileService } from "./file.service";
-import { FolderService } from "./folder.service";
-import { saveAs } from 'file-saver';
-import { DownloadDialogComponent } from "../download-dialog/download-dialog.component";
-import { MatTableDataSource } from "@angular/material/table";
-import { FolderDTO } from "../dto/folder.dto";
-import { ElementService } from "./element.service";
+import {FileDTO} from "../dto/file.dto";
+import {Context} from "../model/context.model";
+import {Download} from "../model/download.model";
+import {ContextEnum} from "../model/enum/context.enum";
+import {ContextType} from "../model/enum/contextType.enum";
+import {Uploader} from "../model/uploader.model";
+import {UploadDialogComponent} from "../upload-dialog/upload-dialog.component";
+import {FileService} from "./file.service";
+import {FolderService} from "./folder.service";
+import {saveAs} from 'file-saver';
+import {DownloadDialogComponent} from "../download-dialog/download-dialog.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {FolderDTO} from "../dto/folder.dto";
+import {ElementService} from "./element.service";
 
 @Injectable({
   providedIn: 'root'
@@ -23,23 +23,24 @@ import { ElementService } from "./element.service";
 export class FunctionService {
 
   private files: FileList;
-  private uploaderDialog: MatDialogRef <any, any>;
-  private downloadDialog: MatDialogRef <any, any>;
+  private uploaderDialog: MatDialogRef<any>;
+  private downloadDialog: MatDialogRef<any>;
   private readonly ZIP_NAME_EXT = ".zip";
 
   constructor(private dialog: MatDialog,
-    private folderService: FolderService,
-    private fileService: FileService,
-    private elementService: ElementService) {}
+              private folderService: FolderService,
+              private fileService: FileService,
+              private elementService: ElementService) {
+  }
 
-  public createFolder() {
+  public createFolder(): void {
     this.dialog.open(CreateFolderDialogComponent, {
-      panelClass: 'create__folder_container',
+      panelClass: 'folder__file_container',
       id: 'createFolderId'
     });
   }
 
-  public download(selectedElements: Download[]) {
+  public download(selectedElements: Download[]): void {
     this.openDownloadDialog();
     for (let index = 0; index < selectedElements.length; index++) {
       let element = selectedElements[index]
@@ -52,29 +53,29 @@ export class FunctionService {
     }
   }
 
-  private downloadFolder(element: Download, index: number) {
+  private downloadFolder(element: Download, index: number): void {
     this.folderService.downloadFolder(element.file.link).subscribe(
       event => {
-        this.getDowloadProgress(event, index, element.file.name);
+        this.getDownloadProgress(event, index, element.file.name);
       }
     );
   }
 
-  private downloadFile(element: Download, index: number) {
+  private downloadFile(element: Download, index: number): void {
     this.fileService.downloadFile(element.file.link).subscribe(
       event => {
-        this.getDowloadProgress(event, index, element.file.name);
+        this.getDownloadProgress(event, index, element.file.name);
       }
     );
   }
 
-    private getDowloadProgress(event: any, index: number, filename: string) {
+  private getDownloadProgress(event: any, index: number, filename: string): void {
     this.downloadDialog.componentInstance.progressInfos[index].type = event.type;
     if (event.type === HttpEventType.DownloadProgress) {
       this.downloadDialog.componentInstance.progressInfos[index].value = Math.round(100 * event.loaded / event.total);
     } else if (event instanceof HttpResponse) {
-      let blob = new Blob([event.body]); 
-      let context = this.downloadDialog.componentInstance.progressInfos[index].file.context; 
+      let blob = new Blob([event.body]);
+      let context = this.downloadDialog.componentInstance.progressInfos[index].file.context;
       this.saveFileDependsOnContext(blob, filename, context);
       setTimeout(() => {
         this.downloadDialog.componentInstance.progressInfos[index].downloaded = true;
@@ -82,47 +83,47 @@ export class FunctionService {
     }
   }
 
-  public preRemove(selectedElements: any[], driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>) {
+  public preRemove(selectedElements: FolderDTO[] | FileDTO[], driveName: string, source: MatTableDataSource<FolderDTO | FileDTO>): void {
     selectedElements.forEach(element => {
       this.elementService.preRemoveElement(element.link, driveName).subscribe(
-        res=>{
+        () => {
           source.data = source.data.filter(f => f.id !== element.id);
         }
       );
     });
   }
 
-  public fullRemove(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
-    selectedElements.forEach(element =>{
+  public fullRemove(selectedElements: FolderDTO[] | FileDTO[], source: MatTableDataSource<FolderDTO | FileDTO>): void {
+    selectedElements.forEach(element => {
       this.removeElement(element.link, source);
     });
 
   }
 
-  private removeElement(fileLink: string, source: MatTableDataSource<FolderDTO | FileDTO>){
+  private removeElement(fileLink: string, source: MatTableDataSource<FolderDTO | FileDTO>): void {
     this.elementService.removeElement(fileLink).subscribe(
-      res=>{
+      res => {
         source.data = source.data.filter(element => element.link !== fileLink);
       }
     );
   }
 
-  public restore(selectedElements: any[], source: MatTableDataSource<FolderDTO | FileDTO>){
-    selectedElements.forEach(element =>{
-        this.retstoreElement(element, source);
+  public restore(selectedElements: FolderDTO[] | FileDTO[], source: MatTableDataSource<FolderDTO | FileDTO>): void {
+    selectedElements.forEach(element => {
+      this.restoreElement(element, source);
     });
   }
 
-  private retstoreElement(file: FileDTO, source: MatTableDataSource<FolderDTO | FileDTO>){
+  private restoreElement(file: FileDTO, source: MatTableDataSource<FolderDTO | FileDTO>): void {
     this.elementService.restoreElement(file.link).subscribe(
-      res=>{
+      res => {
         source.data = source.data.filter(element => element.id != file.id);
       }
     );
   }
 
   //TODO: optimize this
-  public uploadFiles(event: any, context: Context) {
+  public uploadFiles(event: any, context: Context): void {
     this.files = event.target.files;
     this.openUploadDialog();
     if (context.context === ContextEnum.DRIVE) {
@@ -136,7 +137,7 @@ export class FunctionService {
     }
   }
 
-  public uploadFolder(files: FileList, context: Context){ 
+  public uploadFolder(files: FileList, context: Context): void {
     this.openUploadDialog();
     let obj = new Uploader(null, 0, false, files.length);
     this.uploaderDialog.componentInstance.progressInfos.unshift(obj);
@@ -144,50 +145,50 @@ export class FunctionService {
     Array.from(files).forEach((file: File) => {
       formData.append("files", file)
     });
-    if(context.context === ContextEnum.DRIVE){
+    if (context.context === ContextEnum.DRIVE) {
       formData.append("driveName", context.data);
       this.uploadFolderInDrive(formData);
-    }else{
+    } else {
       formData.append("folderLink", context.data);
       this.uploadFolderInFolder(formData);
     }
-  } 
+  }
 
-  private uploadFolderInDrive(formData: FormData){
+  private uploadFolderInDrive(formData: FormData): void {
     this.folderService.uploadInDrive(formData).subscribe(
       event => {
-      this.getUploadingProgess(event, 0);
-    },
-    error => {
-      this.uploaderDialog.componentInstance.progressInfos[0].error = {
-        isError: true,
-        message: error.error.message
-      };
-    }
+        this.getUploadingProgress(event, 0);
+      },
+      error => {
+        this.uploaderDialog.componentInstance.progressInfos[0].error = {
+          isError: true,
+          message: error.error.message
+        };
+      }
     );
   }
 
-  
-  private uploadFolderInFolder(formData: FormData){
+
+  private uploadFolderInFolder(formData: FormData): void {
     this.folderService.uploadInFolder(formData).subscribe(
       event => {
-      this.getUploadingProgess(event, 0);
-    },
-    error => {
-      this.uploaderDialog.componentInstance.progressInfos[0].error = {
-        isError: true,
-        message: error.error.message
-      };
-    }
+        this.getUploadingProgress(event, 0);
+      },
+      error => {
+        this.uploaderDialog.componentInstance.progressInfos[0].error = {
+          isError: true,
+          message: error.error.message
+        };
+      }
     );
   }
 
-  private uploadIntoDrive(context: Context, file: File, index: number) {
+  private uploadIntoDrive(context: Context, file: File, index: number): void {
     let obj = new Uploader(file, 0, false);
     this.uploaderDialog.componentInstance.progressInfos.unshift(obj);
     this.fileService.uploadFileIntoDrive(file, context.data).subscribe(
       event => {
-        this.getUploadingProgess(event, index);
+        this.getUploadingProgress(event, index);
       },
       error => {
         this.uploaderDialog.componentInstance.progressInfos[index].error = {
@@ -199,12 +200,12 @@ export class FunctionService {
   }
 
 
-  private uploadIntoFolder(context: Context, file: File, index: number) {
+  private uploadIntoFolder(context: Context, file: File, index: number): void {
     let obj = new Uploader(file, 0, false);
     this.uploaderDialog.componentInstance.progressInfos.unshift(obj);
     this.fileService.uploadFileIntoFolder(file, context.data).subscribe(
       event => {
-        this.getUploadingProgess(event, index);
+        this.getUploadingProgress(event, index);
       },
       error => {
         this.uploaderDialog.componentInstance.progressInfos[index].error = {
@@ -215,7 +216,7 @@ export class FunctionService {
     );
   }
 
-  private getUploadingProgess(event: any, index: number) {
+  private getUploadingProgress(event: any, index: number): void {
     if (event.type === HttpEventType.UploadProgress) {
       this.uploaderDialog.componentInstance.progressInfos[index].value = Math.round(100 * event.loaded / event.total);
     } else if (event instanceof HttpResponse) {
@@ -226,10 +227,10 @@ export class FunctionService {
   }
 
 
-  private saveFileDependsOnContext(blob: Blob, filename: string, context: ContextType){
-    if(context === ContextType.FOLDER){
+  private saveFileDependsOnContext(blob: Blob, filename: string, context: ContextType): void {
+    if (context === ContextType.FOLDER) {
       saveAs(blob, filename + this.ZIP_NAME_EXT);
-    }else{
+    } else {
       saveAs(blob, filename);
     }
   }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Context } from '../model/context.model';
-import { DriveService } from '../service/drive.service';
-import { FunctionService } from '../service/function.service';
+import {Component, OnInit} from '@angular/core';
+import {Context} from '../model/context.model';
+import {DriveService} from '../service/drive.service';
+import {FunctionService} from '../service/function.service';
 
 @Component({
   selector: 'app-nav-left-side',
@@ -12,16 +12,16 @@ export class NavLeftSideComponent implements OnInit {
 
   public context: Context;
 
-  constructor(public functionService: FunctionService, 
-              private driveService: DriveService) { }
+  constructor(public functionService: FunctionService,
+              private driveService: DriveService) {
+  }
 
   ngOnInit(): void {
     this.driveService.contextSubject.subscribe(
-      res=>{
+      res => {
         this.context = res;
       }
     );
   }
 
- 
 }

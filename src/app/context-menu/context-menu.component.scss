@@ -1,24 +1,26 @@
 @import '../../assets/scss/context-menu.scss';
 
-.colors{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-    padding-left: 1em;
-    padding-right: 1em;
-    box-sizing: border-box;
-    .color{
-        width: 20px;
-        background: bisque;
-        height: 20px;
-        cursor: pointer;
-        transition: .4s ease-in;
+.colors {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
 
-        &:hover{
-            box-shadow: 1px 1px 5px #000000e8;
-        }
+  .color {
+    width: 20px;
+    background: bisque;
+    height: 20px;
+    cursor: pointer;
+    transition: .4s ease-in;
+
+    &:hover {
+      box-shadow: 1px 1px 5px #000000e8;
     }
+  }
 }
-.active{
-    box-shadow: 1px 1px 3px #000000e8;
+
+.active {
+  box-shadow: 1px 1px 3px #000000e8;
 }

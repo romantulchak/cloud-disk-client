@@ -1,10 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Context } from '../model/context.model';
-import { ContextEnum } from '../model/enum/context.enum';
-import { DriveService } from '../service/drive.service';
-import { FolderService } from '../service/folder.service';
+import {Component, OnInit} from '@angular/core';
+import {Context} from '../model/context.model';
+import {ContextEnum} from '../model/enum/context.enum';
+import {DriveService} from '../service/drive.service';
+import {FolderService} from '../service/folder.service';
+import {FolderDTO} from "../dto/folder.dto";
 
 @Component({
   selector: 'app-create-folder-dialog',
@@ -19,7 +18,7 @@ export class CreateFolderDialogComponent implements OnInit {
 
   constructor(private driveService: DriveService,
               private folderService: FolderService) {
- 
+
   }
 
   ngOnInit(): void {
@@ -27,14 +26,14 @@ export class CreateFolderDialogComponent implements OnInit {
     this.getDrive();
   }
 
-  private getContext() {
+  private getContext(): void {
     this.driveService.contextSubject.subscribe(
       res => {
         this.context = res;
       });
   }
 
-  private getDrive() {
+  private getDrive(): void {
     this.driveService.getDrive().then(
       res => {
         this.driveName = res;
@@ -42,7 +41,7 @@ export class CreateFolderDialogComponent implements OnInit {
     );
   }
 
-  public createFolder() {
+  public createFolder(): void {
     switch (this.context.context) {
       case ContextEnum.DRIVE:
         this.createFolderInDrive();
@@ -51,27 +50,27 @@ export class CreateFolderDialogComponent implements OnInit {
         this.createSubFolder();
         break;
     }
-
-
   }
 
-
-  private createFolderInDrive() {
+  private createFolderInDrive(): void {
     this.folderService.createFolder(this.driveName, this.folderName).subscribe(
       res => {
-        if(res != null){
-          this.folderService.folderSubject.next(res);
-        }
+        this.updateFoldersInTable(res);
       }
     );
   }
-  private createSubFolder() {
+
+  private createSubFolder(): void {
     this.folderService.createSubFolder(this.folderName, this.context.data).subscribe(
       res => {
-        if(res != null){
-          this.folderService.folderSubject.next(res);
-        }
+        this.updateFoldersInTable(res);
       }
     );
+  }
+
+  private updateFoldersInTable(folder: FolderDTO): void {
+    if (folder != null) {
+      this.folderService.folderSubject.next(folder);
+    }
   }
 }

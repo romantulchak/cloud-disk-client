@@ -1,48 +1,43 @@
-import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
+import {HttpClient, HttpRequest} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs";
+import {environment} from "src/environments/environment";
 
 const API_URL = environment.api;
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class FileService{
+export class FileService {
 
-    constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {
+  }
 
-    public uploadFileIntoFolder(file: File, folderLink: string): Observable<any>{
-        const req = this.sendRequest('upload-into-folder', folderLink, file);
-        return this.http.request(req);
-    }
+  public uploadFileIntoFolder(file: File, folderLink: string): Observable<any> {
+    const req = this.sendRequest('upload-into-folder', folderLink, file);
+    return this.http.request(req);
+  }
 
-    public uploadFileIntoDrive(file: File, driveName: string):Observable<any>{
-        const req = this.sendRequest('upload-into-drive', driveName, file);
-        return this.http.request(req);
-    }
+  public uploadFileIntoDrive(file: File, driveName: string): Observable<any> {
+    const req = this.sendRequest('upload-into-drive', driveName, file);
+    return this.http.request(req);
+  }
 
-    public fullDeleteFile(fileLink: string): Observable<any>{
-        return this.http.delete(`${API_URL}files/delete-file/${fileLink}`);
-    }
+  public downloadFile(fileLink: string): Observable<any> {
+    const req = new HttpRequest('GET', `${API_URL}files/download-file/${fileLink}`, {
+      responseType: 'arrayBuffer',
+      reportProgress: true
+    });
+    return this.http.request(req);
+  }
 
-    public preDeleteFile(fileLink: string, driveName: string):Observable<any>{
-        return this.http.put(`${API_URL}files/pre-delete-file/${fileLink}`, driveName);
-    }
-
-    public downloadFile(fileLink: string): Observable<any>{
-        const req = new HttpRequest('GET', `${API_URL}files/download-file/${fileLink}`, {responseType: 'arrayBuffer', reportProgress: true});
-        return this.http.request(req);
-    }
-
-    private sendRequest(endPoint: string, name: string, file: File): HttpRequest<FormData>{
-        const formData = new FormData();
-        formData.append("file", file);
-        const req = new HttpRequest('POST', `${API_URL}files/${endPoint}/${name}`, formData, {
-            reportProgress: true,
-            responseType: 'json'
-        });
-        return req;
-    }
+  private sendRequest(endPoint: string, name: string, file: File): HttpRequest<FormData> {
+    const formData = new FormData();
+    formData.append("file", file);
+    return new HttpRequest('POST', `${API_URL}files/${endPoint}/${name}`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+  }
 
 }
