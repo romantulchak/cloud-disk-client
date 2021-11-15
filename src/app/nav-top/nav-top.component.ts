@@ -59,8 +59,10 @@ export class NavTopComponent implements OnInit {
     }, 300);
   }
 
-  public openFolder(link: string): void {
-    this.router.navigateByUrl(`drive/folders/${link}`);
+  public openFolder(element: FolderDTO | FileDTO): void {
+    if(element.context === ContextType.FOLDER){
+      this.router.navigateByUrl(`drive/folders/${element.link}`);
+    }
   }
 
 }

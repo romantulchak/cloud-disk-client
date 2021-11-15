@@ -16,7 +16,7 @@
           <div class="not__found" *ngIf="searchResult === undefined || searchResult.length === 0">
             <h3>Nothing found</h3>
           </div>
-          <div class="result" (click)="openFolder(result.link)" *ngFor="let result of searchResult">
+          <div class="result" (click)="openFolder(result)" *ngFor="let result of searchResult">
             <div class="icon__name">
               <svg *ngIf="result.context === context.FOLDER" fill="element.color" x="0px" y="0px" focusable="false"
                    viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">

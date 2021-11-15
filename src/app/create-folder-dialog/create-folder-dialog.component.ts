@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Context} from '../model/context.model';
 import {ContextEnum} from '../model/enum/context.enum';
 import {DriveService} from '../service/drive.service';
 import {FolderService} from '../service/folder.service';
 import {FolderDTO} from "../dto/folder.dto";
+import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-folder-dialog',
@@ -16,8 +18,10 @@ export class CreateFolderDialogComponent implements OnInit {
   private driveName: string;
   private context: Context;
 
-  constructor(private driveService: DriveService,
-              private folderService: FolderService) {
+  constructor(private dialog: MatDialogRef<CreateFolderDialogComponent, CreateFolderDialogComponent>,
+              private driveService: DriveService,
+              private folderService: FolderService,
+              private router: Router) {
 
   }
 
@@ -70,7 +74,9 @@ export class CreateFolderDialogComponent implements OnInit {
 
   private updateFoldersInTable(folder: FolderDTO): void {
     if (folder != null) {
+      folder.url = this.router.url;
       this.folderService.folderSubject.next(folder);
+      this.dialog.close();
     }
   }
 }

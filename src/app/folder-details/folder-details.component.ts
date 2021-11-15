@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FileDTO} from '../dto/file.dto';
 import {FolderDTO} from '../dto/folder.dto';
 import {Context} from '../model/context.model';
@@ -20,7 +20,9 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private driveService: DriveService,
               private folderService: FolderService,
-              private activatedRouter: ActivatedRoute) {
+              private activatedRouter: ActivatedRoute,
+              private router: Router) {
+                
   }
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
   private updateFolders(): void {
     this.folderService.folderSubject.subscribe(
       res => {
-        if (res != null) {
+        if (res != null && this.router.url === res.url) {
           this.folders.data.unshift(res);
           this.folders.data = this.folders.data;
         }

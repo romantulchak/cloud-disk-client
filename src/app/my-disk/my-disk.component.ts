@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FileDTO} from '../dto/file.dto';
 import {FolderDTO} from '../dto/folder.dto';
 import {Context} from '../model/context.model';
@@ -19,7 +19,8 @@ export class MyDiskComponent implements OnInit {
 
   constructor(private driveService: DriveService,
               private folderService: FolderService,
-              private elementService: ElementService) {
+              private elementService: ElementService,
+              private router: Router) {
   }
 
   private driveName: string;
@@ -40,7 +41,7 @@ export class MyDiskComponent implements OnInit {
   public updateFolders(): void {
     this.folderService.folderSubject.subscribe(
       res => {
-        if (res != null) {
+        if (res != null && this.router.url === res.url) {
           this.folders.data.unshift(res);
           this.folders.data = this.folders.data;
         }

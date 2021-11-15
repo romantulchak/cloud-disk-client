@@ -16,6 +16,7 @@ import {DownloadDialogComponent} from "../download-dialog/download-dialog.compon
 import {MatTableDataSource} from "@angular/material/table";
 import {FolderDTO} from "../dto/folder.dto";
 import {ElementService} from "./element.service";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,15 @@ export class FunctionService {
   private uploaderDialog: MatDialogRef<any>;
   private downloadDialog: MatDialogRef<any>;
   private readonly ZIP_NAME_EXT = ".zip";
+  private currentUrl: string;
 
   constructor(private dialog: MatDialog,
               private folderService: FolderService,
               private fileService: FileService,
-              private elementService: ElementService) {
-  }
+              private elementService: ElementService,
+              private router: Router) {
+                this.currentUrl = router.url;
+              }
 
   public createFolder(): void {
     this.dialog.open(CreateFolderDialogComponent, {
@@ -185,7 +189,7 @@ export class FunctionService {
 
   private uploadIntoDrive(context: Context, file: File, index: number): void {
     let obj = new Uploader(file, 0, false);
-    this.uploaderDialog.componentInstance.progressInfos.unshift(obj);
+    this.uploaderDialog.componentInstance.progressInfos.unshift(obj);    
     this.fileService.uploadFileIntoDrive(file, context.data).subscribe(
       event => {
         this.getUploadingProgress(event, index);
@@ -222,6 +226,7 @@ export class FunctionService {
     } else if (event instanceof HttpResponse) {
       this.uploaderDialog.componentInstance.progressInfos[index].uploaded = true;
       event.body.isOwner = true;
+      event.body.url = this.currentUrl;
       this.folderService.folderSubject.next(event.body);
     }
   }

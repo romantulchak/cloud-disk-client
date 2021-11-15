@@ -10,7 +10,7 @@
     </button>
   </div>
   <div class="element__name_input">
-    <input type="text" name="folderName" [(ngModel)]="folderName" (mousedown)="$event.stopPropagation()">
+    <input type="text" name="folderName" [(ngModel)]="folderName" (keyup.enter)="createFolder()" (mousedown)="$event.stopPropagation()">
   </div>
   <div class="cancel__create_btn">
     <button class="cancel__btn" mat-dialog-close>Cancel</button>

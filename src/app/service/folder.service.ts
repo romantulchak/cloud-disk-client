@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { FolderDTO } from "../dto/folder.dto";
+import { StoreDTO } from "../dto/store.dto";
 
 const API_URL = environment.api;
 
@@ -11,7 +12,7 @@ const API_URL = environment.api;
 })
 export class FolderService{
 
-    public folderSubject: BehaviorSubject<any> = new BehaviorSubject(null);
+    public folderSubject: BehaviorSubject<StoreDTO> = new BehaviorSubject(null);
     public gridSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor(private http: HttpClient){}

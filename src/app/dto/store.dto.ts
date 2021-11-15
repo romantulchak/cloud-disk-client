@@ -1,3 +1,4 @@
+import { Context } from "../model/context.model";
 import { Download } from "../model/download.model";
 import { Access } from "./access.dto";
 import { DriveDTO } from "./drive.dto";
@@ -20,4 +21,5 @@ export class StoreDTO{
     public noticed: boolean;
     public access: Access;
     public isOwner: boolean;
+    public url: string;
 }
