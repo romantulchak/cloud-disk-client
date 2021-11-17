@@ -18,6 +18,8 @@ import {AccessDialogComponent} from '../access-dialog/access-dialog.component';
 import {AccessType} from '../model/enum/accessType.enum';
 import {ElementService} from '../service/element.service';
 import {RenameDialogComponent} from '../rename-dialog/rename-dialog.component';
+import { HistoryService } from '../service/history.service';
+import { PropertyService } from '../service/property.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -46,7 +48,7 @@ export class ContextMenuComponent implements OnInit {
               private driveService: DriveService,
               private folderService: FolderService,
               private noticeService: NoticedService,
-              private elementService: ElementService,
+              private propertyService: PropertyService,
               private dialog: MatDialog) {
   }
 
@@ -148,6 +150,10 @@ export class ContextMenuComponent implements OnInit {
         }
       );
     });
+  }
+
+  public getProperties(){
+    this.propertyService.open(this.element.id);
   }
 
   public checkNoticedElements(): boolean {

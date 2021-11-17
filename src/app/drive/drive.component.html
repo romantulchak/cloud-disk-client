@@ -2,11 +2,14 @@
   <app-nav-top></app-nav-top>
   <div class="left__nav_main">
     <app-nav-left-side></app-nav-left-side>
-    <div>
+    <div class="mat__sidenav">
       <app-folder-toolbar></app-folder-toolbar>
-      <div class="content">
-        <router-outlet></router-outlet>
-      </div>
+      <mat-drawer-container autosize="true">
+        <div class="content" [class.property__side_open]="propertyData?.isOpened">
+          <router-outlet></router-outlet>
+        </div>
+        <app-property-sidenav [elementId]="propertyData?.elementId"></app-property-sidenav>
+      </mat-drawer-container>
     </div>
   </div>
 </section>

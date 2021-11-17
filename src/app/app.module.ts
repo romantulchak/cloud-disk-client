@@ -39,6 +39,9 @@ import {SvgStylePipe} from './pipe/svg-style.pipe';
 import {AccessDialogComponent} from './access-dialog/access-dialog.component';
 import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
 import {MatButtonModule} from "@angular/material/button";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { HistoryComponent } from './history/history.component';
+import { PropertySidenavComponent } from './service/property-sidenav/property-sidenav.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,8 @@ import {MatButtonModule} from "@angular/material/button";
     SvgStylePipe,
     AccessDialogComponent,
     RenameDialogComponent,
+    HistoryComponent,
+    PropertySidenavComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +85,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatTableModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule
   ],
   providers: [authInterceptorProviders, loaderInterceptorProviders],
   bootstrap: [AppComponent]

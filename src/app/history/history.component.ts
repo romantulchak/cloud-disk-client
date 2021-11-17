@@ -1,0 +1,40 @@
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { HistoryDTO } from '../dto/history.dto';
+import { HistoryService } from '../service/history.service';
+
+@Component({
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss']
+})
+export class HistoryComponent implements OnInit, OnChanges {
+
+  @Input() elementId: number;
+
+  public histories: HistoryDTO[] = [];
+
+  constructor(private historyService: HistoryService) { }
+
+  ngOnInit(): void {
+  }
+
+  ngOnChanges(): void{
+    console.log(this.elementId);
+    
+    if(this.elementId !== null){
+      this.getHistory();
+    }
+  }
+
+
+  private getHistory(): void{
+    this.historyService.getHistoryForElement(this.elementId).subscribe(
+      res=>{
+        console.log(res);
+        
+        this.histories = res;
+      }
+    );
+  }
+
+}
