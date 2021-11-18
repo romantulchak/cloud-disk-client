@@ -8,7 +8,7 @@
         <div class="content" [class.property__side_open]="propertyData?.isOpened">
           <router-outlet></router-outlet>
         </div>
-        <app-property-sidenav [elementId]="propertyData?.elementId"></app-property-sidenav>
+        <app-property-sidenav [element]="propertyData?.element"></app-property-sidenav>
       </mat-drawer-container>
     </div>
   </div>

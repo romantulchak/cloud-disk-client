@@ -1,0 +1,25 @@
+<ng-container>
+    <mat-drawer #propertySidenav class="property__sidenav" mode="side" position="end">
+        <div class="test">
+            <div class="element__name">
+                <div class="element__link" (click)="open()">
+                    <app-file-icon [extension]="element?.name | fileExtension" [element]="element"></app-file-icon>
+                    <h3 class="title">{{element?.name}}</h3>
+                </div>
+                <button class="close__btn" (click)="closePropertySidenav()">
+                    <svg class="a-qd-va undefined" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 10 10" focusable="false"
+                         fill="#000000">
+                      <polygon class="a-s-fa-Ha-pa"
+                               points="10,1.01 8.99,0 5,3.99 1.01,0 0,1.01 3.99,5 0,8.99 1.01,10 5,6.01 8.99,10 10,8.99 6.01,5 "></polygon>
+                    </svg>
+                  </button>
+            </div>
+            <mat-tab-group mat-align-tabs="start" class="property__tabs">
+                <mat-tab class="tab__width" label="Property">Content 1</mat-tab>
+                <mat-tab class="tab__width" label="History">
+                    <app-history [elementId]="element?.id"></app-history>
+                </mat-tab>
+              </mat-tab-group>
+        </div>
+    </mat-drawer>
+</ng-container>

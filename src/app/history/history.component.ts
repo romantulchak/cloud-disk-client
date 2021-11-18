@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { HistoryDTO } from '../dto/history.dto';
+import { HistoryType } from '../model/enum/historyType.enum';
 import { HistoryService } from '../service/history.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { HistoryService } from '../service/history.service';
 export class HistoryComponent implements OnInit, OnChanges {
 
   @Input() elementId: number;
-
+  
+  public historyType = HistoryType;
   public histories: HistoryDTO[] = [];
 
   constructor(private historyService: HistoryService) { }

@@ -1,0 +1,8 @@
+export enum HistoryType{
+    CREATE = "CREATE",
+    PRE_REMOVE = "PRE_REMOVE",
+    RESTORE = "RESTORE",
+    ACCESS_OPEN = "ACCESS_OPEN",
+    ACCESS_CLOSE = "ACCESS_CLOSE",
+    RENAME = "RENAME"
+}

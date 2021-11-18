@@ -4,16 +4,7 @@
     <div class="file__list">
       <div class="file" *ngFor="let file of progressInfos">
         <div class="icon">
-          <app-file-icon *ngIf="file.file.context === contextType.FILE;else folder"
-                         [extension]="file.file.name | fileExtension" [path]="file.file.path.fullPath"></app-file-icon>
-          <ng-template #folder>
-            <svg x="0px" y="0px" focusable="false" viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368"
-                 class="ng-star-inserted">
-              <path
-                d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path>
-              <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-          </ng-template>
+          <app-file-icon [extension]="file.file.name | fileExtension" [element]="file.file"></app-file-icon>
         </div>
         <div class="file__name" [title]="file.file.name">
           {{file.file.name | slice: 0: 45}}

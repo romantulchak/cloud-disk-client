@@ -1,5 +1,24 @@
-<section>
-    <div *ngFor="let history of histories">
-        <pre>{{history | json}}</pre>
+<section class="history__section">
+    <div class="history__card" *ngFor="let history of histories">
+        <span class="date">{{history.date | date: 'mediumDate'}}</span>
+        <div class="avatar">
+            <img src="../../assets/images/avatar.jfif" [alt]="history.user.firstName + ' ' + history.user.lastName">
+        </div>
+        <ng-container [ngSwitch]="history.type">
+            <ng-container *ngSwitchCase="historyType.RESTORE">
+                <div class="message">
+                    <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> restore 1 element {{history.element.name}}</span>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="historyType.RENAME">
+                <div class="message">
+                    <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> 
+                    <span> rename element</span>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <h3>{{history.type}}</h3>
+        <pre> {{history | json}}</pre>
     </div>
 </section>

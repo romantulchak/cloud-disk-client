@@ -5,29 +5,9 @@
       <td class="element__name" mat-cell *matCellDef="let element">
         <div class="name__icon">
           <div class="icon">
-            <svg [attr.fill]="element.color | svgStyle"
-                 *ngIf="element.context === contextType.FOLDER && element.access === null" fill="element.color" x="0px"
-                 y="0px" focusable="false"
-                 viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">
-              <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z">
-              </path>
-              <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-            <svg [attr.fill]="element.color | svgStyle"
-                 *ngIf="element.context === contextType.FOLDER && element.access!== null" x="0px" y="0px"
-                 focusable="false" viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">
-              <g>
-                <path
-                  d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-5 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4 8h-8v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1z"></path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-              </g>
-            </svg>
-
-            <app-file-icon *ngIf="element.context === 'FILE'" [extension]="element.name | fileExtension"
-                           [path]="element?.path?.fullPath"></app-file-icon>
+            <app-file-icon [extension]="element.name | fileExtension" [element]="element"></app-file-icon>
           </div>
-          <span>{{element?.name}}</span>
-
+          <span [title]="element?.name">{{element?.name}}</span>
           <div class="additional__icons">
             <svg *ngIf="element.access && element.context !== contextType.FOLDER"
                  [attr.fill]="element.isSelected ? '#1967d2' :'#b2b2b2' " width="16px" height="16px" viewBox="0 0 16 16"

@@ -153,7 +153,7 @@ export class ContextMenuComponent implements OnInit {
   }
 
   public getProperties(){
-    this.propertyService.open(this.element.id);
+    this.propertyService.open(this.element);
   }
 
   public checkNoticedElements(): boolean {

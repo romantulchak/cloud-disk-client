@@ -1,0 +1,18 @@
+.history__section{
+    max-height: 49%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    .history__card{
+        font-family: 'Main';
+        .date{
+            font-weight: 400;
+            font-size: 13px;
+        }
+        .message{
+            word-break: break-all;
+            width: 95%;
+            font-size: 14px;
+        }
+    }
+}

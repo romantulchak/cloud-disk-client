@@ -41,7 +41,9 @@ import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { HistoryComponent } from './history/history.component';
-import { PropertySidenavComponent } from './service/property-sidenav/property-sidenav.component';
+import { PropertySidenavComponent } from './property-sidenav/property-sidenav.component';
+import { PropertyComponent } from './property/property.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { PropertySidenavComponent } from './service/property-sidenav/property-si
     RenameDialogComponent,
     HistoryComponent,
     PropertySidenavComponent,
+    PropertyComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,9 +89,10 @@ import { PropertySidenavComponent } from './service/property-sidenav/property-si
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTabsModule
   ],
-  providers: [authInterceptorProviders, loaderInterceptorProviders],
+  providers: [authInterceptorProviders, loaderInterceptorProviders, FileExtensionPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

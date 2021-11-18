@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
 import { BehaviorSubject } from 'rxjs';
+import { FileDTO } from '../dto/file.dto';
+import { FolderDTO } from '../dto/folder.dto';
 import { PropertyData } from '../model/property-data.model';
 
 @Injectable({
@@ -18,8 +20,8 @@ export class PropertyService {
     this.propertySidenav = propertySidenav;
   }
 
-  public open(elementId: number): Promise<MatDrawerToggleResult>{
-    const propertyData = new PropertyData(true, elementId);
+  public open(element: FolderDTO | FileDTO): Promise<MatDrawerToggleResult>{
+    const propertyData = new PropertyData(true, element);
     this.propertySideState.next(propertyData);
     return this.propertySidenav.open();
   }

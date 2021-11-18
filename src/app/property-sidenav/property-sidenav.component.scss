@@ -1,0 +1,49 @@
+::ng-deep{
+    .mat-drawer-inner-container{
+        overflow: hidden;
+    }
+    
+    .mat-tab-labels{
+        justify-content: center;
+        .mat-tab-label{
+            min-width: 125px;
+        }
+    }
+
+    .mat-tab-group{
+        .mat-tab-header{
+            position: sticky;
+            top: 94px;
+            background: #fff;
+            z-index: 999;
+        }
+    }
+   
+}
+
+.property__sidenav{
+    width: 325px;
+    z-index: 500000;
+    .element__name{
+        font-family: 'Main';
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 25px 0;
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        background: #fff;
+
+        .element__link{
+            display: flex;
+            .title{
+                font-weight: 400;
+                margin-left: 10px;
+                font-size: 18px;
+                max-width: 170px;
+                word-break: break-word;
+            }
+        }
+    }
+}
