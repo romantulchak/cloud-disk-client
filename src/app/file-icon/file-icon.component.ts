@@ -21,7 +21,7 @@ export class FileIconComponent implements OnInit {
   constructor(private fileExtensionPipe: FileExtensionPipe) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   public isFileImageExists(): boolean {

@@ -1,11 +1,11 @@
 <ng-container [ngSwitch]="element?.context">
     <ng-container *ngSwitchCase="contextType.FILE">
-      <ng-container *ngIf="isFileImageExists()">
+      <ng-container *ngIf="isFileImageExists();else undefinedImage">
         <img *ngIf="fileType.RAR.includes(extension)" src="../../assets/images/zip.png" alt="rar">
         <img *ngIf="fileType.PDF.includes(extension)" src="../../assets/images/7z.png" alt="pdf">
         <img *ngIf="fileType.WORD.includes(extension)" src="../../assets/images/word.png" alt="word">
         <div *ngIf="fileType.IMG.includes(extension) && element?.path !== undefined" class="file__icon">
-          <img [src]="element.path" alt="img">
+          <img [src]="element.path.fullPath" alt="img">
         </div>
         <img *ngIf="fileType.IMG.includes(extension) && element?.path === undefined" src="../../assets/images/img.png" alt="img">
         <img *ngIf="fileType.TXT.includes(extension)" src="../../assets/images/txt.png" alt="txt">
@@ -20,13 +20,13 @@
         <img *ngIf="fileType.JSON.includes(extension)" src="../../assets/images/json.png" alt="json">
         <img *ngIf="fileType.PPT.includes(extension)" src="../../assets/images/ppt.png" alt="json">
       </ng-container>
-      <ng-container *ngIf="!isFileImageExists()">
+      <ng-template #undefinedImage>
         <img src="../../assets/images/undefined.png" alt="json">
-      </ng-container>
+      </ng-template>
     </ng-container>
     <ng-container *ngSwitchCase="contextType.FOLDER">
       <svg [attr.fill]="getColor() | svgStyle"
-      *ngIf="element.context === contextType.FOLDER && element.access === null" fill="element.color" x="0px"
+      *ngIf="element.context === contextType.FOLDER && !element.hasLinkAccess " fill="element.color" x="0px"
       y="0px" focusable="false"
       viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">
     <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z">
@@ -34,7 +34,7 @@
       <path d="M0 0h24v24H0z" fill="none"></path>
     </svg>
     <svg [attr.fill]="getColor() | svgStyle"
-          *ngIf="element?.access !== null" x="0px" y="0px"
+          *ngIf="element.hasLinkAccess" x="0px" y="0px"
           focusable="false" viewBox="0 0 24 24" height="24px" width="24px" fill="#5f6368">
       <g>
         <path

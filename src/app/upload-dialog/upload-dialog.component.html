@@ -5,7 +5,7 @@
       <div class="file" *ngFor="let progressInfo of progressInfos">
         <ng-container *ngIf="progressInfo.file != null;else folderUploading">
           <div class="icon">
-            <app-file-icon [extension]="progressInfo.file.name | fileExtension"></app-file-icon>
+            <app-file-icon [element]="progressInfo.element" [extension]="progressInfo.file.name | fileExtension"></app-file-icon>
           </div>
           <div class="file__name" [title]="progressInfo.file.name">
             {{progressInfo.file.name | slice: 0: 45}}

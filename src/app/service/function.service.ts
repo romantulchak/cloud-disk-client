@@ -143,7 +143,7 @@ export class FunctionService {
 
   public uploadFolder(files: FileList, context: Context): void {
     this.openUploadDialog();
-    let obj = new Uploader(null, 0, false, files.length);
+    let obj = new Uploader(null, 0, false, files.length, ContextType.FOLDER);
     this.uploaderDialog.componentInstance.progressInfos.unshift(obj);
     let formData = new FormData();
     Array.from(files).forEach((file: File) => {

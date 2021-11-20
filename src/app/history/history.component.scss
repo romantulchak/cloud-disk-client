@@ -1,18 +1,57 @@
 .history__section{
-    max-height: 49%;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
+    height: 700px;
 
     .history__card{
         font-family: 'Main';
+        padding: 1em;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
         .date{
             font-weight: 400;
             font-size: 13px;
+            margin: 1em 0;
+            display: block;
         }
+
+        .avatar__title{
+            display: grid;
+            grid-template-columns: 60px 1fr;
+        }
+
+        .avatar__medium{
+            align-self: self-start;
+        }
+
         .message{
             word-break: break-all;
             width: 95%;
-            font-size: 14px;
+            font-size: 15px;
+
+            .element{
+                display: flex;
+                margin-top: 1.5em;
+
+                .action{
+                    margin-left: 0.5em;
+                
+                    .element__name{
+                        margin-bottom: 0.5em;
+                        margin-top: 3px;
+                        display: block;
+                    }
+
+                    .element__old_name{
+                        color: #ccc;
+                        margin-top: 8px;
+                        overflow: hidden;
+                        text-decoration: line-through;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+            }
         }
     }
 }

@@ -53,6 +53,8 @@
 
 .uploader__dialog{
   max-height: 360px;
+  overflow-y: auto;
+
   .uploader__body {
     width: 100%;
     overflow-x: hidden;

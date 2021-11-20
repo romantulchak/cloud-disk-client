@@ -77,6 +77,7 @@ export class AccessDialogComponent implements OnInit {
       this.elementAccessService.closeAccess(this.element.link).subscribe(
         () => {
           this.element.access = null;
+          this.element.hasLinkAccess = false;
           this.isAccessOpen = false;
         }
       );
@@ -87,6 +88,7 @@ export class AccessDialogComponent implements OnInit {
     this.elementAccessService.openAccess(this.element.link, this.accessTypes[0].name).subscribe(
       res => {
         this.element.access = res;
+        this.element.hasLinkAccess = true;
         this.isAccessOpen = true;
         this.getLink(res);
       }

@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { HistoryDTO } from '../dto/history.dto';
+import { RenameHistoryDTO } from '../dto/renameHistory.dto';
 import { HistoryType } from '../model/enum/historyType.enum';
 import { HistoryService } from '../service/history.service';
 
@@ -13,7 +14,7 @@ export class HistoryComponent implements OnInit, OnChanges {
   @Input() elementId: number;
   
   public historyType = HistoryType;
-  public histories: HistoryDTO[] = [];
+  public histories: HistoryDTO[] | RenameHistoryDTO[] | any;
 
   constructor(private historyService: HistoryService) { }
 
@@ -21,8 +22,6 @@ export class HistoryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void{
-    console.log(this.elementId);
-    
     if(this.elementId !== null){
       this.getHistory();
     }
@@ -32,8 +31,6 @@ export class HistoryComponent implements OnInit, OnChanges {
   private getHistory(): void{
     this.historyService.getHistoryForElement(this.elementId).subscribe(
       res=>{
-        console.log(res);
-        
         this.histories = res;
       }
     );

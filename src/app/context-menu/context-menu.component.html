@@ -27,7 +27,7 @@
     </em>
     <span class="text__btn">Remove from starred</span>
   </button>
-  <button *ngIf="selectedElements.length === 1" mat-menu-item (click)="openRenameDialog()" class="menu__btn">
+  <button *ngIf="selectedElements.length === 1" [disabled]="element?.access?.accessType !== accessType.EDITOR && !element.isOwner" mat-menu-item (click)="openRenameDialog()" class="menu__btn">
     <em class="icon">
       <svg viewBox="0 0 100 125"
            xml:space="preserve"><switch><foreignObject requiredExtensions="https://ns.adobe.com/AdobeIllustrator/10.0/" x="0" y="0" width="1" height="1"/><g

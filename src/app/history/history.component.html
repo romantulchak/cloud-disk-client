@@ -1,24 +1,46 @@
 <section class="history__section">
     <div class="history__card" *ngFor="let history of histories">
         <span class="date">{{history.date | date: 'mediumDate'}}</span>
-        <div class="avatar">
-            <img src="../../assets/images/avatar.jfif" [alt]="history.user.firstName + ' ' + history.user.lastName">
+        <div class="avatar__title">
+            <div class="avatar__medium">
+                <img src="../../assets/images/avatar.jfif" [alt]="history.user.firstName + ' ' + history.user.lastName">
+            </div>
+            <ng-container [ngSwitch]="history.type">
+                <ng-container *ngSwitchCase="historyType.PRE_REMOVE">
+                    <div class="message">
+                        <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> moved the element to the trash </span>
+                        <div class="element">
+                            <app-file-icon [element]="history.element"></app-file-icon>
+                            <div class="action">
+                                <span class="element__name">{{history.element.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="historyType.RESTORE">
+                    <div class="message">
+                        <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> restore 1 element</span>
+                        <div class="element">
+                            <app-file-icon [element]="history.element"></app-file-icon>
+                            <div class="action">
+                                <span class="element__name">{{history.element.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="historyType.RENAME">
+                    <div class="message">
+                        <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> rename element</span> 
+                        <div class="element">
+                            <app-file-icon [element]="history.element"></app-file-icon>
+                            <div class="action">
+                                <span class="element__name"> {{history.name}}</span>
+                                <span class="element__old_name">{{history.oldName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
         </div>
-        <ng-container [ngSwitch]="history.type">
-            <ng-container *ngSwitchCase="historyType.RESTORE">
-                <div class="message">
-                    <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> restore 1 element {{history.element.name}}</span>
-                </div>
-            </ng-container>
-            <ng-container *ngSwitchCase="historyType.RENAME">
-                <div class="message">
-                    <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> 
-                    <span> rename element</span>
-                </div>
-            </ng-container>
-        </ng-container>
-
-        <h3>{{history.type}}</h3>
-        <pre> {{history | json}}</pre>
     </div>
 </section>

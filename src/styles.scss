@@ -14,6 +14,16 @@ $cloud-disk-client-theme: mat.define-light-theme((
   )
 ));
 
+@mixin avatar($width){
+  width: $width;
+
+    img{
+      width: 100%;
+      height: 100%;
+      border-radius: 50px;
+    }
+}
+
 @include mat.all-component-themes($cloud-disk-client-theme);
 
 /* commissioner-regular - latin-ext_latin_cyrillic-ext_cyrillic */
@@ -110,12 +120,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   overflow-y: hidden;
 }
 
-.avatar {
-  width: 55px;
+.avatar__large {
+  @include avatar(55px);
+}
 
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-  }
+.avatar__medium {
+  @include avatar(40px);
+}
+
+.avatar__small {
+  @include avatar(25px);
 }

@@ -22,4 +22,5 @@ export class StoreDTO{
     public access: Access;
     public isOwner: boolean;
     public url: string;
+    public oldName: string;
 }
