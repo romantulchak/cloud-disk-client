@@ -1,6 +1,6 @@
 <section class="history__section">
     <div class="history__card" *ngFor="let history of histories">
-        <span class="date">{{history.date | date: 'mediumDate'}}</span>
+        <span class="date">{{history.date | date: 'MMM d, y h:mm'}}</span>
         <div class="avatar__title">
             <div class="avatar__medium">
                 <img src="../../assets/images/avatar.jfif" [alt]="history.user.firstName + ' ' + history.user.lastName">
@@ -36,6 +36,17 @@
                             <div class="action">
                                 <span class="element__name"> {{history.name}}</span>
                                 <span class="element__old_name">{{history.oldName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="historyType.UPLOAD_ELEMENT">
+                    <div class="message">
+                        <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> upload element</span> 
+                        <div class="element">
+                            <app-file-icon [element]="getUploadElement(history)" [extension]="history.uploadedElementName | fileExtension"></app-file-icon>
+                            <div class="action">
+                                <span class="element__name"> {{history.uploadedElementName}}</span>
                             </div>
                         </div>
                     </div>

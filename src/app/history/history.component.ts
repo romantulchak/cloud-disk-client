@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { HistoryDTO } from '../dto/history.dto';
 import { RenameHistoryDTO } from '../dto/renameHistory.dto';
+import { StoreDTO } from '../dto/store.dto';
+import { UploadHistoryDTO } from '../dto/uploadHistory.dto';
 import { HistoryType } from '../model/enum/historyType.enum';
 import { HistoryService } from '../service/history.service';
 
@@ -34,6 +36,12 @@ export class HistoryComponent implements OnInit, OnChanges {
         this.histories = res;
       }
     );
+  }
+
+  public getUploadElement(history: UploadHistoryDTO): StoreDTO {
+    let element = new StoreDTO();
+    Object.assign(element, history);
+    return element;
   }
 
 }

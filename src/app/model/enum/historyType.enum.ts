@@ -4,5 +4,6 @@ export enum HistoryType{
     RESTORE = "RESTORE",
     ACCESS_OPEN = "ACCESS_OPEN",
     ACCESS_CLOSE = "ACCESS_CLOSE",
-    RENAME = "RENAME"
+    RENAME = "RENAME",
+    UPLOAD_ELEMENT = "UPLOAD_ELEMENT"
 }
