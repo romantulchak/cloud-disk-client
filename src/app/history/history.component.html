@@ -44,10 +44,30 @@
                     <div class="message">
                         <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> upload element</span> 
                         <div class="element">
-                            <app-file-icon [element]="getUploadElement(history)" [extension]="history.uploadedElementName | fileExtension"></app-file-icon>
+                            <app-file-icon [element]="history.uploadedElement"></app-file-icon>
                             <div class="action">
-                                <span class="element__name"> {{history.uploadedElementName}}</span>
+                                <span class="element__name"> {{history.uploadedElement.name}}</span>
                             </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="historyType.CREATE">
+                    <div class="message">
+                        <b>{{history.element.isOwner ? 'You ' : history.user.firstName + ' ' + history.user.lastName}}</b> <span> create element</span> 
+                        <div class="element">
+                            <div class="parrent_child__folder parent">
+                                <app-file-icon [element]="getUploadedElement(history)"></app-file-icon>
+                                <div class="action" (click)="goToFolder(history.element.link)">
+                                    <span class="element__name"> {{history.element.name}}</span>
+                                </div>
+                            </div>
+                            <div class="parrent_child__folder child">
+                                <app-file-icon [element]="getUploadedElement(history)" [iconSize]="'18px'"></app-file-icon>
+                                <div class="action" (click)="goToFolder(history.uploadedElementLink)">
+                                    <span class="element__name"> {{history.uploadedElementName}}</span>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </ng-container>

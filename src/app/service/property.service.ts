@@ -21,14 +21,13 @@ export class PropertyService {
   }
 
   public open(element: FolderDTO | FileDTO): Promise<MatDrawerToggleResult>{
-    const propertyData = new PropertyData(true, element);
+    const propertyData = new PropertyData(true, false, element);
     this.propertySideState.next(propertyData);
     return this.propertySidenav.open();
   }
 
   public close(): Promise<MatDrawerToggleResult>{
-    const propertyData = new PropertyData(false);
-    this.propertySideState.next(propertyData);
+    this.propertySideState.next(null);
     return this.propertySidenav.close();
   }
 

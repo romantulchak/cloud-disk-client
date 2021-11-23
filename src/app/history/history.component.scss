@@ -29,9 +29,36 @@
             width: 95%;
             font-size: 15px;
 
+        
+
             .element{
                 display: flex;
                 margin-top: 1.5em;
+                flex-wrap: wrap;
+                
+                .parrent_child__folder{
+                    display: flex;
+                    align-items: center;
+
+                    &.parent{
+                        border-bottom: 1px solid #efefef;
+                        width: 100%;
+                        cursor: pointer;
+                    }
+    
+                    &.child{
+                        margin-top: 5px;
+                        font-size: 13px;
+                        padding-left: 1em;
+                        width: 100%;
+                        cursor: pointer;
+                        transition: .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+                        &:hover{
+                            background: rgb(143 131 131 / 8%);
+                            border-radius: 5px;
+                        }
+                    }
+                }
 
                 .action{
                     margin-left: 0.5em;

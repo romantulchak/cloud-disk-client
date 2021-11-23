@@ -5,7 +5,9 @@ import {Router} from '@angular/router';
 import {FileDTO} from '../dto/file.dto';
 import {FolderDTO} from '../dto/folder.dto';
 import {ContextType} from '../model/enum/contextType.enum';
+import { PropertyData } from '../model/property-data.model';
 import {DriveService} from '../service/drive.service';
+import { PropertyService } from '../service/property.service';
 
 @Component({
   selector: 'app-folder-table',
@@ -29,13 +31,16 @@ export class FolderTableComponent implements OnInit, OnChanges {
   public eventType: number;
   public selectedElements: any[] = [];
   public driveName: string;
+  private propertyData: PropertyData;
 
   constructor(private router: Router,
-              private driveService: DriveService) {
+              private driveService: DriveService,
+              private propertyService: PropertyService) {
   }
 
   ngOnInit(): void {
     this.getDriveName();
+    this.getPropertySidenavState();
   }
 
   ngOnChanges(): void {
@@ -44,6 +49,16 @@ export class FolderTableComponent implements OnInit, OnChanges {
         element.isSelected = false;
       });
     }
+  }
+
+  private getPropertySidenavState(){
+    this.propertyService.propertySideState.subscribe(
+      res=>{
+        if(res != null){
+          this.propertyData = res;
+        }
+      }
+    );
   }
 
   private getDriveName(): void {
@@ -79,6 +94,11 @@ export class FolderTableComponent implements OnInit, OnChanges {
       })
       this.selectedElements = [...[element]]
     }
+
+    if(this.propertyData != null){
+      this.propertyData.element = element; 
+    }
+    this.propertyService.propertySideState.next(this.propertyData);
   }
 
   public openContextMenu(event: MouseEvent, element: FolderDTO | FileDTO): void {
