@@ -44,6 +44,7 @@ import { HistoryComponent } from './history/history.component';
 import { PropertySidenavComponent } from './property-sidenav/property-sidenav.component';
 import { PropertyComponent } from './property/property.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    InfiniteScrollModule
   ],
   providers: [authInterceptorProviders, loaderInterceptorProviders, FileExtensionPipe],
   bootstrap: [AppComponent]

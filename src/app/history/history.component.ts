@@ -18,7 +18,8 @@ export class HistoryComponent implements OnInit {
   @Input() elementId: number;
   
   public historyType = HistoryType;
-  public histories: HistoryDTO[] | RenameHistoryDTO[] | any;
+  public histories: HistoryDTO[] | RenameHistoryDTO[] | any = [];
+  private currentPage: number = 0;
 
   constructor(private historyService: HistoryService,
               private propertyService: PropertyService,
@@ -32,7 +33,9 @@ export class HistoryComponent implements OnInit {
   private updateHistoryOnChange(){
     this.propertyService.propertySideState?.subscribe(
       res=>{
-        if(res != null && res.element?.id !== this.elementId){          
+        if(res != null && res.element?.id !== this.elementId){     
+          this.histories = [];
+          this.currentPage = 0;     
           this.elementId = res.element.id;
           this.getHistory();
         }
@@ -41,14 +44,14 @@ export class HistoryComponent implements OnInit {
   }
 
   private getHistory(): void{
-    this.historyService.getHistoryForElement(this.elementId).subscribe(
+    this.historyService.getHistoryForElement(this.elementId, this.currentPage).subscribe(
       res=>{
-        this.histories = res;
+        this.histories.push(...res);
       }
     );
   }
 
-  public goToFolder(link: string){
+  public goToFolder(link: string): void{
     this.router.navigateByUrl(`/drive/folders/${link}`);
   }
 
@@ -56,6 +59,11 @@ export class HistoryComponent implements OnInit {
     let element = new StoreDTO();
     Object.assign(element, history);
     return element;
+  }
+
+  public scrollDown(): void{
+    this.currentPage++;
+    this.getHistory();
   }
 
 }

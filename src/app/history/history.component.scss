@@ -1,7 +1,6 @@
 .history__section{
-    overflow-y: auto;
-    overflow-x: hidden;
     height: 700px;
+    overflow: scroll;
 
     .history__card{
         font-family: 'Main';
