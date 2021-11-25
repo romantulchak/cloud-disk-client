@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentRef, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { HistoryDTO } from 'src/app/dto/history.dto';
 import { FileDTO } from '../dto/file.dto';
 import { FolderDTO } from '../dto/folder.dto';
+import { HistoryComponent } from '../history/history.component';
 import { ContextType } from '../model/enum/contextType.enum';
 import { PropertyService } from '../service/property.service';
 
@@ -15,13 +16,15 @@ import { PropertyService } from '../service/property.service';
 export class PropertySidenavComponent implements OnInit {
 
   @ViewChild("propertySidenav") public propertySidenav: MatSidenav;
-
+  @ViewChild(HistoryComponent) historyComponent: ComponentRef<HistoryComponent>;
   @Input("element") element: FolderDTO | FileDTO;
+  public isSidenavOpened: boolean = false;
 
   constructor(private propertyService: PropertyService,
              private router: Router) { }
 
   ngOnInit(): void {
+    
   }
 
   ngAfterViewInit(): void{

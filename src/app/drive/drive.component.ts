@@ -20,10 +20,9 @@ export class DriveComponent implements OnInit {
   public getPropertySideState(){
     this.propertyService.propertySideState.subscribe(
       res=>{
-        if(res != null){
+        if(res != null)
           this.propertyData = res;
         }
-      }
     );
   }
 }

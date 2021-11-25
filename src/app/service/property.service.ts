@@ -11,7 +11,6 @@ import { PropertyData } from '../model/property-data.model';
 export class PropertyService {
 
   public propertySideState: BehaviorSubject<PropertyData> = new BehaviorSubject(null);
-
   private propertySidenav: MatSidenav;
 
   constructor() { }
@@ -27,7 +26,8 @@ export class PropertyService {
   }
 
   public close(): Promise<MatDrawerToggleResult>{
-    this.propertySideState.next(null);
+    const propertyData = new PropertyData(false, false);
+    this.propertySideState.next(propertyData);
     return this.propertySidenav.close();
   }
 

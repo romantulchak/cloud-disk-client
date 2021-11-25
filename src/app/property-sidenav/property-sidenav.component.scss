@@ -2,6 +2,10 @@
     .mat-drawer-inner-container{
         overflow: hidden;
     }
+
+    .mat-drawer-content{
+        overflow: hidden;
+    }
     
     .mat-tab-labels{
         justify-content: center;
@@ -38,6 +42,7 @@
     background: #fff;
     grid-template-columns: 1fr 30px;
     padding: 2em;
+    grid-template-rows: 30px;
 
         .element__link{
             display: flex;
