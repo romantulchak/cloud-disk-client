@@ -1,7 +1,8 @@
-import {HttpClient, HttpRequest} from "@angular/common/http";
+import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {environment} from "src/environments/environment";
+import { FileDTO } from "../dto/file.dto";
 
 const API_URL = environment.api;
 
@@ -29,6 +30,12 @@ export class FileService {
       reportProgress: true
     });
     return this.http.request(req);
+  }
+
+  public findFilesInFolder(folderLink: string, page: string): Observable<FileDTO[]>{
+    let params = new HttpParams()
+                    .append('page', page);
+    return this.http.get<FileDTO[]>(`${API_URL}files/${folderLink}`, {params: params});
   }
 
   private sendRequest(endPoint: string, name: string, file: File): HttpRequest<FormData> {

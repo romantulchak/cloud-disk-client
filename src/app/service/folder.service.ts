@@ -1,4 +1,4 @@
-import { HttpClient, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -26,7 +26,8 @@ export class FolderService{
     }
 
     public findSubFoldersInFolder(folderLink: string):Observable<FolderDTO[]>{
-        return this.http.get<FolderDTO[]>(`${API_URL}folder/sub-folders/${folderLink}`);
+        let params = new HttpParams().append('page', '0');
+        return this.http.get<FolderDTO[]>(`${API_URL}folder/sub-folders/${folderLink}`, {params: params});
     }
 
     public removeFolder(folderLink: string): Observable<void>{

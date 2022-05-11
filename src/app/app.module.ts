@@ -45,6 +45,7 @@ import { PropertySidenavComponent } from './property-sidenav/property-sidenav.co
 import { PropertyComponent } from './property/property.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FilePreviewDialogComponent } from './file-preview-dialog/file-preview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     HistoryComponent,
     PropertySidenavComponent,
     PropertyComponent,
+    FilePreviewDialogComponent,
   ],
   imports: [
     BrowserModule,

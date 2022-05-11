@@ -41,4 +41,8 @@ export class FileType{
     public readonly JSON = ["json"];
     public readonly PPT = ["ppt", "pptx"];
 
+    public filesToBePreviewd(): string[]{
+        return [...this.PDF, ...this.MP4, ...this.SVG, ...this.TXT, ...this.IMG];
+    }
+
 }

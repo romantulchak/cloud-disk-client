@@ -1,0 +1,11 @@
+<section>
+    <ng-container *ngIf="this.fileExtension === 'mp4' && file">
+        <video controls width="500" height="500">
+            <source [src]="file.path.fullPath" type="video/mp4">
+        </video>
+    </ng-container>
+
+    <ng-container *ngIf="this.fileExtension === 'png' && file">
+        <img [src]="file.path.fullPath" alt="">
+    </ng-container>
+</section>

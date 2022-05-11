@@ -1,12 +1,17 @@
 import {Component, HostListener, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {MatTableDataSource} from '@angular/material/table';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {FileDTO} from '../dto/file.dto';
 import {FolderDTO} from '../dto/folder.dto';
+import { FilePreviewDialogComponent } from '../file-preview-dialog/file-preview-dialog.component';
 import {ContextType} from '../model/enum/contextType.enum';
+import { FileType } from '../model/enum/fileType.enum';
 import { PropertyData } from '../model/property-data.model';
+import { FileExtensionPipe } from '../pipe/file-extension.pipe';
 import {DriveService} from '../service/drive.service';
+import { FileService } from '../service/file.service';
 import { PropertyService } from '../service/property.service';
 
 @Component({
@@ -32,13 +37,19 @@ export class FolderTableComponent implements OnInit, OnChanges {
   public selectedElements: any[] = [];
   public driveName: string;
   private propertyData: PropertyData;
+  private folderLink: string;
+  private currentPage: number = 0;
 
   constructor(private router: Router,
               private driveService: DriveService,
-              private propertyService: PropertyService) {
+              private fileService: FileService,
+              private propertyService: PropertyService,
+              private activatedRouter: ActivatedRoute,
+              private dialog: MatDialog) {                
   }
 
   ngOnInit(): void {
+    this.getFolderLink();
     this.getDriveName();
     this.getPropertySidenavState();
   }
@@ -51,7 +62,15 @@ export class FolderTableComponent implements OnInit, OnChanges {
     }
   }
 
-  private getPropertySidenavState(){
+  private getFolderLink(): void{
+    this.activatedRouter.url.subscribe(res => {
+      if(res.length > 1){
+        this.folderLink = res[1].path;
+      }
+    });
+  }
+
+  private getPropertySidenavState(): void{
     this.propertyService.propertySideState.subscribe(
       res=>{
         if(res != null){
@@ -69,11 +88,25 @@ export class FolderTableComponent implements OnInit, OnChanges {
     );
   }
 
+  private canBePreviewed(fileName: string): boolean{
+    const fileExtension = new FileExtensionPipe().transform(fileName);
+    const filesThatCanBePreviewd = new FileType().filesToBePreviewd();
+    return filesThatCanBePreviewd.includes(fileExtension);
+  }
+
+  private previewFile(file: FileDTO){
+    if(this.canBePreviewed(file.name)){
+      this.dialog.open(FilePreviewDialogComponent, {
+        data: file
+      });
+    }
+  }
+
   public open(element: FolderDTO | FileDTO): void {
     if (element.context == ContextType.FOLDER) {
       this.router.navigateByUrl(`drive/folders/${element.link}`);
     } else {
-      console.log('FILE');
+      this.previewFile(element as FileDTO);
     }
   }
 
@@ -119,5 +152,17 @@ export class FolderTableComponent implements OnInit, OnChanges {
 
   public changeNoticed(element: FileDTO | FolderDTO): void {
     this.source.data.find(element => element.id === element.id).noticed = element.noticed;
+  }
+
+  public scrollDown(){
+    if(!this.router.url.endsWith('my-drive')){
+      this.fileService.findFilesInFolder(this.folderLink, this.currentPage.toString()).subscribe(
+        res=> {
+            this.source.data.push(...res);
+            this.source._updateChangeSubscription();
+            this.currentPage++;
+        }
+      );
+    }
   }
 }
