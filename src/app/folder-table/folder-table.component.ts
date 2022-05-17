@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {MatTableDataSource} from '@angular/material/table';
@@ -12,6 +12,7 @@ import { PropertyData } from '../model/property-data.model';
 import { FileExtensionPipe } from '../pipe/file-extension.pipe';
 import {DriveService} from '../service/drive.service';
 import { FileService } from '../service/file.service';
+import { FolderService } from '../service/folder.service';
 import { PropertyService } from '../service/property.service';
 
 @Component({
@@ -45,13 +46,15 @@ export class FolderTableComponent implements OnInit, OnChanges {
               private fileService: FileService,
               private propertyService: PropertyService,
               private activatedRouter: ActivatedRoute,
-              private dialog: MatDialog) {                
+              private dialog: MatDialog,
+              private folderService: FolderService) {                
   }
 
   ngOnInit(): void {
     this.getFolderLink();
     this.getDriveName();
     this.getPropertySidenavState();
+    this.updateFolders();
   }
 
   ngOnChanges(): void {
@@ -84,6 +87,17 @@ export class FolderTableComponent implements OnInit, OnChanges {
     this.driveService.getDrive().then(
       res => {
         this.driveName = res;
+      }
+    );
+  }
+
+  private updateFolders(): void {
+    this.folderService.folderSubject.subscribe(
+      res => {
+        if (res != null) {
+          this.source.data.unshift(res);
+          this.source.data = this.source.data;
+        }
       }
     );
   }

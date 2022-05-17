@@ -247,7 +247,13 @@ export class FunctionService {
         disableClose: true,
         panelClass: 'upload__dialog',
         id: 'upload_dialog_num',
-        data: []
+        data: [],
+        position: {
+          bottom: '40px',
+          right: '60px'
+        },
+        width: '360px',
+        hasBackdrop: false
       });
     }
   }
@@ -259,8 +265,14 @@ export class FunctionService {
         disableClose: true,
         panelClass: 'upload__dialog',
         id: 'download_dialog_num',
-        data: []
-      })
+        data: [],
+        position: {
+          bottom: '40px',
+          right: '60px'
+        },
+        width: '360px',
+        hasBackdrop: false
+      });
     }
   }
 }

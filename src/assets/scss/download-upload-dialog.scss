@@ -24,34 +24,25 @@
   height: 0;
   position: initial;
 
-  .cdk-overlay-dark-backdrop {
-    background: transparent;
-    z-index: 0;
-    position: initial;
-  }
+  .upload__dialog {
 
-  .cdk-global-overlay-wrapper {
-    z-index: 0;
-    position: absolute;
-    bottom: 70px;
-    right: 130px;
-    top: unset;
-    width: 156px;
-    left: unset;
-    align-items: flex-end !important;
-    max-height: 323px;
-    z-index: 1;
-  }
+    .cdk-overlay-dark-backdrop {
+      background: transparent;
+      z-index: 0;
+      position: initial;
+    }
 
-  .mat-dialog-container {
-    width: 356px;
-    height: 100%;
-    padding: 0;
+    .mat-dialog-container {
+      width: 356px;
+      height: 100%;
+      padding: 0;
+    }
   }
 }
 
 
-.uploader__dialog{
+
+.uploader__dialog {
   max-height: 360px;
   overflow-y: auto;
 
@@ -90,9 +81,9 @@
   }
 }
 
-.create__zip_spinner{
-  &::ng-deep{
-    circle{
+.create__zip_spinner {
+  &::ng-deep {
+    circle {
       stroke: #c7c7c7;
     }
   }

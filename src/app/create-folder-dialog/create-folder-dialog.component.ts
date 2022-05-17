@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {Context} from '../model/context.model';
 import {ContextEnum} from '../model/enum/context.enum';
 import {DriveService} from '../service/drive.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-folder-dialog',
   templateUrl: './create-folder-dialog.component.html',
-  styleUrls: ['./create-folder-dialog.component.scss']
+  styleUrls: ['./create-folder-dialog.component.scss'],
 })
 export class CreateFolderDialogComponent implements OnInit {
 

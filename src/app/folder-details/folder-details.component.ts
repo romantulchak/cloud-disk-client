@@ -20,14 +20,12 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private driveService: DriveService,
               private folderService: FolderService,
-              private activatedRouter: ActivatedRoute,
-              private router: Router) {
+              private activatedRouter: ActivatedRoute) {
                 
   }
 
   ngOnInit(): void {
     this.getSubFolders();
-    this.updateFolders();
   }
 
   private getSubFolders(): void {
@@ -36,17 +34,6 @@ export class FolderDetailsComponent implements OnInit, OnDestroy {
         this.folderLink = res.link;
         this.initContext();
         this.getSubFoldersInFolder();
-      }
-    );
-  }
-
-  private updateFolders(): void {
-    this.folderService.folderSubject.subscribe(
-      res => {
-        if (res != null && this.router.url === res.url) {
-          this.folders.data.unshift(res);
-          this.folders.data = this.folders.data;
-        }
       }
     );
   }

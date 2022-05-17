@@ -1,0 +1,11 @@
+.imaage__preview{
+    width: 90%;
+    height: 700px;
+    margin: 0 auto;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

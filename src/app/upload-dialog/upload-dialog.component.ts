@@ -15,7 +15,6 @@ export class UploadDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.progressInfos);
     
   }
 
