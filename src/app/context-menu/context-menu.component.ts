@@ -16,10 +16,8 @@ import {NoticedService} from '../service/noticed.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AccessDialogComponent} from '../access-dialog/access-dialog.component';
 import {AccessType} from '../model/enum/accessType.enum';
-import {ElementService} from '../service/element.service';
 import {RenameDialogComponent} from '../rename-dialog/rename-dialog.component';
-import { HistoryService } from '../service/history.service';
-import { PropertyService } from '../service/property.service';
+import {PropertyService} from '../service/property.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -152,7 +150,7 @@ export class ContextMenuComponent implements OnInit {
     });
   }
 
-  public getProperties(){
+  public getProperties() {
     this.propertyService.open(this.element);
   }
 
