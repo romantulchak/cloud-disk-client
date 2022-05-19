@@ -10,9 +10,17 @@ import {MyDiskComponent} from './my-disk/my-disk.component';
 import {NoticedComponent} from './noticed/noticed.component';
 import {RecentComponent} from './recent/recent.component';
 import {TrashComponent} from './trash/trash.component';
+import {LoginComponent} from "./auth/login/login.component";
+import {SignupComponent} from "./auth/signup/signup.component";
 
 const routes: Routes = [
-  {path: 'auth', component: AuthComponent, canActivate: [AuthGuard]},
+  {
+    path: 'auth', component: AuthComponent, canActivate: [AuthGuard], children: [
+      {path: '', redirectTo: 'login', pathMatch: 'full'},
+      {path: 'signup', component: SignupComponent},
+      {path: 'login', component: LoginComponent},
+    ]
+  },
   {
     path: 'drive', component: DriveComponent, children: [
       {path: '', redirectTo: 'my-drive', pathMatch: 'full'},

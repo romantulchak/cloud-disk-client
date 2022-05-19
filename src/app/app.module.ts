@@ -33,19 +33,23 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ContextMenuComponent} from './context-menu/context-menu.component';
 import {DownloadDialogComponent} from './download-dialog/download-dialog.component';
 import {FileExtensionPipe} from './pipe/file-extension.pipe';
-import {DialogHeaderUploadDownloadComponent} from './dialog-header-upload-download/dialog-header-upload-download.component';
+import {
+  DialogHeaderUploadDownloadComponent
+} from './dialog-header-upload-download/dialog-header-upload-download.component';
 import {FileSizePipe} from './pipe/file-size.pipe';
 import {SvgStylePipe} from './pipe/svg-style.pipe';
 import {AccessDialogComponent} from './access-dialog/access-dialog.component';
 import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { HistoryComponent } from './history/history.component';
-import { PropertySidenavComponent } from './property-sidenav/property-sidenav.component';
-import { PropertyComponent } from './property/property.component';
+import {HistoryComponent} from './history/history.component';
+import {PropertySidenavComponent} from './property-sidenav/property-sidenav.component';
+import {PropertyComponent} from './property/property.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { FilePreviewDialogComponent } from './file-preview-dialog/file-preview-dialog.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {FilePreviewDialogComponent} from './file-preview-dialog/file-preview-dialog.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,8 @@ import { FilePreviewDialogComponent } from './file-preview-dialog/file-preview-d
     PropertySidenavComponent,
     PropertyComponent,
     FilePreviewDialogComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
