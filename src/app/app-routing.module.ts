@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthComponent} from './auth/auth.component';
-import {AvailableComponent} from './available/available.component';
-import {ComputerComponent} from './computer/computer.component';
-import {DriveComponent} from './drive/drive.component';
-import {FolderDetailsComponent} from './folder-details/folder-details.component';
+import {AuthComponent} from './components/auth/auth.component';
+import {AvailableComponent} from './components/available/available.component';
+import {ComputerComponent} from './components/computer/computer.component';
+import {DriveComponent} from './components/drive/drive.component';
+import {FolderDetailsComponent} from './components/folder/folder-details/folder-details.component';
 import {AuthGuard} from './guard/auth-guard.guard';
-import {MyDiskComponent} from './my-disk/my-disk.component';
-import {NoticedComponent} from './noticed/noticed.component';
-import {RecentComponent} from './recent/recent.component';
-import {TrashComponent} from './trash/trash.component';
-import {LoginComponent} from "./auth/login/login.component";
-import {SignupComponent} from "./auth/signup/signup.component";
+import {MyDiskComponent} from './components/my-disk/my-disk.component';
+import {NoticedComponent} from './components/noticed/noticed.component';
+import {RecentComponent} from './components/recent/recent.component';
+import {TrashComponent} from './components/trash/trash.component';
+import {LoginComponent} from "./components/auth/login/login.component";
+import {SignupComponent} from "./components/auth/signup/signup.component";
 
 const routes: Routes = [
   {

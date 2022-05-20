@@ -1,18 +1,18 @@
 import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {CreateFolderDialogComponent} from "../create-folder-dialog/create-folder-dialog.component";
+import {CreateFolderDialogComponent} from "../components/dialog/create-folder-dialog/create-folder-dialog.component";
 import {FileDTO} from "../dto/file.dto";
 import {Context} from "../model/context.model";
 import {Download} from "../model/download.model";
 import {ContextEnum} from "../model/enum/context.enum";
 import {ContextType} from "../model/enum/contextType.enum";
 import {Uploader} from "../model/uploader.model";
-import {UploadDialogComponent} from "../upload-dialog/upload-dialog.component";
+import {UploadDialogComponent} from "../components/dialog/upload-dialog/upload-dialog.component";
 import {FileService} from "./file.service";
 import {FolderService} from "./folder.service";
 import {saveAs} from 'file-saver';
-import {DownloadDialogComponent} from "../download-dialog/download-dialog.component";
+import {DownloadDialogComponent} from "../components/dialog/download-dialog/download-dialog.component";
 import {MatTableDataSource} from "@angular/material/table";
 import {FolderDTO} from "../dto/folder.dto";
 import {ElementService} from "./element.service";
@@ -189,7 +189,7 @@ export class FunctionService {
 
   private uploadIntoDrive(context: Context, file: File, index: number): void {
     let obj = new Uploader(file, 0, false);
-    this.uploaderDialog.componentInstance.progressInfos.unshift(obj);    
+    this.uploaderDialog.componentInstance.progressInfos.unshift(obj);
     this.fileService.uploadFileIntoDrive(file, context.data).subscribe(
       event => {
         this.getUploadingProgress(event, index);
