@@ -108,6 +108,7 @@ $cloud-disk-client-theme: mat.define-light-theme((
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 
 body{
@@ -137,13 +138,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
