@@ -1,8 +1,8 @@
-import {Component, HostListener, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {MatTableDataSource} from '@angular/material/table';
-import {ActivatedRoute, Route, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FileDTO} from '../../../dto/file.dto';
 import {FolderDTO} from '../../../dto/folder.dto';
 import { FilePreviewDialogComponent } from '../../dialog/file-preview-dialog/file-preview-dialog.component';
@@ -31,7 +31,6 @@ export class FolderTableComponent implements OnInit, OnChanges {
   @Input("source") source: MatTableDataSource<FolderDTO | FileDTO>;
 
   public menuTopLeftPosition = {x: '0', y: '0'}
-  public isSelected: boolean = false;
   public displayedColumns: string[] = ['name', 'owner', 'lastChanged', 'size'];
   public contextType = ContextType;
   public eventType: number;
@@ -94,7 +93,7 @@ export class FolderTableComponent implements OnInit, OnChanges {
   private updateFolders(): void {
     this.folderService.folderSubject.subscribe(
       res => {
-        if (res != null) {
+        if (res != null && res.url === this.router.url) {
           this.source.data.unshift(res);
           this.source.data = this.source.data;
         }
@@ -104,8 +103,8 @@ export class FolderTableComponent implements OnInit, OnChanges {
 
   private canBePreviewed(fileName: string): boolean{
     const fileExtension = new FileExtensionPipe().transform(fileName);
-    const filesThatCanBePreviewd = new FileType().filesToBePreviewd();
-    return filesThatCanBePreviewd.includes(fileExtension);
+    const filesThatCanBePreviewed = new FileType().filesToBePreviewd();
+    return filesThatCanBePreviewed.includes(fileExtension);
   }
 
   private previewFile(file: FileDTO){
@@ -118,7 +117,7 @@ export class FolderTableComponent implements OnInit, OnChanges {
 
   public open(element: FolderDTO | FileDTO): void {
     if (element.context == ContextType.FOLDER) {
-      this.router.navigateByUrl(`drive/folders/${element.link}`);
+      this.router.navigateByUrl(`drive/folders/${element.link}`).then(() => {});
     } else {
       this.previewFile(element as FileDTO);
     }
@@ -148,6 +147,13 @@ export class FolderTableComponent implements OnInit, OnChanges {
     this.propertyService.propertySideState.next(this.propertyData);
   }
 
+  public selectAllElements(){
+    this.selectedElements = [...this.source.data];
+    this.source.data.forEach(element => {
+      element.isSelected = true;
+    });
+  }
+
   public openContextMenu(event: MouseEvent, element: FolderDTO | FileDTO): void {
     event.preventDefault();
     if (this.selectedElements.length == 0) {
@@ -165,7 +171,7 @@ export class FolderTableComponent implements OnInit, OnChanges {
   }
 
   public changeNoticed(element: FileDTO | FolderDTO): void {
-    this.source.data.find(element => element.id === element.id).noticed = element.noticed;
+    this.source.data.find(elem => elem.id === element.id).noticed = element.noticed;
   }
 
   public scrollDown(){

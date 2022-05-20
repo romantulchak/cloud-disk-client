@@ -47,6 +47,7 @@ export class CreateFolderDialogComponent implements OnInit {
 
   public createFolder(): void {
     switch (this.context.context) {
+      case ContextEnum.NOTICED:
       case ContextEnum.DRIVE:
         this.createFolderInDrive();
         break;
@@ -74,9 +75,18 @@ export class CreateFolderDialogComponent implements OnInit {
 
   private updateFoldersInTable(folder: FolderDTO): void {
     if (folder != null) {
-      folder.url = this.router.url;
+      folder.url = this.getUrlForFolderDestination();
       this.folderService.folderSubject.next(folder);
       this.dialog.close();
+    }
+  }
+
+  private getUrlForFolderDestination(): string{
+    switch (this.context.context) {
+      case ContextEnum.NOTICED:
+        return '/drive/my-drive';
+      default:
+        return this.router.url;
     }
   }
 }
