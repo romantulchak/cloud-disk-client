@@ -39,7 +39,6 @@ $cloud-disk-client-theme: mat.define-light-theme((
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.ttf') format('truetype'), /* Safari, Android, iOS */
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
-
 /* commissioner-500 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -53,7 +52,6 @@ $cloud-disk-client-theme: mat.define-light-theme((
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.ttf') format('truetype'), /* Safari, Android, iOS */
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
-
 /* commissioner-600 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -67,7 +65,6 @@ $cloud-disk-client-theme: mat.define-light-theme((
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.ttf') format('truetype'), /* Safari, Android, iOS */
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
-
 /* commissioner-700 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -81,7 +78,6 @@ $cloud-disk-client-theme: mat.define-light-theme((
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
-
 /* commissioner-800 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -95,7 +91,6 @@ $cloud-disk-client-theme: mat.define-light-theme((
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.ttf') format('truetype'), /* Safari, Android, iOS */
   url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
-
 /* commissioner-900 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -113,6 +108,7 @@ $cloud-disk-client-theme: mat.define-light-theme((
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 
 body {
