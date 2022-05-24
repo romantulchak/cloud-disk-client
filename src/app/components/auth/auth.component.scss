@@ -1,0 +1,30 @@
+.auth-wrapper {
+  background-color: #FAFBFF;
+  height: 100vh;
+  position: relative;
+
+  .cloud {
+    position: absolute;
+
+    &._first {
+      opacity: .3;
+      top: 8%;
+      right: 18%;
+      animation: bounce 5s infinite;
+    }
+
+    &._second {
+      top: 20%;
+      left: 20%;
+      animation: bounce 7s infinite;
+    }
+
+    &._third {
+      bottom: 16%;
+      right: 20%;
+      max-width: 336px;
+      height: 224px;
+      animation: bounce 8s infinite;
+    }
+  }
+}

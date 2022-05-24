@@ -14,14 +14,14 @@ $cloud-disk-client-theme: mat.define-light-theme((
   )
 ));
 
-@mixin avatar($width){
+@mixin avatar($width) {
   width: $width;
 
-    img{
-      width: 100%;
-      height: 100%;
-      border-radius: 50px;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+  }
 }
 
 @include mat.all-component-themes($cloud-disk-client-theme);
@@ -33,12 +33,13 @@ $cloud-disk-client-theme: mat.define-light-theme((
   font-weight: 400;
   src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.eot'); /* IE9 Compat Modes */
   src: local(''),
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff') format('woff'), /* Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.svg#Commissioner') format('svg'); /* Legacy iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff') format('woff'), /* Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-regular.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
+
 /* commissioner-500 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -46,12 +47,13 @@ $cloud-disk-client-theme: mat.define-light-theme((
   font-weight: 500;
   src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.eot'); /* IE9 Compat Modes */
   src: local(''),
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.woff2') format('woff2'), /* Super Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.woff') format('woff'), /* Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.svg#Commissioner') format('svg'); /* Legacy iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.woff2') format('woff2'), /* Super Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.woff') format('woff'), /* Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-500.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
+
 /* commissioner-600 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -59,12 +61,13 @@ $cloud-disk-client-theme: mat.define-light-theme((
   font-weight: 600;
   src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.eot'); /* IE9 Compat Modes */
   src: local(''),
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.woff2') format('woff2'), /* Super Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.woff') format('woff'), /* Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.svg#Commissioner') format('svg'); /* Legacy iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.woff2') format('woff2'), /* Super Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.woff') format('woff'), /* Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-600.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
+
 /* commissioner-700 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -72,12 +75,13 @@ $cloud-disk-client-theme: mat.define-light-theme((
   font-weight: 700;
   src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.eot'); /* IE9 Compat Modes */
   src: local(''),
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.woff2') format('woff2'), /* Super Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.woff') format('woff'), /* Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.svg#Commissioner') format('svg'); /* Legacy iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.woff2') format('woff2'), /* Super Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.woff') format('woff'), /* Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-700.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
+
 /* commissioner-800 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -85,12 +89,13 @@ $cloud-disk-client-theme: mat.define-light-theme((
   font-weight: 800;
   src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.eot'); /* IE9 Compat Modes */
   src: local(''),
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.woff2') format('woff2'), /* Super Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.woff') format('woff'), /* Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.svg#Commissioner') format('svg'); /* Legacy iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.woff2') format('woff2'), /* Super Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.woff') format('woff'), /* Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-800.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
+
 /* commissioner-900 - latin-ext_latin_cyrillic-ext_cyrillic */
 @font-face {
   font-family: 'Main';
@@ -98,11 +103,11 @@ $cloud-disk-client-theme: mat.define-light-theme((
   font-weight: 900;
   src: url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.eot'); /* IE9 Compat Modes */
   src: local(''),
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.woff2') format('woff2'), /* Super Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.woff') format('woff'), /* Modern Browsers */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.svg#Commissioner') format('svg'); /* Legacy iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.woff2') format('woff2'), /* Super Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.woff') format('woff'), /* Modern Browsers */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('assets/fonts/commissioner-v5-latin-ext_latin_cyrillic-ext_cyrillic-900.svg#Commissioner') format('svg'); /* Legacy iOS */
 }
 
 * {
@@ -110,11 +115,22 @@ $cloud-disk-client-theme: mat.define-light-theme((
   padding: 0;
 }
 
-body{
-    overflow: hidden;
+body {
+  overflow: hidden;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
 
 .cdk-global-scrollblock {
   overflow-y: hidden;
@@ -137,13 +153,134 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
+}
+
+.mat-form-field {
+  position: relative;
+
+  &.mat-focused {
+    mat-placeholder {
+      color: #B3B3B3;
+    }
+
+    .mat-form-field-label {
+      color: #415878;
+    }
+  }
+
+  &.mat-form-field-invalid {
+    .mat-form-field-label {
+      color: #DB8983;
+    }
+
+    .mat-form-field-infix {
+      border: 1px solid #DB8983;
+    }
+
+    .field-icon {
+      filter: hue-rotate(130deg);
+    }
+  }
+
+  .field-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 18px;
+  }
+
+  .mat-form-field-label {
+    color: #415878;
+  }
+
+  .mat-form-field-infix {
+    padding: 0;
+    border: 1px solid #D6E2EE;
+    border-radius: 4px;
+    transition: .4s;
+  }
+
+  &.no__border-bottom {
+    .mat-form-field-infix {
+      border-bottom: none;
+    }
+  }
+
+  .mat-input-element {
+    width: 85%;
+    color: #415878;
+    height: 50px;
+    font-family: 'Roboto', serif;
+    padding-left: 50px;
+    caret-color: #829BDB;
+  }
+
+  mat-placeholder {
+    transition: .4s;
+    color: #415878;
+  }
+
+  .mat-form-field-label {
+    color: #B3B3B3;
+  }
+
+  .mat-form-field-label-wrapper {
+    top: -4px;
+    left: 50px;
+    overflow: visible;
+    font-family: inherit;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0;
+    height: 50px;
+  }
+
+  .mat-form-field-underline {
+    color: #829BDB;
+    display: none;
+  }
+
+  .mat-form-field-ripple {
+    color: #829BDB;
+  }
+
+  .mat-form-field-required-marker {
+    color: #829BDB;
+  }
+
+  .mat-icon-button {
+    position: absolute;
+    right: 0;
+    bottom: -4px;
+    color: #829BDB;
+  }
+
+  mat-error {
+    color: #DB8983;
+    margin-top: 20px;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-20px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
 }
