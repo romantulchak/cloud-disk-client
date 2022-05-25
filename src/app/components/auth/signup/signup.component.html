@@ -1,24 +1,81 @@
-<h3>Registration</h3>
-<form>
-  <div>
-    <label>Username</label>
-    <input type="text" name="username" [(ngModel)]="registrationRequest.username">
-  </div>
-  <div>
-    <label>First name</label>
-    <input type="text" name="firstName" [(ngModel)]="registrationRequest.firstName">
-  </div>
-  <div>
-    <label>Last name</label>
-    <input type="text" name="lastName" [(ngModel)]="registrationRequest.lastName">
-  </div>
-  <div>
-    <label>Email</label>
-    <input type="text" name="email" [(ngModel)]="registrationRequest.email">
-  </div>
-  <div>
-    <label>Password</label>
-    <input type="password" name="password" [(ngModel)]="registrationRequest.password">
-  </div>
-  <button type="submit" (click)="registration()">SignUp</button>
-</form>
+<div class="form-wrapper">
+  <form class="signup-form form"
+        [formGroup]="signupForm"
+        (ngSubmit)="registration()">
+    <div class="form-heading">
+      <h3>Welcome to the CloudDisk</h3>
+      <p>Already have an account? <a routerLink="/auth/login">Login</a></p>
+    </div>
+    <mat-form-field class="form-field" floatLabel="never">
+      <img class="field-icon" src="./assets/images/user.svg" alt="username">
+      <mat-label>Username</mat-label>
+      <input
+        autocomplete="off"
+        matInput type="text"
+        formControlName="username">
+      <mat-error *ngIf="username.errors?.['required']">
+        Required
+      </mat-error>
+      <mat-error *ngIf="username.errors?.['maxlength']">
+        Can contain max 150 symbols
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" floatLabel="never">
+      <img class="field-icon" src="./assets/images/user.svg" alt="Username">
+      <mat-label>First name</mat-label>
+      <input
+        autocomplete="off"
+        matInput type="text"
+        formControlName="firstName">
+      <mat-error *ngIf="firstName.errors?.['required']">
+        Required
+      </mat-error>
+      <mat-error *ngIf="firstName.errors?.['maxlength']">
+        Can contain max 150 symbols
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" floatLabel="never">
+      <img class="field-icon" src="./assets/images/user.svg" alt="Last name">
+      <mat-label>Last name</mat-label>
+      <input
+        autocomplete="off"
+        matInput type="text"
+        formControlName="lastName">
+      <mat-error *ngIf="lastName.errors?.['required']">
+        Required
+      </mat-error>
+      <mat-error *ngIf="lastName.errors?.['maxlength']">
+        Can contain max 150 symbols
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" floatLabel="never">
+      <img class="field-icon" src="./assets/images/mail.svg" alt="Email">
+      <mat-label>Email</mat-label>
+      <input
+        autocomplete="off"
+        matInput type="text"
+        formControlName="email">
+      <mat-error *ngIf="email.errors?.['required']">
+        Required
+      </mat-error>
+      <mat-error *ngIf="email.errors?.['email']">
+        Invalid email format
+      </mat-error>
+      <mat-error *ngIf="email.errors?.['maxlength']">
+        Can contain max 150 symbols
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" floatLabel="never">
+      <img class="field-icon" src="./assets/images/lock.svg" alt="Password">
+      <mat-label>Password</mat-label>
+      <input
+        autocomplete="off"
+        matInput type="password"
+        formControlName="password">
+      <mat-error *ngIf="password.errors?.['required']">
+        Required
+      </mat-error>
+    </mat-form-field>
+    <button type="submit" class="submit-btn">Sign up</button>
+  </form>
+</div>

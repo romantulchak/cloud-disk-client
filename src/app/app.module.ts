@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -48,6 +48,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {FilePreviewDialogComponent} from './components/dialog/file-preview-dialog/file-preview-dialog.component';
 import {LoginComponent} from './components/auth/login/login.component';
 import {SignupComponent} from './components/auth/signup/signup.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -98,7 +100,10 @@ import {SignupComponent} from './components/auth/signup/signup.component';
     MatButtonModule,
     MatSidenavModule,
     MatTabsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [authInterceptorProviders, loaderInterceptorProviders, FileExtensionPipe],
   bootstrap: [AppComponent]
