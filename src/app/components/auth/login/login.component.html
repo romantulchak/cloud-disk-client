@@ -1,12 +1,40 @@
-<h3>Login</h3>
-<form>
-  <div>
-    <label>Username</label>
-    <input type="text" name="username" [(ngModel)]="loginRequest.username">
+<div class="form-wrapper">
+  <form class="login-form form"
+        [formGroup]="loginForm"
+        (ngSubmit)="login()">
+    <div class="form-heading">
+      <h3>Welcome back</h3>
+      <p>Enter your credentials to access your account</p>
+    </div>
+    <mat-form-field class="form-field" floatLabel="never">
+      <img class="field-icon" src="./assets/images/user.svg" alt="username">
+      <mat-label>Username</mat-label>
+      <input
+        autocomplete="off"
+        matInput type="text"
+        formControlName="username">
+      <mat-error *ngIf="username.errors?.['required']">
+        Required
+      </mat-error>
+      <mat-error *ngIf="username.errors?.['maxlength']">
+        Can contain max 150 symbols
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" floatLabel="never">
+      <img class="field-icon" src="./assets/images/lock.svg" alt="Password">
+      <mat-label>Password</mat-label>
+      <input
+        autocomplete="off"
+        matInput type="password"
+        formControlName="password">
+      <mat-error *ngIf="password.errors?.['required']">
+        Required
+      </mat-error>
+    </mat-form-field>
+    <button type="submit" class="submit-btn">Login</button>
+  </form>
+  <div class="form-links">
+    <a>Forgot password</a>
+    <p>Don't have an account? <a routerLink="/auth/signup">Sign up</a></p>
   </div>
-  <div>
-    <label>Password</label>
-    <input type="password" name="password" [(ngModel)]="loginRequest.password">
-  </div>
-  <button type="submit" (click)="login()">Login</button>
-</form>
+</div>

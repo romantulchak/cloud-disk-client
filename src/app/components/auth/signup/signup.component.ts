@@ -72,7 +72,6 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
     }
-
     const body: SignupRequest = this.signupForm.value;
     this.authService.registration(body).subscribe(
       () => {

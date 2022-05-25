@@ -1,8 +1,10 @@
 <div class="form-wrapper">
-  <form class="signup-form form" [formGroup]="signupForm">
+  <form class="signup-form form"
+        [formGroup]="signupForm"
+        (ngSubmit)="registration()">
     <div class="form-heading">
       <h3>Welcome to the CloudDisk</h3>
-      <p>Already have an account? <a [routerLink]="['/auth', 'login']">Login</a></p>
+      <p>Already have an account? <a routerLink="/auth/login">Login</a></p>
     </div>
     <mat-form-field class="form-field" floatLabel="never">
       <img class="field-icon" src="./assets/images/user.svg" alt="username">
@@ -10,8 +12,7 @@
       <input
         autocomplete="off"
         matInput type="text"
-        formControlName="username"
-      >
+        formControlName="username">
       <mat-error *ngIf="username.errors?.['required']">
         Required
       </mat-error>
@@ -25,8 +26,7 @@
       <input
         autocomplete="off"
         matInput type="text"
-        formControlName="firstName"
-      >
+        formControlName="firstName">
       <mat-error *ngIf="firstName.errors?.['required']">
         Required
       </mat-error>
@@ -40,8 +40,7 @@
       <input
         autocomplete="off"
         matInput type="text"
-        formControlName="lastName"
-      >
+        formControlName="lastName">
       <mat-error *ngIf="lastName.errors?.['required']">
         Required
       </mat-error>
@@ -55,8 +54,7 @@
       <input
         autocomplete="off"
         matInput type="text"
-        formControlName="email"
-      >
+        formControlName="email">
       <mat-error *ngIf="email.errors?.['required']">
         Required
       </mat-error>
@@ -73,12 +71,11 @@
       <input
         autocomplete="off"
         matInput type="password"
-        formControlName="password"
-      >
+        formControlName="password">
       <mat-error *ngIf="password.errors?.['required']">
         Required
       </mat-error>
     </mat-form-field>
-    <button type="submit" class="submit-btn" (click)="registration()">Sign up</button>
+    <button type="submit" class="submit-btn">Sign up</button>
   </form>
 </div>

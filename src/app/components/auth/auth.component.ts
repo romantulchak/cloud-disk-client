@@ -1,18 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthService} from '../../service/auth.service';
-import {TokenStorageService} from '../../service/tokenStorage.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private authService: AuthService,
-              private tokenStorageService: TokenStorageService,
-              private router: Router) {
+  constructor() {
   }
 
   ngOnInit(): void {

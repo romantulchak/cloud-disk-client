@@ -6,25 +6,96 @@
   .cloud {
     position: absolute;
 
-    &._first {
+    &.first {
       opacity: .3;
       top: 8%;
       right: 18%;
       animation: bounce 5s infinite;
     }
 
-    &._second {
+    &.second {
       top: 20%;
       left: 20%;
       animation: bounce 7s infinite;
     }
 
-    &._third {
+    &.third {
       bottom: 16%;
       right: 20%;
       max-width: 336px;
       height: 224px;
       animation: bounce 8s infinite;
+    }
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .form {
+    background-color: #fff;
+    max-width: 575px;
+    padding: 50px 37px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .submit-btn {
+      height: 50px;
+      border: none;
+      background: linear-gradient(269.43deg, #ACC3FF 0.1%, #869FDF 100%);
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+      transition: .4s;
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+
+    .form-heading {
+      text-align: center;
+
+      h3 {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 38px;
+        color: #415878;
+        margin-bottom: 14px;
+      }
+
+      p {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        color: #B3B3B3;
+      }
+    }
+  }
+
+  a {
+    color: #829BDB;
+    cursor: pointer;
+  }
+
+  .form-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 50px;
+
+    p {
+      font-weight: 400;
+      font-size: 16px;
+      color: #415878;
     }
   }
 }
