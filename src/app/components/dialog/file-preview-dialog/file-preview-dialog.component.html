@@ -1,7 +1,7 @@
 <section>
-    <ng-container *ngIf="this.fileExtension === 'viedo' && file">
-        <video controls width="500" height="500">
-            <source [src]="file.path.fullPath" type="video/mp4">
+    <ng-container *ngIf="this.fileExtension === 'video' && file">
+        <video controls autoplay width="500" height="500">
+            <source [src]="file?.path?.fullPath" type="video/mp4">
         </video>
     </ng-container>
 
