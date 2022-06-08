@@ -43,6 +43,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    z-index: 3;
 
     .submit-btn {
       height: 50px;
@@ -96,6 +97,77 @@
       font-weight: 400;
       font-size: 16px;
       color: #415878;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .auth-wrapper {
+    .cloud {
+      &.second {
+        top: 18%;
+        left: 2%;
+      }
+
+      &.first {
+        top: 8%;
+        right: 4%;
+      }
+
+      &.third {
+        bottom: 10%;
+        right: 8%;
+        max-width: 260px;
+        height: 224px;
+        animation: bounce 8s infinite;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .auth-wrapper {
+    .cloud {
+      &.second {
+        display: none;
+      }
+
+      &.first {
+        display: none;
+      }
+
+      &.third {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .form-wrapper {
+    justify-content: unset;
+
+    .form {
+      padding: 40px 26px;
+      margin-top: 30px;
+
+      .form-heading {
+        h3 {
+          font-size: 26px;
+        }
+
+        p {
+          font-size: 15px;
+          max-width: 200px;
+        }
+      }
+    }
+  }
+  .auth-wrapper {
+    .cloud {
+      &.third {
+        display: none;
+      }
     }
   }
 }
