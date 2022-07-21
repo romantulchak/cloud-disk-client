@@ -113,6 +113,8 @@ export class ContextMenuComponent implements OnInit {
     this.functionService.restore(this.selectedElements, this.source);
   }
 
+
+  //TODO: DOESN'T WORK FOR MULTI-SELECT
   public changeColor(color: FolderColor): void {
     this.selectedElements.forEach(element => {
       this.folderService.changeFolderColor(element.link, color.value).subscribe(

@@ -49,7 +49,7 @@ export class AccessDialogComponent implements OnInit {
       url = `file/view/${this.element.link}`
     } else {
       name = `${HOST_LINK}folders/${this.element.link}`;
-      url = `folders/${this.element.link}`;
+      url = `drive/folders/${this.element.link}`;
     }
     this.link = new Link(name, url, access.accessType);
   }
