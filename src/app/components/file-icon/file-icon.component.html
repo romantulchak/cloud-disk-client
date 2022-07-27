@@ -4,8 +4,8 @@
         <img *ngIf="fileType.RAR.includes(extension)" src="../../../assets/images/zip.png" alt="rar">
         <img *ngIf="fileType.PDF.includes(extension)" src="../../../assets/images/7z.png" alt="pdf">
         <img *ngIf="fileType.WORD.includes(extension)" src="../../../assets/images/word.png" alt="word">
-        <div *ngIf="fileType.IMG.includes(extension) && file?.previewPath" class="file__icon">
-          <img [src]="file?.previewPath.fullPath" alt="img">
+        <div *ngIf="fileType.IMG.includes(extension) && file?.path" class="file__icon">
+          <img [src]="file?.path.fullPath" alt="img">
         </div>
         <img *ngIf="fileType.IMG.includes(extension) && file?.path === undefined" src="../../../assets/images/img.png" alt="img">
         <img *ngIf="fileType.TXT.includes(extension)" src="../../../assets/images/txt.png" alt="txt">

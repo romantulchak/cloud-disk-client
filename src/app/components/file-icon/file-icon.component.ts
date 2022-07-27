@@ -23,7 +23,8 @@ export class FileIconComponent implements OnInit, OnChanges {
   public fileType: FileType = new FileType();
   public contextType = ContextType;
 
-  constructor(private fileExtensionPipe: FileExtensionPipe) {
+  constructor() {
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {

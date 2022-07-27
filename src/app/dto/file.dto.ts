@@ -5,6 +5,6 @@ import { StoreDTO } from "./store.dto";
 
 export class FileDTO extends StoreDTO implements IStore{
     public size: number;
-    public previewPath: LocalPath;
+    public path: LocalPath;
     public folder: FolderDTO;
 }
